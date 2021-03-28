@@ -1,0 +1,1 @@
+web: gunicorn projectCato.wsgi --log-file -
