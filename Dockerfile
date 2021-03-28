@@ -3,6 +3,7 @@ FROM python:3.8
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+ENV PYTHONPATH=/src
 ENV DJANGO_SETTINGS_MODULE=projectCato.settings.production
 ENV ENVIRONMENT production
 ENV DJANGO_SECRET_KEY "tx)9sy7p**md@4^fdps003e15qlkn8(px1=@9)agvi%2u=sdyv"
