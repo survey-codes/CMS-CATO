@@ -1,0 +1,747 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-24 16:51-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: projectCato/settings/constants.py:3
+msgid "Banner's title"
+msgstr "Título del banner"
+
+#: projectCato/settings/constants.py:4
+msgid "Banner's subtitle"
+msgstr "Subtítulo del banner"
+
+#: projectCato/settings/constants.py:5
+msgid "Banner's description text"
+msgstr "Texto de descripción del banner"
+
+#: projectCato/settings/constants.py:7
+msgid "This field can't be empty"
+msgstr "Este campo no puede estar vacío"
+
+#: projectCato/settings/constants.py:8
+msgid "Image name in spanish"
+msgstr "Nombre de la imagen en español"
+
+#: projectCato/settings/constants.py:9
+msgid "Image name in english"
+msgstr "Nombre de la imagen en inglés"
+
+#: projectCato/settings/constants.py:11
+msgid "Load image"
+msgstr "Cargar imagen"
+
+#: projectCato/settings/constants.py:12
+msgid "is it a 360 image?"
+msgstr "¿Es una imagen 360?"
+
+#: projectCato/settings/constants.py:13
+msgid "Youtube video url"
+msgstr "Url del video en YouTube"
+
+#: projectCato/settings/constants.py:14
+msgid "Add link to banner"
+msgstr "Añadir enlace al banner"
+
+#: projectCato/settings/constants.py:15
+msgid "Banners gallery"
+msgstr "Galería de banners"
+
+#: projectCato/settings/constants.py:16
+msgid "Banners galleries"
+msgstr "Galerías de banners"
+
+#: projectCato/settings/constants.py:17
+msgid "Banner's gallery title"
+msgstr "Título de galería de banners"
+
+#: projectCato/settings/constants.py:18
+msgid "Select banners galleries"
+msgstr "Seleccionar galerías de banners"
+
+#: projectCato/settings/constants.py:19
+msgid "Description text"
+msgstr "Descripción de la imagen"
+
+#: projectCato/settings/constants.py:20
+msgid "Show banner gallery in this page"
+msgstr "Mostrar galería en esta página"
+
+#: projectCato/settings/constants.py:21
+msgid "Background image"
+msgstr "Imagen de fondo"
+
+#: projectCato/settings/constants.py:23
+msgid "Page's title"
+msgstr "Título de la página"
+
+#: projectCato/settings/constants.py:24
+msgid "Page's parent"
+msgstr "Padre de la página"
+
+#: projectCato/settings/constants.py:25
+msgid "Page"
+msgstr "Página"
+
+#: projectCato/settings/constants.py:27
+msgid "Post language"
+msgstr "Idioma de post"
+
+#: projectCato/settings/constants.py:28
+msgid "Post languages"
+msgstr "Idiomas de post"
+
+#: projectCato/settings/constants.py:30
+msgid "Post"
+msgstr "Post"
+
+#: projectCato/settings/constants.py:31
+msgid "Post's title"
+msgstr "Título del post"
+
+#: projectCato/settings/constants.py:32
+msgid "Post's subtitle"
+msgstr "Subtítulo del post"
+
+#: projectCato/settings/constants.py:33
+msgid "Post's description text"
+msgstr "Texto de descripción del post"
+
+#: projectCato/settings/constants.py:34
+msgid "Post's image"
+msgstr "Imagen del post"
+
+#: projectCato/settings/constants.py:35
+msgid "Post's parent"
+msgstr "Padre del post"
+
+#: projectCato/settings/constants.py:36
+msgid "Tags"
+msgstr "Etiquetas"
+
+#: projectCato/settings/constants.py:37
+msgid "Tag"
+msgstr "Etiqueta"
+
+#: projectCato/settings/constants.py:38
+msgid "Page's section"
+msgstr "Sección de página"
+
+#: projectCato/settings/constants.py:40
+msgid "Select sections"
+msgstr "Seleccionar secciones"
+
+#: projectCato/settings/constants.py:41
+msgid "Section's title"
+msgstr "Título de sección"
+
+#: projectCato/settings/constants.py:42
+msgid "Section's description"
+msgstr "Descripción de sección"
+
+#: projectCato/settings/constants.py:43
+msgid "Section's background color"
+msgstr "Color de fondo de la sección"
+
+#: projectCato/settings/constants.py:44
+msgid "Posts texts alignment"
+msgstr "Alineación de textos de los post"
+
+#: projectCato/settings/constants.py:47
+msgid "Right"
+msgstr "Derecha"
+
+#: projectCato/settings/constants.py:48
+msgid "Left"
+msgstr "Izquierda"
+
+#: projectCato/settings/constants.py:49
+msgid "Right - left"
+msgstr "Derecha - Izquierda"
+
+#: projectCato/settings/constants.py:50
+msgid "left - right"
+msgstr "Izquierda - derecha"
+
+#: projectCato/settings/constants.py:53
+msgid "Number of sections"
+msgstr "Cantidad de secciones"
+
+#: projectCato/settings/constants.py:54
+msgid "Number of images in gallery"
+msgstr "Cantidad de imágenes en galería"
+
+#: projectCato/settings/constants.py:55
+msgid "Registered users"
+msgstr "Usuarios registrados"
+
+#: projectCato/settings/constants.py:56
+msgid "Content management"
+msgstr "Gestión de contenidos"
+
+#: projectCato/settings/constants.py:57
+msgid "Tools"
+msgstr "Herramientas"
+
+#: projectCato/settings/constants.py:58
+msgid "Number of translations"
+msgstr "Cantidad de traducciones"
+
+#: projectCato/settings/constants.py:59
+msgid "Import-export data from post's language"
+msgstr "Importar/exportar información de idioma de posts"
+
+#: projectCato/settings/constants.py:60
+msgid "Posts visualization component"
+msgstr "Componente de visualización de posts"
+
+#: projectCato/settings/constants.py:61
+msgid "check the box if the posts component is visible in this section"
+msgstr ""
+"Marca la casilla si el componente de los post es visible en esta sección"
+
+#: projectCato/settings/constants.py:63
+msgid "Title"
+msgstr "Título"
+
+#: projectCato/settings/constants.py:64
+msgid "Subtitle visibility"
+msgstr "Subtítulo visible"
+
+#: projectCato/settings/constants.py:66
+msgid "Logo"
+msgstr "Logo"
+
+#: projectCato/settings/constants.py:67
+msgid "Description visibility"
+msgstr "Descripción visible"
+
+#: projectCato/settings/constants.py:68
+msgid "logo as title"
+msgstr "Logo como título"
+
+#: projectCato/settings/constants.py:69
+msgid "Logo(preview)"
+msgstr "Logo (Vista previa)"
+
+#: projectCato/settings/constants.py:75
+msgid "Above title"
+msgstr "Arriba del título"
+
+#: projectCato/settings/constants.py:76
+msgid "To the left of the title"
+msgstr "A la izquierda del título"
+
+#: projectCato/settings/constants.py:77
+msgid "To the left of the post"
+msgstr "A la izquierda del post"
+
+#: projectCato/settings/constants.py:78
+msgid "as background"
+msgstr "Como imagen de fondo"
+
+#: projectCato/settings/constants.py:79
+msgid "No visible"
+msgstr "No visible"
+
+#: projectCato/settings/constants.py:81
+msgid "You have to show the title to allocate the logo to the left of it"
+msgstr "Debes mostrar el título para ubicar el logo a la izquierda."
+
+#: projectCato/settings/constants.py:82
+msgid "Image visibility"
+msgstr "Imagen visible"
+
+#: projectCato/settings/constants.py:83
+msgid "Tags visibility"
+msgstr "Tags visibles"
+
+#: projectCato/settings/constants.py:85
+msgid "Title visibility"
+msgstr "Título visible"
+
+#: projectCato/settings/constants.py:86
+msgid "Edit in another window"
+msgstr "Editar en otra ventana"
+
+#: projectCato/settings/constants.py:87
+msgid "Create a gallery of banners"
+msgstr "Crear galería de banners"
+
+#: projectCato/settings/constants.py:88
+msgid "Edit banner's fields in language"
+msgstr "Editar campos de idioma de banner"
+
+#: projectCato/settings/constants.py:89
+msgid "Language"
+msgstr "Idioma"
+
+#: projectCato/settings/constants.py:90
+msgid "Gallery"
+msgstr "Galería"
+
+#: projectCato/settings/constants.py:91
+msgid "Gallery visibility"
+msgstr "Galería visible"
+
+#: projectCato/settings/constants.py:92
+msgid "post's visible fields"
+msgstr "Campos visibles del post"
+
+#: projectCato/settings/constants.py:93
+msgid "Post settings"
+msgstr "Configuración de post"
+
+#: projectCato/settings/constants.py:94
+msgid "Posts Settings"
+msgstr "Configuración de posts"
+
+#: projectCato/settings/constants.py:95
+msgid "Go to section's language"
+msgstr "Ir al idioma de la sección"
+
+#: projectCato/settings/constants.py:96
+msgid "Save and continue to section language"
+msgstr "Grabar y continuar para ir al idioma de la sección"
+
+#: projectCato/settings/constants.py:97
+msgid "Order posts"
+msgstr "Ordenación de posts"
+
+#: projectCato/settings/constants.py:98
+msgid "(Save and continue to choose the posts for this section)"
+msgstr "(Grabar y continuar editando para elegir los posts para la sección)"
+
+#: projectCato/settings/constants.py:99
+msgid "Edit fields in section's language"
+msgstr "Editar campos de idioma de sección"
+
+#: projectCato/settings/constants.py:100
+msgid "Section"
+msgstr "Sección"
+
+#: projectCato/settings/constants.py:101
+msgid "Sections"
+msgstr "Secciones"
+
+#: projectCato/settings/constants.py:102
+msgid "Section's posts"
+msgstr "Posts de la sección"
+
+#: projectCato/settings/constants.py:103
+msgid "Check the box if is a 360 image"
+msgstr "Marca la casilla si es una imagen 360"
+
+#: projectCato/settings/constants.py:104
+msgid "Image"
+msgstr "Imagen"
+
+#: projectCato/settings/constants.py:105
+msgid "Images"
+msgstr "Imágenes"
+
+#: projectCato/settings/constants.py:106
+msgid "Component name"
+msgstr "Nombre de componente"
+
+#: projectCato/settings/constants.py:107
+msgid "Component type"
+msgstr "Tipo de componente"
+
+#: projectCato/settings/constants.py:108
+msgid "Components type"
+msgstr "Tipo de componentes"
+
+#: projectCato/settings/constants.py:110
+msgid "Contact Information"
+msgstr "Información de contacto"
+
+#: projectCato/settings/constants.py:111
+msgid "Contact name"
+msgstr "Nombre de contacto"
+
+#: projectCato/settings/constants.py:112
+msgid "Contact"
+msgstr "Contacto"
+
+#: projectCato/settings/constants.py:113
+msgid "Contacts"
+msgstr "Contactos"
+
+#: projectCato/settings/constants.py:114
+msgid "Title information contact"
+msgstr "Título de la información de contacto"
+
+#: projectCato/settings/constants.py:115
+msgid "Direction title"
+msgstr "Título dirección"
+
+#: projectCato/settings/constants.py:116
+msgid "Direction subtitle"
+msgstr "Subtítulo dirección"
+
+#: projectCato/settings/constants.py:117
+msgid "Phone title"
+msgstr "Título teléfono"
+
+#: projectCato/settings/constants.py:118
+msgid "Phone subtitle"
+msgstr "Subtítulo teléfono"
+
+#: projectCato/settings/constants.py:119
+msgid "Schedule title"
+msgstr "Título horario:"
+
+#: projectCato/settings/constants.py:120
+msgid "Schedule subtitle"
+msgstr "Subtítulo horario"
+
+#: projectCato/settings/constants.py:121
+msgid "Mail title"
+msgstr "Título correo"
+
+#: projectCato/settings/constants.py:122
+msgid "Mail subtitle"
+msgstr "Subtítulo correo"
+
+#: projectCato/settings/constants.py:124
+msgid "Tag name"
+msgstr "Nombre de etiqueta"
+
+#: projectCato/settings/constants.py:125
+msgid "Section's language"
+msgstr "Idioma de sección"
+
+#: projectCato/settings/constants.py:126
+msgid "Section's languages"
+msgstr "Idiomas de sección"
+
+#: projectCato/settings/constants.py:129
+msgid "creation date"
+msgstr "Fecha de creación"
+
+#: projectCato/settings/constants.py:130
+msgid "Created by"
+msgstr "Creado por"
+
+#: projectCato/settings/constants.py:131
+msgid "Updated"
+msgstr "Actualizado el"
+
+#: projectCato/settings/constants.py:132
+msgid "Updated by"
+msgstr "Actualizado por"
+
+#: projectCato/settings/constants.py:133
+msgid "Active"
+msgstr "Activo"
+
+#: projectCato/settings/constants.py:134
+msgid "the same language shouldn't be chosen more than once"
+msgstr "El mismo idioma no debería ser elegido más de una vez"
+
+#: projectCato/settings/constants.py:137
+msgid "Language Name"
+msgstr "Nombre de idioma"
+
+#: projectCato/settings/constants.py:138
+msgid "Language abbreviation"
+msgstr "Abreviación del idioma"
+
+#: projectCato/settings/constants.py:139
+msgid "Languages"
+msgstr "Idiomas"
+
+#: projectCato/settings/constants.py:144
+msgid "Banner's language"
+msgstr "Idioma de banner"
+
+#: projectCato/settings/constants.py:145
+msgid "Banner's laguages"
+msgstr "Idiomas de banner"
+
+#: projectCato/settings/constants.py:146
+msgid "Go to Banner language tab"
+msgstr "Ir a la pestaña idioma en banners"
+
+#: projectCato/settings/constants.py:147
+msgid "Save and continue to edit banner language fields"
+msgstr "Grabar y continuar para modificar los campos de idioma en banner"
+
+#: projectCato/settings/constants.py:149
+msgid "(choose an image and save and continue editing to see the preview)"
+msgstr ""
+"(Selecciona una imagen, de clic en grabar y continuar para una vista previa)"
+
+#: projectCato/settings/constants.py:150
+msgid "Preview"
+msgstr "Vista previa"
+
+#: projectCato/settings/constants.py:152
+msgid "Social network"
+msgstr "Red social"
+
+#: projectCato/settings/constants.py:153
+msgid "Social networks"
+msgstr "Redes sociales"
+
+#: projectCato/settings/constants.py:154
+msgid "order"
+msgstr "Orden"
+
+#: projectCato/settings/constants.py:155
+msgid "link social"
+msgstr "Enlace red social"
+
+#: projectCato/settings/constants.py:156
+msgid "Footer"
+msgstr "Pié de página"
+
+#: projectCato/settings/constants.py:157
+msgid "Social network name"
+msgstr "Nombre de la red social"
+
+#: projectCato/settings/constants.py:158
+msgid "footer title one"
+msgstr "Título uno (Pie de página)"
+
+#: projectCato/settings/constants.py:159
+msgid "Footer description"
+msgstr "Descripción (Pie de página)"
+
+#: projectCato/settings/constants.py:160
+msgid "footer title two"
+msgstr "Título dos(Pie de página)"
+
+#: projectCato/settings/constants.py:161
+msgid "Icon"
+msgstr "Ícono"
+
+#: projectCato/settings/constants.py:162
+msgid "Icon (Preview)"
+msgstr "Ícono (Vista previa)"
+
+#: projectCato/settings/constants.py:163
+msgid "Icon css"
+msgstr "Ícono css"
+
+#: projectCato/settings/constants.py:166
+msgid "animated logo"
+msgstr "Logo animado"
+
+#: projectCato/settings/constants.py:167
+msgid "text button banner"
+msgstr "Texto de botón de banner"
+
+#: projectCato/settings/constants.py:169
+msgid "List of icons"
+msgstr "Lista de Íconos"
+
+#: projectCato/settings/constants.py:171
+msgid "icon css button banner"
+msgstr "Ícon css para botón de banner"
+
+#: projectCato/settings/constants.py:172
+msgid "The same gallery shouldn't be added more than once"
+msgstr "La misma galería no debería ser elegida más de una vez"
+
+#: projectCato/settings/constants.py:173
+msgid "Please select galleries that are active"
+msgstr "Por favor seleccione galerías que estén activas"
+
+#: projectCato/settings/constants.py:175
+msgid "Check the box if you want the post's family to shown in the section"
+msgstr "Marca la casilla si la familia de los post se muestra en esta sección"
+
+#: projectCato/settings/constants.py:176
+msgid "Show family"
+msgstr "Mostrar familia"
+
+#: projectCato/settings/constants.py:177
+msgid "General data"
+msgstr "Información general"
+
+#: projectCato/settings/constants.py:178
+msgid "General data language"
+msgstr "Idioma de información general"
+
+#: projectCato/settings/constants.py:180
+msgid "General data languages"
+msgstr "Idiomas de información general"
+
+#: projectCato/settings/constants.py:181
+msgid "Galleries"
+msgstr "Galerías"
+
+#: projectCato/settings/constants.py:182
+msgid "The section has no posts"
+msgstr "La sección no contiene posts"
+
+#: projectCato/settings/constants.py:183
+msgid "Banner"
+msgstr "Banner"
+
+#: projectCato/settings/constants.py:184
+msgid "Banners"
+msgstr "Banners"
+
+#: projectCato/settings/constants.py:195
+msgid "Page language"
+msgstr "Idioma de página"
+
+#: projectCato/settings/constants.py:196
+msgid "Page languages"
+msgstr "Idiomas de página"
+
+#: projectCato/settings/constants.py:198
+msgid ""
+"(choose a gallery, click on save and continue editing to see a preview of "
+"the first banner of it)"
+msgstr ""
+"(Seleccione una galería, de clic en grabar y continuar editando para una "
+"vista previa del primer banner de esta)"
+
+#: projectCato/settings/constants.py:199
+msgid "Institution image"
+msgstr "Imagen institución"
+
+#: projectCato/settings/constants.py:200
+msgid "Institution url"
+msgstr "Url institución"
+
+#: projectCato/settings/constants.py:201
+msgid "Institutional links"
+msgstr "Enlaces institucionales"
+
+#: projectCato/settings/constants.py:202
+msgid "partners link number "
+msgstr "Enlace institucional número "
+
+#: projectCato/settings/constants.py:203
+msgid "This section is not associated with any page"
+msgstr "Esta sección no está asociada a alguna página."
+
+#: projectCato/settings/constants.py:204
+msgid "This page does not contain sections"
+msgstr "Esta página no contiene secciones"
+
+#: projectCato/settings/constants.py:205
+msgid "Sections and pages in which appears "
+msgstr "Secciones y páginas en las que aparece"
+
+#: projectCato/settings/constants.py:206
+msgid "Pages in which appears "
+msgstr "Páginas en las que aparece"
+
+#: projectCato/settings/constants.py:207
+msgid "Only one banner gallery must be active"
+msgstr "Solo una galería debe estar activa"
+
+#: projectCato/settings/constants.py:208
+msgid "Only one general data must be active"
+msgstr "Solo una información general debe estar activa"
+
+#: projectCato/settings/constants.py:209
+msgid "This post is not contained in any section"
+msgstr "Este post no está contenido en ninguna sección."
+
+#: projectCato/settings/constants.py:210
+msgid "This post is not in a page"
+msgstr "Este post no está una página."
+
+#: projectCato/settings/constants.py:211
+msgid "Only one general data can be active"
+msgstr "Solo una información general debe estar activa"
+
+#: projectCato/settings/constants.py:212
+msgid ""
+"Make sure this value is less or equal than 4 and greater or equal than 1"
+msgstr ""
+"Asegúrese de que este valor sea menor o igual que 4 y mayor o igual que 1"
+
+#: projectCato/settings/constants.py:213
+msgid "Display this many lines before show more"
+msgstr "Mostrar esta cantidad de líneas antes de mostrar más"
+
+#: projectCato/settings/constants.py:214
+msgid "Between one and four lines"
+msgstr "Entre 1 y 4 líneas"
+
+#: templates/admin/base.html:16
+msgid "Welcome,"
+msgstr "Bienvenido,"
+
+#~ msgid "Settings"
+#~ msgstr "Configuraciones"
+
+#~ msgid "Sections quantity"
+#~ msgstr "Cantidad de secciones"
+
+#~ msgid "Images quantity"
+#~ msgstr "Cantidad de imágenes"
+
+#~ msgid "Post's logo"
+#~ msgstr "Logo del post"
+
+#~ msgid "Logo visibility"
+#~ msgstr "Logo visible"
+
+#~ msgid "Text"
+#~ msgstr "Texto"
+
+#~ msgid "See title as"
+#~ msgstr "Ver título como"
+
+#~ msgid "It hast to be between one and 10 lines "
+#~ msgstr "Debe ser entre 1 y 10 líneas"
+
+#~ msgid "Whatsapp phone number"
+#~ msgstr "Número de teléfono de whatsapp"
+
+#~ msgid "Description"
+#~ msgstr "Descripción"
+
+#~ msgid "footer about"
+#~ msgstr "Acerca de(Pié de página)"
+
+#~ msgid "Choose posts for this section"
+#~ msgstr " "
+
+#~ msgid "Show section's posts in"
+#~ msgstr "Mostrar los post de la sección en"
+
+#~ msgid "Save and continue to modify gallery language"
+#~ msgstr "Grabar y continuar para modificar el idioma de la galería"
+
+#~ msgid "Save and continue to modify gallery banner"
+#~ msgstr "Grabar y continuar para modificar el banner de la galería"
+
+#~ msgid "align posts gallery"
+#~ msgstr "Alinear galería de los post"
+
+#~ msgid "Post gallery"
+#~ msgstr "Galería post"
+
+#~ msgid "Main banner"
+#~ msgstr "Banner principal"
+
+#~ msgid "Edit gallery's languages fields"
+#~ msgstr "Editar campos de idioma de la galería"
+
+#~ msgid "Component types"
+#~ msgstr "Tipos de componentes"

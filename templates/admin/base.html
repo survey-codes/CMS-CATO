@@ -1,0 +1,24 @@
+{% extends 'admin/base.html' %}
+{% load i18n admin_static suit_tags %}
+
+{% block extrastyle %}
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+    <link href='{% static "suit/css/font-awesome.min.css" %}' rel='stylesheet' type='text/css'>
+{% endblock %}
+
+{% block footer_links %}
+    Soporte: <a href="mailto:contacto@grupocato.co" target="_blank">contacto@grupocato.co</a>
+{% endblock %}
+
+{% block welcome-msg %}
+    <span class="welcome">
+        {% trans 'Welcome,' %}
+        <strong>{% firstof user.get_short_name user.get_username %}</strong>.
+    </span>
+{% endblock %}
+
+{% block copyright %}
+    <span class="hidden-md-down"></span>
+    Desarrollado por Grupo Cato.
+    <br>Colombia todos los derechos reservados
+{% endblock %}

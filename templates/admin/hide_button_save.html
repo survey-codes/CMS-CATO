@@ -1,0 +1,9 @@
+{% extends 'admin/change_form.html' %}
+{% block extrastyle %}
+    {{ block.super }}
+    <style>
+        .col-right input[name=_addanother] {
+            display: none !important;
+        }
+    </style>
+{% endblock %}
