@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+  carpa:
+    build: .
+    image: inessence:latest
+    container_name: inessence
+    environment:
+      ENVIRONMENT: development
+    depends_on:
+      - database
+    volumes:
+      - .:/src
+      - ./scripts:/scripts
+    # Dev user: admin pass: admin
+    command: ["/scripts/wait-for-it.sh", "database:5432", "--", "/scripts/command-dev.sh"]
+    ports:
+      - "8005:8000"
+
+  database:
+    image: postgis/postgis:12-3.0
+    container_name: inessence-postgis
+    environment: 
+      POSTGRES_PASSWORD: postgres
