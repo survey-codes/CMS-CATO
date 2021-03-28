@@ -12,9 +12,11 @@ class SuitConfig(DjangoSuitConfig):
             ChildItem(model='auth.user'),
             ChildItem(model='auth.group'),
         ]),
+        ParentItem(c.MENU, icon='fa fa-bars', children=[
+            ChildItem(model='menus.menu'),
+            ChildItem(model='menus.menuitem'),
+        ]),
         ParentItem(c.CONTENT, icon='fa fa-sitemap', children=[
-            ChildItem(model='contents.menu'),
-            ChildItem(model='contents.menuitem'),
             ChildItem(model='contents.page'),
             ChildItem(model='contents.generaldata'),
             ChildItem(model='contents.section'),

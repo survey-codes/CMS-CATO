@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'tools.apps.ToolsConfig',
     'contents.apps.ContentsConfig',
     'main',
+    'menus',
     'ckeditor',
     'mptt',
     'colorfield',
