@@ -127,3 +127,28 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# IDE folders
+.idea/
+
+__pycache__
+MANIFEST
+dist/
+docs/_build/
+docs/locale/
+node_modules/
+build/
+tests/report/
+env/
+venv/
+
+
+/static/
+!static/.keep
+
+# coverage related files/folders
+htmlcov/*
+.coverage
+.coverage.*
+coverage.xml
+*.cover
