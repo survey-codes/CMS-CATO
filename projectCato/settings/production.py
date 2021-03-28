@@ -1,5 +1,5 @@
 from .common import *
-from .decouple import config
+from decouple import config
 from .partials.util import get_secret
 
 
