@@ -1,24 +1,26 @@
 version: '3.1'
 
 services:
-  carpa:
+  cato:
     build: .
-    image: inessence:latest
-    container_name: inessence
+    image: cato:latest
+    container_name: catoback
     environment:
       ENVIRONMENT: development
     depends_on:
-      - database
+      - db
     volumes:
       - .:/src
       - ./scripts:/scripts
     # Dev user: admin pass: admin
-    command: ["/scripts/wait-for-it.sh", "database:5432", "--", "/scripts/command-dev.sh"]
+    command: ["/scripts/wait-for-it.sh", "db:5432", "--", "/scripts/command-dev.sh"]
     ports:
-      - "8005:8000"
+      - "8010:8000"
 
-  database:
+  db:
     image: postgis/postgis:12-3.0
-    container_name: inessence-postgis
+    container_name: cato-postgis
     environment: 
       POSTGRES_PASSWORD: postgres
+    ports:
+      - "50000:5432"
