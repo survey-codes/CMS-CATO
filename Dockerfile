@@ -3,11 +3,6 @@ FROM python:3.8
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-ENV PYTHONPATH=/src
-ENV DJANGO_SETTINGS_MODULE=projectCato.settings.production
-ENV ENVIRONMENT production
-ENV DJANGO_SECRET_KEY "tx)9sy7p**md@4^fdps003e15qlkn8(px1=@9)agvi%2u=sdyv"
-ENV PORT 8010
 
 RUN apt-get update
 
@@ -28,12 +23,11 @@ RUN pip install -r /src/test-requirements.txt
 
 COPY . /src
 
+# Load initial data
+RUN python manage.py loaddata initial.json
+
 # Install assets
 RUN python manage.py collectstatic --noinput
 
-# Run migrations
-RUN python manage.py migrate menus
-RUN python manage.py migrate
-
 # run gunicorn
-CMD gunicorn --workers 4 --log-level info --timeout 300 --bind 0.0.0.0:$PORT projectCato.wsgi:application
+CMD gunicorn --workers 2 --log-level info --timeout 300 projectCato.wsgi:application

@@ -1,7 +1,11 @@
 build:
   docker:
     web: Dockerfile
+
+run:
+  web: gunicorn --workers 2 --log-level info --timeout 300 --bind 0.0.0.0:$PORT projectCato.wsgi:application
+
 release:
   image: web
   command:
-    - django-admin migrate --noinput
+    - ./scripts/command-prod.sh
