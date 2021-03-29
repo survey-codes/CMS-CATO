@@ -6,6 +6,10 @@
     <link href='{% static "suit/css/font-awesome.min.css" %}' rel='stylesheet' type='text/css'>
 {% endblock %}
 
+{% block extrahead %}
+        <link rel="icon" href="{% static 'images/favicon.ico'%}" sizes="48x48" />
+{% endblock %}
+
 {% block footer_links %}
     Soporte: <a href="mailto:contacto@grupocato.co" target="_blank">contacto@grupocato.co</a>
 {% endblock %}
