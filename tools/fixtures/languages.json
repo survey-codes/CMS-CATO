@@ -1,0 +1,26 @@
+[
+{
+    "model": "tools.language",
+    "pk": 1,
+    "fields": {
+        "name": "Espa\u00f1ol",
+        "abbreviation": "ES"
+    }
+},
+{
+    "model": "tools.language",
+    "pk": 2,
+    "fields": {
+        "name": "Ingl\u00e9s",
+        "abbreviation": "EN"
+    }
+},
+{
+    "model": "tools.language",
+    "pk": 3,
+    "fields": {
+        "name": "Franc\u00e9s",
+        "abbreviation": "FR"
+    }
+}
+]

@@ -1,0 +1,119 @@
+[
+  {
+    "model": "contents.sectiontemplate",
+    "pk": 1,
+    "fields": {
+      "name": "hero",
+      "nickname": "Componente inicial",
+      "preview": ""
+    }
+  },
+  {
+    "model": "contents.sectiontemplate",
+    "pk": 2,
+    "fields": {
+      "name": "section-with-collapsible",
+      "nickname": "Colapsable",
+      "preview": ""
+    }
+  },
+  {
+    "model": "contents.sectiontemplate",
+    "pk": 3,
+    "fields": {
+      "name": "carousel-media",
+      "nickname": "Carrusel media",
+      "preview": ""
+    }
+  },
+  {
+    "model": "contents.sectiontemplate",
+    "pk": 4,
+    "fields": {
+      "name": "section-stacks",
+      "nickname": "Secci\u00f3n stacks",
+      "preview": ""
+    }
+  },
+  {
+    "model": "contents.sectiontemplate",
+    "pk": 5,
+    "fields": {
+      "name": "section-with-multiple-subsection",
+      "nickname": "Sub-secci\u00f3n",
+      "preview": ""
+    }
+  },
+  {
+    "model": "contents.sectiontemplate",
+    "pk": 6,
+    "fields": {
+      "name": "section-simple2",
+      "nickname": "Simple 2",
+      "preview": ""
+    }
+  },
+  {
+    "model": "contents.sectiontemplate",
+    "pk": 7,
+    "fields": {
+      "name": "section-text-grid",
+      "nickname": "Texto y grilla",
+      "preview": ""
+    }
+  },
+  {
+    "model": "contents.sectiontemplate",
+    "pk": 8,
+    "fields": {
+      "name": "section-with-collapsible-grid",
+      "nickname": "Colapsable y grilla",
+      "preview": ""
+    }
+  },
+  {
+    "model": "contents.sectiontemplate",
+    "pk": 9,
+    "fields": {
+      "name": "section-with-multiple-subsection",
+      "nickname": "M\u00faltiples sub-secciones",
+      "preview": ""
+    }
+  },
+  {
+    "model": "contents.sectiontemplate",
+    "pk": 10,
+    "fields": {
+      "name": "section-simple",
+      "nickname": "Simple",
+      "preview": ""
+    }
+  },
+  {
+    "model": "contents.sectiontemplate",
+    "pk": 11,
+    "fields": {
+      "name": "section-with-carousel2",
+      "nickname": "Carrusel 2",
+      "preview": ""
+    }
+  },
+  {
+    "model": "contents.sectiontemplate",
+    "pk": 12,
+    "fields": {
+      "name": "section-with-scroll",
+      "nickname": "Secci\u00f3n con scroll",
+      "preview": ""
+    }
+  },
+  {
+    "model": "contents.sectiontemplate",
+    "pk": 13,
+    "fields": {
+      "name": "section-with-carousel1",
+      "nickname": "Carrusel 1",
+      "preview": ""
+    }
+  }
+]
