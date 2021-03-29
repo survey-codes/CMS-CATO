@@ -8,7 +8,7 @@ SECRET_KEY = get_secret('DJANGO_SECRET_KEY')
 
 PROD_APPS = [
     'storages',
-
+    'graphene_django'
 ]
 
 INSTALLED_APPS += PROD_APPS
