@@ -22,3 +22,5 @@ COPY test-requirements.txt /src/
 RUN pip install -r /src/test-requirements.txt
 
 COPY . /src
+
+RUN chmod 755 -R scripts/
