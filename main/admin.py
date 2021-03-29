@@ -7,7 +7,7 @@ class AuditAdmin(object):
     fieldsets = ('creation_date', 'created_by', 'update_date', 'updated_by',)
 
 
-def get_image_preview(obj, img, title, width=80, field_msg=c.PREVIEW_TEXT):
+def get_image_preview(obj, img, title, width=100, field_msg=c.PREVIEW_TEXT):
     if obj.pk:
         return mark_safe(f"""<a href="{img}" target="_blank">
         <img src="{img}" alt="{title}" style="max-width:{width}px; height: auto;" /></a>""")
