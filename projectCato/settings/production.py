@@ -1,9 +1,8 @@
 from .common import *
-from decouple import config
 from .partials.util import get_secret
 
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
-DEBUG = False
+DEBUG = get_secret('DEBUG')
 ALLOWED_HOSTS = ['*']
 SECRET_KEY = get_secret('DJANGO_SECRET_KEY')
 
