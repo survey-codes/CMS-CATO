@@ -22,12 +22,3 @@ COPY test-requirements.txt /src/
 RUN pip install -r /src/test-requirements.txt
 
 COPY . /src
-
-# Load initial data
-RUN python manage.py loaddata initial.json
-
-# Install assets
-RUN python manage.py collectstatic --noinput
-
-# run gunicorn
-CMD gunicorn --workers 2 --log-level info --timeout 300 projectCato.wsgi:application
