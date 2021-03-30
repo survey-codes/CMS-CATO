@@ -13,6 +13,12 @@ PROD_APPS = [
 
 INSTALLED_APPS += PROD_APPS
 
+PROD_MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+]
+
+MIDDLEWARE = PROD_MIDDLEWARE + MIDDLEWARE
+
 if get_secret('DATABASE_URL'):
     import dj_database_url
     DATABASES = {

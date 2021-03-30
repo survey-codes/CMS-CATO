@@ -21,7 +21,6 @@ def show_toolbar(request):
 
 
 # CORS Config: install django-cors-headers and uncomment the following to allow CORS from any origin
-
 DEV_APPS = [
     'debug_toolbar',
     'corsheaders',
@@ -53,10 +52,6 @@ DEBUG_TOOLBAR_CONFIG = {
 GRAPHENE = {
     "SCHEMA": "main.schema.schema"
 }
-
-INTERNAL_IPS = [
-    '127.0.0.1',
-]
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
