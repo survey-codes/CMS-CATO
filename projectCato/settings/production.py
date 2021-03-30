@@ -3,7 +3,7 @@ from .partials.util import get_secret
 
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 DEBUG = False
-ALLOWED_HOSTS = ['cato-cms.herokuapp.com']
+ALLOWED_HOSTS = ['cato.herokuapp.com']
 SECRET_KEY = get_secret('DJANGO_SECRET_KEY')
 
 PROD_APPS = [
