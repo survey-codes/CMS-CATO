@@ -2,7 +2,7 @@ from .common import *
 from .partials.util import get_secret
 
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
-DEBUG = get_secret('DEBUG', True) != 'False'
+DEBUG = get_secret('DEBUG') != 'False'
 ALLOWED_HOSTS = ['cato-cms.herokuapp.com', '127.0.0.1']
 SECRET_KEY = get_secret('DJANGO_SECRET_KEY')
 
@@ -26,7 +26,7 @@ else:
         }
     }
 
-USE_S3 = (get_secret('USE_S3', False) == 'True')
+USE_S3 = (get_secret('USE_S3') == 'True')
 
 if USE_S3:
     # AWS settings
