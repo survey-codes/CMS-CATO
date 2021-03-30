@@ -40,9 +40,9 @@ if USE_S3:
     # S3 static files
     STATIC_LOCATION = 'static'
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
-    STATICFILES_STORAGE = 'hello_django.storage_backends.StaticStorage'
+    STATICFILES_STORAGE = 'projectCato.storage_backends.StaticStorage'
 
     # S3 media files
     PUBLIC_MEDIA_LOCATION = 'media'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    DEFAULT_FILE_STORAGE = 'projectCato.backends.s3boto3.S3Boto3Storage'
