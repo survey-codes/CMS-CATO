@@ -3,5 +3,4 @@
 .idea/
 .env/
 src/media/
-src/static/
 db.sqlite3

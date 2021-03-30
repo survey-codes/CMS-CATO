@@ -23,4 +23,4 @@ RUN pip install -r /src/test-requirements.txt
 
 COPY . /src
 
-RUN chmod 755 -R scripts/
+RUN chmod 755 -R scripts/ static/ staticfiles/
