@@ -1,5 +1,3 @@
-# my_project_app/apps.py
-from django.contrib import admin
 from suit.apps import DjangoSuitConfig
 from suit.menu import ParentItem, ChildItem
 from .settings import constants as c
@@ -33,4 +31,3 @@ class SuitConfig(DjangoSuitConfig):
         ])
 
     )
-# admin.site.site_header = 'PANEL DE ADMINISTRACIÓN GRUPO CATO'
