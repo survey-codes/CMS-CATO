@@ -143,6 +143,7 @@ env/
 venv/
 
 /media/
+/static/
 !static/.keep
 !media/.keep
 
