@@ -13,6 +13,13 @@ PROD_APPS = [
 
 INSTALLED_APPS += PROD_APPS
 
+# TODO: Check NGINX approach for CORS management instead django cors
+PROD_MIDDLEWARE = [
+    # 'corsheaders.middleware.CorsMiddleware'
+]
+
+MIDDLEWARE += PROD_MIDDLEWARE
+
 if get_secret('DATABASE_URL'):
     import dj_database_url
     DATABASES = {
@@ -44,4 +51,4 @@ if USE_S3:
     # S3 media files
     MEDIA_LOCATION = 'media'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
-    DEFAULT_FILE_STORAGE = 'projectCato.storage_backends.StaticStorage'
+    DEFAULT_FILE_STORAGE = 'projectCato.storage_backends.PublicMediaStorage'
