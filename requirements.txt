@@ -13,8 +13,13 @@ chardet==3.0.4
 colorama==0.4.3
 defusedxml==0.6.0
 diff-match-patch==20181111
+
+# For autoconfig database using DATABASE_URL env variable
 dj-database-url
+
+# Python WEB framework
 Django==2.2.3
+
 django-admin-rangefilter==0.5.4
 django-admin-sortable==2.1.8
 django-admin-sortable2==0.7.3
@@ -23,7 +28,10 @@ django-cleanup==4.0.0
 django-colorfield==0.1.15
 django-cors-headers==3.1.0
 django-crum==0.7.5
+
+# A configurable set of panels that display various debug information about the current request/response
 django-debug-toolbar==3.2
+
 django-filter==2.3.0
 django-import-export==2.0.1
 django-js-asset==1.2.2
@@ -32,12 +40,19 @@ django-mptt==0.10.0
 # Collection of custom storage backends for Django
 django-storages==1.11.1
 
+# Django admin custom template
 django-suit @ https://github.com/darklow/django-suit/tarball/v2
+
 django-url-or-relative-url-field==0.1.1
 docutils==0.16
 et-xmlfile==1.0.1
+
+# Provides tools to implement a GraphQL API in Python using a code-first approach
 graphene-django==2.15.0
+
+# Python WSGI HTTP Server
 gunicorn==20.0.4
+
 idna==2.8
 imagesize==1.2.0
 jdcal==1.4.1
@@ -48,14 +63,19 @@ mccabe==0.6.1
 odfpy==1.4.1
 openpyxl==3.0.4
 packaging==20.0
+
+# Python Imaging Library
 Pillow==6.2.1
+
 promise==2.3
+
+# PostgreSQL python client
 psycopg2==2.8.3
+
 pycodestyle==2.6.0
 pyflakes==2.2.0
 Pygments==2.5.2
 pyparsing==2.4.6
-python-decouple==3.3
 PyYAML==5.3.1
 requests==2.22.0
 Rx==1.6.1
