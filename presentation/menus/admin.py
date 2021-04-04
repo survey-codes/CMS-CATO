@@ -1,7 +1,7 @@
 from django.contrib import admin, messages
 from django.contrib.admin import register
-from main.admin import AuditAdmin
-from menus.models import Menu, MenuItem, MenuItemLanguage, MenuLanguage
+from presentation.main.admin import AuditAdmin
+from presentation.menus.models import Menu, MenuItem, MenuItemLanguage, MenuLanguage
 from projectCato.settings import constants as c
 from rangefilter.filter import DateRangeFilter
 
@@ -65,7 +65,7 @@ class MenuItemAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             'classes': ('suit-tab suit-tab-menu',),
-            'fields': ('name', 'parent', 'menu', 'url', 'page_url', 'slug_url', ) + AuditAdmin.fieldsets
+            'fields': ('name', 'parent', 'menu', 'url', 'page_url', 'slug_url',) + AuditAdmin.fieldsets
         }),
     )
 

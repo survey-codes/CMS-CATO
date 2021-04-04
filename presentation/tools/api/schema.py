@@ -1,6 +1,6 @@
 import graphene
 from graphene_django import DjangoObjectType
-from tools import models
+from presentation.tools import models
 
 
 class LanguageType(DjangoObjectType):

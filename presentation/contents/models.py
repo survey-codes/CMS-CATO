@@ -9,8 +9,8 @@ from django.db import models
 from django.db.models import Q
 from django.utils.text import slugify
 
-from main.models import Audit, LanguageAbstract
-from menus.models import Menu
+from presentation.main.models import Audit, LanguageAbstract
+from presentation.menus.models import Menu
 from mptt.models import MPTTModel, TreeForeignKey
 from projectCato.settings import constants as c
 from url_or_relative_url_field.fields import URLOrRelativeURLField

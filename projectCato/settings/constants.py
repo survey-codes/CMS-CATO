@@ -144,18 +144,12 @@ SECTION_LANGUAGE_SINGULAR = _("Section's language")
 SECTION_LANGUAGE_PLURAL = _("Section's languages")
 
 # -------CORE------------------#
-CREATION_DATE = _('creation date')
-CREATED_BY = _('Created by')
-UPDATED = _('Updated')
-UPDATED_BY = _('Updated by')
 ACTIVE = _('Active')
-LANGUAGE_MESSAGE = _('the same language shouldn\'t be chosen more than once')
 
 # --------TOOLS-----#
 LANGUAGE_NAME = _('Language Name')
 LANGUAGE_ABB = _('Language abbreviation')
 LANGUAGE_APP_PLURAL = _('Languages')
-RELATED_NAME = '%(class)s_{}'
 
 SLUG = 'Slug'
 
@@ -164,7 +158,6 @@ BANNER_LANGUAGE_PLURAL = _("Banner's laguages")
 GO_BANNER_LANGUAGE = _('Go to Banner language tab')
 BANNER_LANGUAGE_SAVE = _('Save and continue to edit banner language fields')
 
-PREVIEW_TEXT = _("(choose an image and save and continue editing to see the preview)")
 IMAGE_PREVIEW = _("Preview")
 
 SOCIAL_NETWORK_SING = _('Social network')

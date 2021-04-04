@@ -1,6 +1,6 @@
 import graphene
-from contents.api.schema import PageQuery, GeneralInfoQuery
-from tools.api.schema import LanguageQuery
+from presentation.contents.api.schema import PageQuery, GeneralInfoQuery
+from presentation.tools.api.schema import LanguageQuery
 
 
 class Query(GeneralInfoQuery, LanguageQuery, PageQuery, graphene.ObjectType):

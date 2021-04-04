@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 
-from main.models import Audit, LanguageAbstract
+from presentation.main.models import Audit, LanguageAbstract
 from mptt.models import MPTTModel
 from projectCato.settings import constants as c
 

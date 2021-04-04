@@ -1,40 +1,46 @@
 from crum import get_current_user
 from django.contrib.auth.models import User
 from django.db import models
-from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 
+from presentation.tools.models import Language
 from projectCato.settings import constants as c
-from tools.models import Language
+
+CREATION_DATE = _('creation date')
+CREATED_BY = _('Created by')
+UPDATED_DATE = _('Updated')
+UPDATED_BY = _('Updated by')
+RELATED_NAME = '%(class)s_{}'
+LANGUAGE_MESSAGE = _('the same language shouldn\'t be chosen more than once')
 
 
 class Audit(models.Model):
     creation_date = models.DateTimeField(
-        verbose_name=c.CREATION_DATE,
+        verbose_name=CREATION_DATE,
         auto_now_add=True,
         null=True,
     )
-
     created_by = models.ForeignKey(
         User,
+        verbose_name=CREATED_BY,
+        on_delete=models.CASCADE,
         null=True,
         blank=True,
-        verbose_name=c.CREATED_BY,
-        on_delete=models.CASCADE,
-        related_name=c.RELATED_NAME.format('created_by')
+        related_name=RELATED_NAME.format('created_by')
     )
 
     update_date = models.DateTimeField(
-        verbose_name=c.UPDATED,
-        default=timezone.now
+        verbose_name=UPDATED_DATE,
+        auto_now=True
     )
 
     updated_by = models.ForeignKey(
         User,
+        verbose_name=UPDATED_BY,
+        on_delete=models.CASCADE,
         null=True,
         blank=True,
-        verbose_name=c.UPDATED_BY,
-        on_delete=models.CASCADE,
-        related_name=c.RELATED_NAME.format('updated_by'),
+        related_name=RELATED_NAME.format('updated_by'),
     )
 
     active = models.BooleanField(
@@ -68,4 +74,4 @@ class LanguageAbstract(models.Model):
         return str(self.language)
 
     def unique_error_message(self):
-        return c.LANGUAGE_MESSAGE
+        return LANGUAGE_MESSAGE
