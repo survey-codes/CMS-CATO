@@ -8,9 +8,10 @@ from projectCato.settings import constants as c
 
 CREATION_DATE = _('creation date')
 CREATED_BY = _('Created by')
+CREATED_BY_KEY = 'created_by'
 UPDATED_DATE = _('Updated')
 UPDATED_BY = _('Updated by')
-RELATED_NAME = '%(class)s_{}'
+UPDATED_BY_KEY = 'updated_by'
 LANGUAGE_MESSAGE = _('the same language shouldn\'t be chosen more than once')
 
 
@@ -26,7 +27,7 @@ class Audit(models.Model):
         on_delete=models.CASCADE,
         null=True,
         blank=True,
-        related_name=RELATED_NAME.format('created_by')
+        related_name=c.RELATED_NAME.format(CREATED_BY_KEY)
     )
 
     update_date = models.DateTimeField(
@@ -40,7 +41,7 @@ class Audit(models.Model):
         on_delete=models.CASCADE,
         null=True,
         blank=True,
-        related_name=RELATED_NAME.format('updated_by'),
+        related_name=c.RELATED_NAME.format(UPDATED_BY_KEY),
     )
 
     active = models.BooleanField(

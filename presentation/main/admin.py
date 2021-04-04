@@ -3,7 +3,7 @@ from django.utils.safestring import mark_safe
 
 class AuditAdmin(object):
     readonly_fields = ('creation_date', 'created_by', 'update_date', 'updated_by',)
-    fieldsets = ('creation_date', 'created_by', 'update_date', 'updated_by',)
+    fieldsets = (('created_by', 'creation_date'), ('updated_by', 'update_date'),)
 
 
 def _sect(sections, no_section):

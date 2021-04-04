@@ -2,20 +2,27 @@ from django.contrib.postgres.fields import JSONField
 from django.core.exceptions import ValidationError
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
+from mptt.models import MPTTModel
 
 from presentation.main.models import Audit, LanguageAbstract
-from mptt.models import MPTTModel
 from projectCato.settings import constants as c
+
+MAX_LENGTH_NAME = 128
+MENU_NAME = _("Menu's name")
+MENU_GENERAL = _('General menu')
+MENU_GENERAL_ERROR = _("There cannot be more than one general menu")
+MENU_LANG_KEY = 'menu_lang'
 
 
 class Menu(Audit):
     name = models.CharField(
-        verbose_name=c.MENU_NAME,
-        max_length=128
+        verbose_name=MENU_NAME,
+        max_length=MAX_LENGTH_NAME
     )
 
     general = models.BooleanField(
-        verbose_name=c.MENU_GENERAL,
+        verbose_name=MENU_GENERAL,
         default=False,
     )
 
@@ -26,7 +33,7 @@ class Menu(Audit):
         qs = Menu.objects.filter(general=True).first()
         if self.general and qs != self:
             raise ValidationError({
-                "general": c.MENU_GENERAL_ERROR
+                "general": MENU_GENERAL_ERROR
             })
 
     def __str__(self):
@@ -36,7 +43,7 @@ class Menu(Audit):
 class MenuLanguage(LanguageAbstract):
     menu = models.ForeignKey(
         Menu,
-        related_name="menu_lang",
+        related_name=c.RELATED_NAME.format(MENU_LANG_KEY),
         on_delete=models.CASCADE
     )
 
@@ -97,7 +104,7 @@ class MenuItem(MPTTModel, Audit):
     )
 
     slug_url = models.CharField(
-        verbose_name="URL "+c.SLUG,
+        verbose_name="URL " + c.SLUG,
         max_length=50,
         blank=True,
         null=True
@@ -138,7 +145,7 @@ class MenuItem(MPTTModel, Audit):
 
 class MenuItemLanguage(LanguageAbstract):
     name = models.CharField(
-        verbose_name=c.MENU_NAME,
+        verbose_name=MENU_NAME,
         max_length=128
     )
 

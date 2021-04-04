@@ -145,6 +145,7 @@ SECTION_LANGUAGE_PLURAL = _("Section's languages")
 
 # -------CORE------------------#
 ACTIVE = _('Active')
+RELATED_NAME = '%(class)s_{}'
 
 # --------TOOLS-----#
 LANGUAGE_NAME = _('Language Name')
@@ -229,10 +230,7 @@ PATH_BACKGROUND_POST = f'{PATH_APP}/Background_Thumnails'
 
 # ------------Menu-----------#
 MENU = _("Menu")
-MENU_NAME = _("Menu's name")
 MENU_LANGUAGE = _("Menu's language")
-MENU_GENERAL = _('Menú general')
-MENU_GENERAL_ERROR = _("No puede haber más de un menú general")
 MENU_ITEM = _("Menu's item")
 MENU_ITEM_URL_ERROR = _("No puede añadir ambas URL, escoja solo una")
 MENU_ITEM_LANGUAGE = _("Menu's item language")
