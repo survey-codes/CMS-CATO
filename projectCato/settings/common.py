@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 import os
+from celery.schedules import crontab
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -207,3 +208,10 @@ CELERY_RESULT_EXPIRES = 3600
 # Task execution
 CELERY_TASK_IGNORE_RESULT = True
 CELERY_WORKER_DISABLE_RATE_LIMITS = True
+
+# CELERY_BEAT_SCHEDULE = {
+#     'hello_task': {
+#         'task': 'main.tasks.hello',
+#         'schedule': crontab(minute='*/1')
+#     }
+# }
