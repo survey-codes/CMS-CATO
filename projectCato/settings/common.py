@@ -179,11 +179,31 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# Translations
 LANGUAGES = (
     ('es', 'Spanish'),
     ('en', 'English'),
 )
-
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
+
+##########
+# CELERY #
+##########
+
+# Broker settings.
+CELERY_BROKER_USE_SSL = False
+CELERY_BROKER_URL = ''
+CELERY_TIMEZONE = TIME_ZONE
+
+# Task result backend
+CELERY_RESULT_BACKEND = 'amqp'
+
+# AMQP backend settings
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_RESULT_EXPIRES = 3600
+
+# Task execution
+CELERY_TASK_IGNORE_RESULT = True
+CELERY_WORKER_DISABLE_RATE_LIMITS = True
