@@ -79,3 +79,5 @@ else:
             'PORT': 5432,
         }
     }
+
+CELERY_BROKER_URL = 'amqp://catocms:catocms@broker:5672/'
