@@ -1,14 +1,15 @@
 version: '3.1'
 
 services:
-  cato:
+  web:
     build: .
-    image: cato:latest
-    container_name: catoback
+    image: catocms:latest
+    container_name: catocms-backend
     environment:
       ENVIRONMENT: development
     depends_on:
       - db
+      - broker
     volumes:
       - .:/src
       - ./scripts:/scripts
@@ -17,9 +18,57 @@ services:
     ports:
       - "8010:8000"
 
+  broker:
+    image: rabbitmq:latest
+    container_name: catocms-broker
+    restart: "no"
+    environment:
+      RABBITMQ_DEFAULT_USER: catocms
+      RABBITMQ_DEFAULT_PASS: catocms
+    ports:
+      - "5672:5672"
+
+  celery:
+    image: catocms:latest
+    container_name: catocms-celery
+    restart: always
+    command:
+      [
+        "celery",
+        "--app=projectCato",
+        "--concurrency=8",
+        "--hostname=worker1@%h",
+        "--loglevel=INFO",
+        "--queues=celery",
+        "worker",
+      ]
+    depends_on:
+      - web
+      - broker
+
+  flower:
+    image: catocms:latest
+    container_name: catocms-flower
+    restart: always
+    command:
+      [
+        "celery",
+        "--app=projectCato",
+        "--concurrency=8",
+        "--db=/src/flowerdb",
+        "--persistent",
+        "--port=5555",
+        "flower",
+      ]
+    depends_on:
+      - broker
+      - web
+    ports:
+      - "5555:5555"
+
   db:
     image: postgis/postgis:12-3.0
-    container_name: cato-postgis
+    container_name: catocms-postgis
     environment: 
       POSTGRES_PASSWORD: postgres
     ports:
