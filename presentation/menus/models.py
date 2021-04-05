@@ -26,6 +26,7 @@ EXTERNAL_URL = _("External url")
 PAGE_URL = _("Page url")
 URL = "URL"
 MENU_ITEM_URL_ERROR = _("No puede añadir ambas URL, escoja solo una")
+ITEM_LANG_KEY = "item_lang"
 
 
 class Menu(Audit):
@@ -166,7 +167,7 @@ class MenuItemLanguage(LanguageAbstract):
 
     menu_item = models.ForeignKey(
         MenuItem,
-        related_name="item_lang",
+        related_name=c.RELATED_NAME.format(ITEM_LANG_KEY),
         on_delete=models.CASCADE
     )
 

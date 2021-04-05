@@ -9,6 +9,11 @@ from projectCato.settings import constants as c
 NAME_KEY = "name"
 GENERAL_KEY = "general"
 SHORT_DESCRIPTION_UPDATE_JSON_CONTENT = "Update json content"
+PARENT_KEY = "parent"
+MENU_KEY = "menu"
+URL_KEY = "url"
+PAGE_URL_KEY = "page_url"
+SLUG_URL_KEY = "slug_url"
 
 
 class MenuLanguageInline(admin.TabularInline):
@@ -62,16 +67,16 @@ class MenuItemLanguageInline(admin.StackedInline):
 @admin.register(MenuItem)
 class MenuItemAdmin(admin.ModelAdmin):
     actions = ['update_json_content']
-    search_fields = ('creation_date',)
-    list_filter = (('creation_date', DateRangeFilter),)
-    suit_list_filter_horizontal = ('creation_date',)
+    search_fields = (CREATION_DATE_KEY,)
+    list_filter = ((CREATION_DATE_KEY, DateRangeFilter),)
+    suit_list_filter_horizontal = (CREATION_DATE_KEY,)
     change_list_template = 'admin/change_date_filter.html'
     inlines = [MenuItemLanguageInline]
     readonly_fields = AuditAdmin.readonly_fields
     fieldsets = (
         (None, {
             'classes': ('suit-tab suit-tab-menu',),
-            'fields': ('name', 'parent', 'menu', 'url', 'page_url', 'slug_url',) + AuditAdmin.fieldsets
+            'fields': (NAME_KEY, PARENT_KEY, MENU_KEY, URL_KEY, PAGE_URL_KEY, SLUG_URL_KEY,) + AuditAdmin.fieldsets
         }),
     )
 
@@ -91,4 +96,4 @@ class MenuItemAdmin(admin.ModelAdmin):
         )
         return True
 
-    update_json_content.short_description = "Actualizar contenido JSON"
+    update_json_content.short_description = SHORT_DESCRIPTION_UPDATE_JSON_CONTENT
