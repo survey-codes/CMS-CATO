@@ -9,10 +9,23 @@ from presentation.main.models import Audit, LanguageAbstract
 from projectCato.settings import constants as c
 
 MAX_LENGTH_NAME = 128
+MAX_LENGTH_URL = 256
+MAX_LENGTH_SLUG = 50
+MENUS = _("Menus")
 MENU_NAME = _("Menu's name")
-MENU_GENERAL = _('General menu')
+MENU_GENERAL = _("General menu")
 MENU_GENERAL_ERROR = _("There cannot be more than one general menu")
-MENU_LANG_KEY = 'menu_lang'
+MENU_LANG_KEY = "menu_lang"
+MENU_LANGUAGE = _("Menu language")
+MENUS_LANGUAGE = _("Menu's language")
+MENU_ITEM_NAME = _("Menu's item name")
+ITEMS_KEY = "items"
+MENU_ITEM_PARENT = _("Menu's item parent")
+CHILDREN_KEY = "children"
+EXTERNAL_URL = _("External url")
+PAGE_URL = _("Page url")
+URL = "URL"
+MENU_ITEM_URL_ERROR = _("No puede añadir ambas URL, escoja solo una")
 
 
 class Menu(Audit):
@@ -27,6 +40,8 @@ class Menu(Audit):
     )
 
     class Meta:
+        verbose_name = c.MENU
+        verbose_name_plural = MENUS
         ordering = ("pk",)
 
     def clean(self):
@@ -57,7 +72,8 @@ class MenuLanguage(LanguageAbstract):
     )
 
     class Meta:
-        verbose_name = c.MENU_LANGUAGE
+        verbose_name = MENU_LANGUAGE
+        verbose_name_plural = MENUS_LANGUAGE
         unique_together = (("language", "menu"),)
 
     def __str__(self):
@@ -66,14 +82,14 @@ class MenuLanguage(LanguageAbstract):
 
 class MenuItem(MPTTModel, Audit):
     name = models.CharField(
-        verbose_name=c.MENU_ITEM_NAME,
-        max_length=128
+        verbose_name=MENU_ITEM_NAME,
+        max_length=MAX_LENGTH_NAME
     )
 
     menu = models.ForeignKey(
         Menu,
         verbose_name=c.MENU,
-        related_name="items",
+        related_name=c.RELATED_NAME.format(ITEMS_KEY),
         on_delete=models.CASCADE,
         blank=True,
         null=True
@@ -81,49 +97,48 @@ class MenuItem(MPTTModel, Audit):
 
     parent = models.ForeignKey(
         "self",
-        verbose_name=c.MENU_ITEM_PARENT,
+        verbose_name=MENU_ITEM_PARENT,
         null=True,
         blank=True,
-        related_name="children",
+        related_name=c.RELATED_NAME.format(CHILDREN_KEY),
         on_delete=models.CASCADE
     )
 
     # Usarlos dependiendo del tipo de enlace que necesite guardar
     url = models.URLField(
-        verbose_name=c.EXTERNAL_URL,
-        max_length=256,
+        verbose_name=EXTERNAL_URL,
+        max_length=MAX_LENGTH_URL,
         blank=True,
         null=True
     )
 
     page_url = models.CharField(
-        verbose_name=c.PAGE_URL,
-        max_length=128,
+        verbose_name=PAGE_URL,
+        max_length=MAX_LENGTH_NAME,
         blank=True,
         null=True
     )
 
     slug_url = models.CharField(
-        verbose_name="URL " + c.SLUG,
-        max_length=50,
+        verbose_name=f"{URL} {c.SLUG}",
+        max_length=MAX_LENGTH_SLUG,
         blank=True,
         null=True
     )
 
     class Meta:
-        # ordering = ("pk",)
         verbose_name = c.MENU_ITEM
 
     def clean(self):
         if self.page_url and self.url:
             raise ValidationError(
                 {
-                    "url": c.MENU_ITEM_URL_ERROR,
+                    "url": MENU_ITEM_URL_ERROR,
                 }
             )
 
     def get_ordering_queryset(self):
-        return self.menu.items.all() if not self.parent else self.parent.children.all()
+        return self.menu.menu_item_items.all() if not self.parent else self.parent.menu_item_children.all()
 
     @property
     def linked_object(self):

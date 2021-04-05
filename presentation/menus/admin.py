@@ -1,12 +1,17 @@
 from django.contrib import admin, messages
 from django.contrib.admin import register
-from presentation.main.admin import AuditAdmin
-from presentation.menus.models import Menu, MenuItem, MenuItemLanguage, MenuLanguage
-from projectCato.settings import constants as c
 from rangefilter.filter import DateRangeFilter
 
+from presentation.main.admin import AuditAdmin, CREATION_DATE_KEY
+from presentation.menus.models import Menu, MenuItem, MenuItemLanguage, MenuLanguage
+from projectCato.settings import constants as c
 
-class MenuLanguageInline(admin.StackedInline):
+NAME_KEY = "name"
+GENERAL_KEY = "general"
+SHORT_DESCRIPTION_UPDATE_JSON_CONTENT = "Update json content"
+
+
+class MenuLanguageInline(admin.TabularInline):
     model = MenuLanguage
     extra = 0
     suit_classes = 'suit-tab suit-tab-language'
@@ -14,17 +19,18 @@ class MenuLanguageInline(admin.StackedInline):
 
 @register(Menu)
 class MenuAdmin(admin.ModelAdmin):
+    list_display = (NAME_KEY, GENERAL_KEY)
     actions = ['update_json_content']
-    search_fields = ('creation_date',)
-    list_filter = (('creation_date', DateRangeFilter),)
-    suit_list_filter_horizontal = ('creation_date',)
+    search_fields = (CREATION_DATE_KEY,)
+    list_filter = ((CREATION_DATE_KEY, DateRangeFilter),)
+    suit_list_filter_horizontal = (CREATION_DATE_KEY,)
     change_list_template = 'admin/change_date_filter.html'
     readonly_fields = AuditAdmin.readonly_fields
     inlines = [MenuLanguageInline]
     fieldsets = (
         (None, {
             'classes': ('suit-tab suit-tab-menu',),
-            'fields': ('name', 'general',) + AuditAdmin.fieldsets
+            'fields': (NAME_KEY, GENERAL_KEY,) + AuditAdmin.fieldsets
         }),
     )
 
@@ -34,7 +40,7 @@ class MenuAdmin(admin.ModelAdmin):
     )
 
     def update_json_content(self, request, queryset):
-        from .utils import update_json_content_menu
+        from domain.menus.utils import update_json_content_menu
         for menu in queryset:
             update_json_content_menu(menu)
 
@@ -44,7 +50,7 @@ class MenuAdmin(admin.ModelAdmin):
         )
         return True
 
-    update_json_content.short_description = "Actualizar contenido JSON"
+    update_json_content.short_description = SHORT_DESCRIPTION_UPDATE_JSON_CONTENT
 
 
 class MenuItemLanguageInline(admin.StackedInline):
@@ -75,7 +81,7 @@ class MenuItemAdmin(admin.ModelAdmin):
     )
 
     def update_json_content(self, request, queryset):
-        from .utils import update_json_content_menu_item
+        from domain.menus.utils import update_json_content_menu_item
         for menu_item in queryset:
             update_json_content_menu_item(menu_item)
 

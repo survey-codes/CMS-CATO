@@ -39,7 +39,7 @@ from presentation.contents.models import (
 
 from presentation.contents.resources import PostLanguageResource, ImportPostResource, ExportPostResource
 from presentation.main.admin import AuditAdmin
-from domain.image import get_image_preview
+from domain.main.image import get_image_preview
 from projectCato.settings import constants as c
 
 

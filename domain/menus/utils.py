@@ -5,7 +5,7 @@ def get_menu_as_dict(menu, lang):
     menu_data = {
         "menu": list()
     }
-    items = menu.items.all()
+    items = menu.menuitem_items.all()
     if items:
         for item in items:
             lang_item = item.item_lang.filter(language__abbreviation=lang.language.abbreviation).first()
@@ -59,8 +59,8 @@ def update_json_content_menu_item(menu_item, **kwargs):
 
 
 @transaction.atomic
-def update_json_content_menu(menu, **kwargs):
-    langs = menu.menu_lang.select_related("language")
+def update_json_content_menu(menu):
+    langs = menu.menulanguage_menu_lang.select_related("language")
     for lang in langs:
         lang.menu_metadata = get_menu_as_dict(menu, lang)
         lang.save(update_fields=["menu_metadata"])
