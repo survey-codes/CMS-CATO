@@ -3,7 +3,6 @@ from django.utils.translation import ugettext_lazy as _
 
 JSON_UPDATE_MESSAGE = _('JSON content updated')
 
-BANNERS_TITLE = _("Banner's title")
 BANNERS_SUBTITLE = _("Banner's subtitle")
 BANNERS_DESCRIPTION = _("Banner's description text")
 
@@ -12,16 +11,11 @@ IMAGE_NAME = _("Image name in spanish")
 IMAGE_NAME_TRANSLATION = _("Image name in english")
 
 LOAD_IMAGE = _('Load image')
-IMAGE_360 = _("is it a 360 image?")
-YOUTUBE_VIDEO = _("Youtube video url")
-BANNER_LINK = _('Add link to banner')
-BANNER_GALLERY = _("Banners gallery")
 BANNER_GALLERY_PLURAL = _("Banners galleries")
 BANNER_GALLERY_TITLE = _("Banner's gallery title")
 GALLERY_SELECTOR = _("Select banners galleries")
 IMAGE_DESCRIPTION = _('Description text')
 PAGE_FK_BANNER_GALLERY = _('Show banner gallery in this page')
-BACKGROUND_IMAGE = _('Background image')
 JSON_CONTENT = _('Json content')
 
 PAGE_TYPE_CHOICES = (
@@ -112,7 +106,6 @@ SECTION_LANGUAGE = _("Edit fields in section's language")
 SECTION = _('Section')
 SECTION_PLURAL = _('Sections')
 SECTION_POST = _("Section's posts")
-IMAGE_HELP_TEXT = _('Check the box if is a 360 image')
 POST_GALLERY = _("Image")
 POST_GALLERY_PLURAL = _('Images')
 POST_GALLERY_ERROR = _("You can't save an image and youtube video into the same gallery")
@@ -173,12 +166,8 @@ ICON_PREVIEW = _('Icon (Preview)')
 ICON_CSS = _('Icon css')
 
 # ------------Banner-----------#
-LOGO_ANIMATE = _('animated logo')
 BUTTON_BANNER = _('text button banner')
 
-ICON_LIST = _('List of icons')
-ICON_LIST_URL = 'https://fontawesome.com/v4.7.0/icons/'
-ICON_CSS_BUTTON_BANNER = _('icon css button banner')
 GALLERY_MESSAGE_UNIQUE = _("The same gallery shouldn't be added more than once")
 GALLERY_ERROR = _('Please select galleries that are active')
 
@@ -195,9 +184,6 @@ BANNER_PLURAL = _('Banners')
 
 PATH_APP = 'Contents'
 PATH_APP_TOOLS = 'Tools'
-PATH_BANNER = f'{PATH_APP}/banners/'
-PATH_ANIMATED_LOGO = f'{PATH_BANNER}/animated_logos'
-PATH_ICON_POST = f'{PATH_BANNER}/icon_post'
 PATH_CONTACT_BACKGROUND = f'{PATH_APP}/contacts/background'
 PATH_SECTION_BACKGROUND = f'{PATH_APP}/sections/background'
 PATH_IMAGES_GALLERIES = f'{PATH_APP}/Post_gallery_images'
@@ -228,5 +214,3 @@ PATH_BACKGROUND_POST = f'{PATH_APP}/Background_Thumnails'
 
 # ------------Menu-----------#
 MENU = _("Menu")
-MENU_ITEM = _("Menu's item")
-MENU_ITEM_LANGUAGE = _("Menu's item language")

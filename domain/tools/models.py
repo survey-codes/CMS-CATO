@@ -1,6 +1,8 @@
 from django.db import models
 
-from projectCato.settings import constants as c
+from presentation import constants as c
+
+APP_LABEL = "tools"
 
 
 class Language(models.Model):
@@ -18,6 +20,7 @@ class Language(models.Model):
     class Meta:
         verbose_name = c.LANGUAGE_TAB
         verbose_name_plural = c.LANGUAGE_APP_PLURAL
+        app_label = APP_LABEL
 
     def save(self, *args, **kwargs):
         self.abbreviation = self.abbreviation.upper()

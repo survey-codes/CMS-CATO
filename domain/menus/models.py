@@ -5,13 +5,16 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from mptt.models import MPTTModel
 
-from presentation.main.models import Audit, LanguageAbstract
-from projectCato.settings import constants as c
+from domain.main.models import Audit, LanguageAbstract
+from presentation import constants as c
+
+APP_LABEL = "menus"
 
 MAX_LENGTH_NAME = 128
 MAX_LENGTH_URL = 256
 MAX_LENGTH_SLUG = 50
 MENUS = _("Menus")
+MENU_ITEM = _("Menu's item")
 MENU_NAME = _("Menu's name")
 MENU_GENERAL = _("General menu")
 MENU_GENERAL_ERROR = _("There cannot be more than one general menu")
@@ -27,6 +30,7 @@ PAGE_URL = _("Page url")
 URL = "URL"
 MENU_ITEM_URL_ERROR = _("No puede añadir ambas URL, escoja solo una")
 ITEM_LANG_KEY = "item_lang"
+MENU_ITEM_LANGUAGE = _("Menu's item language")
 
 
 class Menu(Audit):
@@ -44,6 +48,7 @@ class Menu(Audit):
         verbose_name = c.MENU
         verbose_name_plural = MENUS
         ordering = ("pk",)
+        app_label = APP_LABEL
 
     def clean(self):
         qs = Menu.objects.filter(general=True).first()
@@ -76,6 +81,7 @@ class MenuLanguage(LanguageAbstract):
         verbose_name = MENU_LANGUAGE
         verbose_name_plural = MENUS_LANGUAGE
         unique_together = (("language", "menu"),)
+        app_label = APP_LABEL
 
     def __str__(self):
         return self.menu.name
@@ -128,7 +134,8 @@ class MenuItem(MPTTModel, Audit):
     )
 
     class Meta:
-        verbose_name = c.MENU_ITEM
+        verbose_name = MENU_ITEM
+        app_label = APP_LABEL
 
     def clean(self):
         if self.page_url and self.url:
@@ -162,7 +169,7 @@ class MenuItem(MPTTModel, Audit):
 class MenuItemLanguage(LanguageAbstract):
     name = models.CharField(
         verbose_name=MENU_NAME,
-        max_length=128
+        max_length=MAX_LENGTH_NAME
     )
 
     menu_item = models.ForeignKey(
@@ -181,8 +188,9 @@ class MenuItemLanguage(LanguageAbstract):
     )
 
     class Meta:
-        verbose_name = c.MENU_ITEM_LANGUAGE
+        verbose_name = MENU_ITEM_LANGUAGE
         unique_together = (("language", "menu_item"),)
+        app_label = APP_LABEL
 
     def __str__(self):
         return self.name

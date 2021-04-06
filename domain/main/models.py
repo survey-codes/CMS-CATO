@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from presentation.tools.models import Language
-from projectCato.settings import constants as c
+from domain.tools.models import Language
+from presentation import constants as c
 
 CREATION_DATE = _('creation date')
 CREATED_BY = _('Created by')

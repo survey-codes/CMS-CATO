@@ -13,7 +13,7 @@ from import_export.admin import ImportExportModelAdmin
 from mptt.admin import DraggableMPTTAdmin
 from adminsortable2.admin import SortableInlineAdminMixin
 from rangefilter.filter import DateRangeFilter
-from presentation.contents.models import (
+from domain.contents.models import (
     Banner,
     BannerGallery,
     BannerLanguage,
@@ -40,7 +40,7 @@ from presentation.contents.models import (
 from presentation.contents.resources import PostLanguageResource, ImportPostResource, ExportPostResource
 from presentation.main.admin import AuditAdmin
 from domain.main.image import get_image_preview
-from projectCato.settings import constants as c
+from presentation import constants as c
 
 
 class BannerLanguageInline(admin.StackedInline):

@@ -1,78 +1,100 @@
 from adminsortable.models import SortableMixin
 from ckeditor.fields import RichTextField
 from colorfield.fields import ColorField
-
 from django.contrib.postgres.fields import JSONField
 from django.core.exceptions import ValidationError
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.db.models import Q
 from django.utils.text import slugify
-
-from presentation.main.models import Audit, LanguageAbstract
-from presentation.menus.models import Menu
+from django.utils.translation import ugettext_lazy as _
 from mptt.models import MPTTModel, TreeForeignKey
-from projectCato.settings import constants as c
 from url_or_relative_url_field.fields import URLOrRelativeURLField
+
+from domain.menus.models import Menu
+from presentation import constants as c
+from domain.main.models import Audit, LanguageAbstract
+
+APP_LABEL = "contents"
+
+BANNERS_TITLE = _("Banner's title")
+MAX_LENGTH_TITLE = 200
+BACKGROUND_IMAGE = _('Background image')
+PATH_BANNER = f'{c.PATH_APP}/banners/'
+PATH_ANIMATED_LOGO = f'{PATH_BANNER}/animated_logos'
+PATH_ICON_POST = f'{PATH_BANNER}/icon_post'
+IMAGE_360 = _("is it a 360 image?")
+IMAGE_HELP_TEXT = _('Check the box if is a 360 image')
+LOGO_ANIMATE = _('animated logo')
+BANNER_LINK = _('Add link to banner')
+ICON_CSS_BUTTON_BANNER = _('icon css button banner')
+MAX_LENGTH_ICON_CSS_BANNER = 20
+ICON_LIST = _('List of icons')
+ICON_LIST_URL = 'https://fontawesome.com/v4.7.0/icons/'
+HELP_TEXT_ICON_CSS_BANNER = f"{ICON_LIST}: <a href={ICON_LIST_URL} target={'_blank'}> {ICON_LIST_URL} </a>"
+ORDER_VALUE_DEFAULT = 0
+YOUTUBE_VIDEO = _("Youtube video url")
+MAX_LENGTH_URL_YOUTUBE = 255
+BANNER_GALLERY = _("Banners gallery")
 
 
 class Banner(SortableMixin, Audit):
     title = models.CharField(
-        verbose_name=c.BANNERS_TITLE,
-        max_length=200
+        verbose_name=BANNERS_TITLE,
+        max_length=MAX_LENGTH_TITLE
     )
 
     image = models.ImageField(
-        verbose_name=c.BACKGROUND_IMAGE,
-        upload_to=c.PATH_BANNER,
+        verbose_name=BACKGROUND_IMAGE,
+        upload_to=PATH_BANNER,
         null=True,
         blank=True
     )
 
     image_360 = models.BooleanField(
-        verbose_name=c.IMAGE_360,
-        help_text=c.IMAGE_HELP_TEXT,
+        verbose_name=IMAGE_360,
+        help_text=IMAGE_HELP_TEXT,
         default=False,
         blank=True
     )
 
     animated_logo = models.ImageField(
-        verbose_name=c.LOGO_ANIMATE,
-        upload_to=c.PATH_ANIMATED_LOGO,
+        verbose_name=LOGO_ANIMATE,
+        upload_to=PATH_ANIMATED_LOGO,
         null=True,
         blank=True
     )
 
     button_link = URLOrRelativeURLField(
-        verbose_name=c.BANNER_LINK,
+        verbose_name=BANNER_LINK,
         blank=True,
         null=True,
         default=None
     )
 
     icon_css_banner = models.CharField(
-        verbose_name=c.ICON_CSS_BUTTON_BANNER,
-        max_length=20,
+        verbose_name=ICON_CSS_BUTTON_BANNER,
+        max_length=MAX_LENGTH_ICON_CSS_BANNER,
         blank=True,
         null=True,
         default=None,
-        help_text=f"{c.ICON_LIST}: <a href={c.ICON_LIST_URL} target={'_blank'}> {c.ICON_LIST_URL} </a>"
+        help_text=HELP_TEXT_ICON_CSS_BANNER
     )
 
     order = models.PositiveSmallIntegerField(
-        default=0
+        default=ORDER_VALUE_DEFAULT
     )
 
     url_youtube = models.CharField(
-        verbose_name=c.YOUTUBE_VIDEO,
-        max_length=255,
+        verbose_name=YOUTUBE_VIDEO,
+        max_length=MAX_LENGTH_URL_YOUTUBE,
         blank=True,
         null=True
     )
 
     banner_gallery = models.ForeignKey(
         'BannerGallery',
-        verbose_name=c.BANNER_GALLERY,
+        verbose_name=BANNER_GALLERY,
         on_delete=models.CASCADE,
         null=True,
     )
@@ -86,6 +108,7 @@ class Banner(SortableMixin, Audit):
         ordering = ['order', ]
         verbose_name = c.BANNER
         verbose_name_plural = c.BANNER_PLURAL
+        app_label = APP_LABEL
 
     def save(self, *args, **kwargs):
         self.slug_banner = slugify(self.title)
@@ -97,7 +120,7 @@ class Banner(SortableMixin, Audit):
 
 class BannerLanguage(LanguageAbstract):
     title = models.CharField(
-        verbose_name=c.BANNERS_TITLE,
+        verbose_name=BANNERS_TITLE,
         max_length=200,
         blank=True,
         null=True
@@ -143,6 +166,7 @@ class BannerLanguage(LanguageAbstract):
         unique_together = (('language', 'banner'),)
         verbose_name = c.FIELD_BANNER_LANGUAGE
         verbose_name_plural = c.BANNER_LANGUAGE_PLURAL
+        app_label = APP_LABEL
 
     def __str__(self):
         return str(self.language)
@@ -153,7 +177,7 @@ class BannerGallery(Audit):
         c.BANNER_GALLERY_TITLE,
         max_length=200,
         null=False,
-        default=c.BANNER_GALLERY
+        default=BANNER_GALLERY
     )
 
     slug_banner_gallery = models.SlugField(
@@ -167,8 +191,9 @@ class BannerGallery(Audit):
 
     class Meta:
         ordering = ['-creation_date']
-        verbose_name = c.BANNER_GALLERY
+        verbose_name = BANNER_GALLERY
         verbose_name_plural = c.BANNER_GALLERY_PLURAL
+        app_label = APP_LABEL
 
     def __str__(self):
         return str(self.title)
@@ -212,8 +237,9 @@ class GallerySelector(models.Model):
     class Meta:
         ordering = ['-active', ]
         unique_together = (('page', 'banner_gallery'),)
-        verbose_name = c.BANNER_GALLERY
+        verbose_name = BANNER_GALLERY
         verbose_name_plural = c.BANNER_GALLERY_PLURAL
+        app_label = APP_LABEL
 
     def unique_error_message(self, model_class, unique_check):
         return c.GALLERY_MESSAGE_UNIQUE
@@ -274,6 +300,7 @@ class Page(MPTTModel, Audit):
 
     class Meta:
         verbose_name = c.PAGE
+        app_label = APP_LABEL
 
     def save(self, *args, **kwargs):
         self.slug_page = slugify(self.title)
@@ -315,6 +342,7 @@ class PageLanguage(LanguageAbstract):
         unique_together = (('language', 'page'),)
         verbose_name = c.PAGE_LANGUAGE
         verbose_name_plural = c.PAGE_LANGUAGE_PLURAL
+        app_label = APP_LABEL
 
     def __str__(self):
         return str(self.language)
@@ -330,13 +358,13 @@ class Post(MPTTModel, Audit):
 
     logo = models.ImageField(
         verbose_name=c.LOGO_POST,
-        upload_to=c.PATH_ANIMATED_LOGO,
+        upload_to=PATH_ANIMATED_LOGO,
         blank=True
     )
 
     icon = models.ImageField(
         verbose_name=c.ICON_POST,
-        upload_to=c.PATH_ICON_POST,
+        upload_to=PATH_ICON_POST,
         blank=True
     )
 
@@ -363,6 +391,9 @@ class Post(MPTTModel, Audit):
         verbose_name=c.SECTION_PLURAL,
         through='PostSettings'
     )
+
+    class Meta:
+        app_label = APP_LABEL
 
     def save(self, *args, **kwargs):
         self.slug_post = slugify(self.title_post)
@@ -420,6 +451,7 @@ class PostLanguage(LanguageAbstract):
         ordering = ['post', ]
         verbose_name = c.POST_LANGUAGE
         verbose_name_plural = c.POST_LANGUAGE_PLURAL
+        app_label = APP_LABEL
 
     def __str__(self):
         return '{} - {}'.format(
@@ -451,6 +483,7 @@ class SectionSelector(Audit):
         ordering = ['order', ]
         verbose_name = c.SELECT_SECTIONS
         verbose_name_plural = c.SELECT_SECTIONS
+        app_label = APP_LABEL
 
     def __str__(self):
         return f"{self.section}"
@@ -471,7 +504,7 @@ class Section(Audit):
     )
 
     background = models.ImageField(
-        verbose_name=c.BACKGROUND_IMAGE,
+        verbose_name=BACKGROUND_IMAGE,
         upload_to=c.PATH_SECTION_BACKGROUND,
         blank=True,
         null=True
@@ -550,6 +583,7 @@ class Section(Audit):
         ordering = ['order', ]
         verbose_name = c.SECTION
         verbose_name_plural = c.SECTION_PLURAL
+        app_label = APP_LABEL
 
     def clean(self):
         if self.logo_visibility == 2 and self.title_visibility is False:
@@ -605,6 +639,7 @@ class SectionLanguage(LanguageAbstract):
         unique_together = (('language', 'section'),)
         verbose_name = c.SECTION_LANGUAGE_SINGULAR
         verbose_name_plural = c.SECTION_LANGUAGE_PLURAL
+        app_label = APP_LABEL
 
     def __str__(self):
         return str(self.language)
@@ -624,6 +659,7 @@ class Tag(models.Model):
     class Meta:
         verbose_name = c.TAG_SINGULAR
         verbose_name_plural = c.TAG
+        app_label = APP_LABEL
 
     def save(self, *args, **kwargs):
         self.slug_tag = slugify(self.name)
@@ -664,6 +700,7 @@ class PostSettings(models.Model):
         ordering = ['order', ]
         verbose_name = c.POST_SETTINGS
         verbose_name_plural = c.CHOOSE_POSTS
+        app_label = APP_LABEL
 
     def __str__(self):
         return f'{self.section}'
@@ -695,14 +732,14 @@ class PostGallery(SortableMixin, Audit):
     )
 
     image_360 = models.BooleanField(
-        verbose_name=c.IMAGE_360,
-        help_text=c.IMAGE_HELP_TEXT,
+        verbose_name=IMAGE_360,
+        help_text=IMAGE_HELP_TEXT,
         default=False,
         blank=True
     )
 
     url_youtube = models.CharField(
-        verbose_name=c.YOUTUBE_VIDEO,
+        verbose_name=YOUTUBE_VIDEO,
         max_length=255,
         blank=True,
         null=True
@@ -727,6 +764,7 @@ class PostGallery(SortableMixin, Audit):
         ordering = ['order', ]
         verbose_name = c.POST_GALLERY
         verbose_name_plural = c.POST_GALLERY_PLURAL
+        app_label = APP_LABEL
 
     def clean(self):
         if self.image and self.url_youtube:
@@ -769,6 +807,7 @@ class SectionTemplate(models.Model):
         verbose_name = c.TEMPLATE_NAME
         verbose_name_plural = c.TEMPLATE_TYPE_PLURAL
         unique_together = (('name', 'nickname'),)
+        app_label = APP_LABEL
 
     def __str__(self):
         return f'{self.name}'
@@ -797,6 +836,7 @@ class Contact(Audit):
     class Meta:
         verbose_name = c.CONTACT
         verbose_name_plural = c.CONTACT_PLURAL
+        app_label = APP_LABEL
 
     def save(self, *args, **kwargs):
         self.slug_contact = slugify(self.contact_title)
@@ -874,6 +914,7 @@ class ContactLanguage(LanguageAbstract):
         unique_together = (('language', 'contact'),)
         verbose_name = c.LANGUAGE_TAB
         verbose_name_plural = c.LANGUAGE_APP_PLURAL
+        app_label = APP_LABEL
 
     def __str__(self):
         return '{} - {}'.format(self.contact.contact_title, self.language.name)
@@ -929,6 +970,7 @@ class SocialNetwork(SortableMixin, Audit):
         ordering = ['order']
         verbose_name = c.SOCIAL_NETWORK_SING
         verbose_name_plural = c.SOCIAL_NETWORK_PLUR
+        app_label = APP_LABEL
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -966,6 +1008,7 @@ class GeneralData(Audit):
         ordering = ['-active', 'creation_date']
         verbose_name = c.GENERAL_DATA
         verbose_name_plural = c.GENERAL_DATA
+        app_label = APP_LABEL
 
     def clean(self):
         actives = False
@@ -1012,6 +1055,7 @@ class PartnersGallery(SortableMixin, Audit):
         ordering = ['order', ]
         verbose_name = c.PARTNERS_GALLERY
         verbose_name_plural = c.PARTNERS_GALLERY
+        app_label = APP_LABEL
 
     def __str__(self):
         return f' {c.STR_PARTNER} {self.pk}'
@@ -1023,7 +1067,7 @@ class GeneralDataLanguage(LanguageAbstract):
         max_length=100,
         blank=True,
         null=True
-        )
+    )
 
     about = RichTextField(
         verbose_name=c.FOOTER_ABOUT,
@@ -1060,7 +1104,7 @@ class GeneralDataLanguage(LanguageAbstract):
         unique_together = (('language', 'general_data'),)
         verbose_name = c.GENERAL_DATA_LANGUAGE
         verbose_name_plural = c.GENERAL_DATA_LANGUAGE_PLURAL
+        app_label = APP_LABEL
 
     def __str__(self):
         return self.title_one
-

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Language
+from domain.tools.models import Language
 
 
 @admin.register(Language)

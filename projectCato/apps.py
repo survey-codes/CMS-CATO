@@ -1,6 +1,7 @@
 from suit.apps import DjangoSuitConfig
 from suit.menu import ParentItem, ChildItem
-from .settings import constants as c
+
+from presentation import constants as c
 
 
 class SuitConfig(DjangoSuitConfig):
@@ -20,6 +21,7 @@ class SuitConfig(DjangoSuitConfig):
             ChildItem(model='contents.section'),
             ChildItem(model='contents.post'),
             ChildItem(model='contents.bannergallery'),
+
             ChildItem(model='contents.contact'),
         ]),
         ParentItem(c.SETTINGS, icon='fa fa-cogs', children=[
@@ -29,5 +31,4 @@ class SuitConfig(DjangoSuitConfig):
             ChildItem(model='contents.postlanguage', label=c.IMPORT_EXPORT_LANGUAGE)
 
         ])
-
     )

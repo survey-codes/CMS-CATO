@@ -3,8 +3,8 @@ from django.contrib.admin import register
 from rangefilter.filter import DateRangeFilter
 
 from presentation.main.admin import AuditAdmin, CREATION_DATE_KEY
-from presentation.menus.models import Menu, MenuItem, MenuItemLanguage, MenuLanguage
-from projectCato.settings import constants as c
+from domain.menus.models import Menu, MenuItem, MenuItemLanguage, MenuLanguage
+from presentation import constants as c
 
 NAME_KEY = "name"
 GENERAL_KEY = "general"
@@ -45,7 +45,7 @@ class MenuAdmin(admin.ModelAdmin):
     )
 
     def update_json_content(self, request, queryset):
-        from domain.menus.utils import update_json_content_menu
+        from presentation.menus.utils import update_json_content_menu
         for menu in queryset:
             update_json_content_menu(menu)
 
@@ -86,7 +86,7 @@ class MenuItemAdmin(admin.ModelAdmin):
     )
 
     def update_json_content(self, request, queryset):
-        from domain.menus.utils import update_json_content_menu_item
+        from presentation.menus.utils import update_json_content_menu_item
         for menu_item in queryset:
             update_json_content_menu_item(menu_item)
 

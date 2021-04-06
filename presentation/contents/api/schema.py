@@ -1,6 +1,7 @@
 import graphene
-from presentation.contents import models
-from presentation.contents.api.scalars import JSONCustom
+
+from domain.contents import models
+from scalars import JSONCustom
 
 
 class GeneralInfoQuery(graphene.ObjectType):
