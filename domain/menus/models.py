@@ -5,14 +5,13 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from mptt.models import MPTTModel
 
+from domain.constants import MAX_LENGTH_50, MENU, RELATED_NAME, JSON_CONTENT, SLUG
 from domain.main.models import Audit, LanguageAbstract
-from presentation import constants as c
 
 APP_LABEL = "menus"
 
 MAX_LENGTH_NAME = 128
 MAX_LENGTH_URL = 256
-MAX_LENGTH_SLUG = 50
 MENUS = _("Menus")
 MENU_ITEM = _("Menu's item")
 MENU_NAME = _("Menu's name")
@@ -45,7 +44,7 @@ class Menu(Audit):
     )
 
     class Meta:
-        verbose_name = c.MENU
+        verbose_name = MENU
         verbose_name_plural = MENUS
         ordering = ("pk",)
         app_label = APP_LABEL
@@ -64,12 +63,12 @@ class Menu(Audit):
 class MenuLanguage(LanguageAbstract):
     menu = models.ForeignKey(
         Menu,
-        related_name=c.RELATED_NAME.format(MENU_LANG_KEY),
+        related_name=RELATED_NAME.format(MENU_LANG_KEY),
         on_delete=models.CASCADE
     )
 
     menu_metadata = JSONField(
-        verbose_name=c.JSON_CONTENT,
+        verbose_name=JSON_CONTENT,
         blank=True,
         null=True,
         default=dict,
@@ -95,8 +94,8 @@ class MenuItem(MPTTModel, Audit):
 
     menu = models.ForeignKey(
         Menu,
-        verbose_name=c.MENU,
-        related_name=c.RELATED_NAME.format(ITEMS_KEY),
+        verbose_name=MENU,
+        related_name=RELATED_NAME.format(ITEMS_KEY),
         on_delete=models.CASCADE,
         blank=True,
         null=True
@@ -107,7 +106,7 @@ class MenuItem(MPTTModel, Audit):
         verbose_name=MENU_ITEM_PARENT,
         null=True,
         blank=True,
-        related_name=c.RELATED_NAME.format(CHILDREN_KEY),
+        related_name=RELATED_NAME.format(CHILDREN_KEY),
         on_delete=models.CASCADE
     )
 
@@ -127,8 +126,8 @@ class MenuItem(MPTTModel, Audit):
     )
 
     slug_url = models.CharField(
-        verbose_name=f"{URL} {c.SLUG}",
-        max_length=MAX_LENGTH_SLUG,
+        verbose_name=f"{URL} {SLUG}",
+        max_length=MAX_LENGTH_50,
         blank=True,
         null=True
     )
@@ -146,7 +145,7 @@ class MenuItem(MPTTModel, Audit):
             )
 
     def get_ordering_queryset(self):
-        return self.menu.menu_item_items.all() if not self.parent else self.parent.menu_item_children.all()
+        return self.menu.menuitem_items_set.all() if not self.parent else self.parent.menuitem_children_set.all()
 
     @property
     def linked_object(self):
@@ -174,12 +173,12 @@ class MenuItemLanguage(LanguageAbstract):
 
     menu_item = models.ForeignKey(
         MenuItem,
-        related_name=c.RELATED_NAME.format(ITEM_LANG_KEY),
+        related_name=RELATED_NAME.format(ITEM_LANG_KEY),
         on_delete=models.CASCADE
     )
 
     menu_item_metadata = JSONField(
-        verbose_name=c.JSON_CONTENT,
+        verbose_name=JSON_CONTENT,
         blank=True,
         null=True,
         default=dict,

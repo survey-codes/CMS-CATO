@@ -1,46 +1,63 @@
 from adminsortable.admin import SortableStackedInline, NonSortableParentAdmin
+from adminsortable2.admin import SortableInlineAdminMixin
 from django.contrib import admin, messages
 from django.contrib.admin import register
 from django.contrib.admin.options import StackedInline
 from django.core.exceptions import ValidationError
+from django.db.models import Count
 from django.forms import BaseInlineFormSet
 from django.urls import reverse
 from django.utils.encoding import force_text
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
-from django.db.models import Count
+from django.utils.translation import ugettext_lazy as _
 from import_export.admin import ImportExportModelAdmin
 from mptt.admin import DraggableMPTTAdmin
-from adminsortable2.admin import SortableInlineAdminMixin
 from rangefilter.filter import DateRangeFilter
-from domain.contents.models import (
-    Banner,
-    BannerGallery,
-    BannerLanguage,
-    Contact,
-    ContactLanguage,
-    GallerySelector,
-    GeneralData,
-    GeneralDataLanguage,
-    Page,
-    PageLanguage,
-    PartnersGallery,
-    Post,
-    PostGallery,
-    PostLanguage,
-    PostSettings,
-    Section,
-    SectionLanguage,
-    SectionSelector,
-    SectionTemplate,
-    SocialNetwork,
-    Tag
-)
 
-from presentation.contents.resources import PostLanguageResource, ImportPostResource, ExportPostResource
-from presentation.main.admin import AuditAdmin
+from domain.contents.models import (
+    Banner, BannerGallery, BannerLanguage, Contact, ContactLanguage, GallerySelector, GeneralData, GeneralDataLanguage,
+    Page, PageLanguage, PartnersGallery, Post, PostGallery, PostLanguage, PostSettings, Section,
+    SectionLanguage, SectionSelector, SectionTemplate, SocialNetwork, Tag, TITLE
+)
 from domain.main.image import get_image_preview
 from presentation import constants as c
+from presentation.contents.resources import PostLanguageResource, ImportPostResource, ExportPostResource
+from presentation.main.admin import AuditAdmin
+
+PAGE = _('Page')
+POST = _('Post')
+SECTION_BACKGROUND_COLOR = _("Section's background color")
+COUNT_SECTIONS = _('Number of sections')
+COUNT_IMAGES = _('Number of images in gallery')
+COUNT_TRANSLATIONS = _('Number of translations')
+VISIBILITY_HELP_TEXT = _('check the box if the posts component is visible in this section')
+LOGO_PREVIEW = _('Logo(preview)')
+EDIT_TEXT = _('Edit in another window')
+BANNER_LANGUAGE_MODIFY = _("Edit banner's fields in language")
+GALLERY = _('Gallery')
+GALLERY_SELECTOR = _("Select banners galleries")
+POST_SETTINGS_PLURAL = _("Posts Settings")
+CHOOSE_POSTS = _('Order posts')
+SECTION = _('Section')
+SECTION_PLURAL = _('Sections')
+CONTACT_INFORMATION = _('Contact Information')
+BANNER_LANGUAGE_SAVE = _('Save and continue to edit banner language fields')
+IMAGE_PREVIEW = _("Preview")
+SOCIAL_NETWORK_PLUR = _('Social networks')
+ICON_PREVIEW = _('Icon (Preview)')
+GALLERIES = _('Galleries')
+NO_POSTS = _("The section has no posts")
+FIELD_MSG_GALLERY = _(
+    "(choose a gallery, click on save and continue editing to see a preview of the first banner of it)")
+IMAGE_INSTITUTION = _('Institution image')
+PARTNERS_GALLERY = _("Institutional links")
+NO_PAGES = _("This section is not associated with any page")
+NO_SECTIONS = _("This page does not contain sections")
+SHOW_PAGES = _('Sections and pages in which appears ')
+SHOW_PAGES_SECTION = _('Pages in which appears ')
+ONE_GALLERY_ACTIVE = _('Only one banner gallery must be active')
+NO_POST_SECTIONS = _("This post is not contained in any section")
 
 
 class BannerLanguageInline(admin.StackedInline):
@@ -80,20 +97,20 @@ class BannerAdmin(admin.ModelAdmin):
     def logo_preview(self, obj):
         image = obj.animated_logo
         if image:
-            return get_image_preview(obj, img=image.url, title=c.IMAGE_PREVIEW)
+            return get_image_preview(obj, img=image.url, title=IMAGE_PREVIEW)
         return '-'
 
     logo_preview.allow_tags = True
-    logo_preview.short_description = c.IMAGE_PREVIEW
+    logo_preview.short_description = IMAGE_PREVIEW
 
     def _preview(self, obj):
         image = obj.image
         if image:
-            return get_image_preview(obj, img=image.url, title=c.IMAGE_PREVIEW)
+            return get_image_preview(obj, img=image.url, title=IMAGE_PREVIEW)
         return '-'
 
     _preview.allow_tags = True
-    _preview.short_description = c.IMAGE_PREVIEW
+    _preview.short_description = IMAGE_PREVIEW
 
     def update_json_content(self, request, queryset):
         from .utils import update_json_content_banner
@@ -136,30 +153,30 @@ class BannerInline(SortableStackedInline):
     def banner_language(self, obj=None):
         if obj.pk:
             url = reverse('admin:%s_%s_change' % (obj._meta.app_label, obj._meta.model_name), args=[force_text(obj.pk)])
-            text = c.EDIT_TEXT
+            text = EDIT_TEXT
             return format_html('<a href="{url}#language" target=' + '_blank' + '>{text}</a>', url=url, text=text)
-        return c.BANNER_LANGUAGE_SAVE
+        return BANNER_LANGUAGE_SAVE
 
     banner_language.allow_tags = True
-    banner_language.short_description = c.BANNER_LANGUAGE_MODIFY
+    banner_language.short_description = BANNER_LANGUAGE_MODIFY
 
     def logo_preview(self, obj):
         image = obj.animated_logo
         if image:
-            return get_image_preview(obj, img=image.url, title=c.IMAGE_PREVIEW)
+            return get_image_preview(obj, img=image.url, title=IMAGE_PREVIEW)
         return '-'
 
     logo_preview.allow_tags = True
-    logo_preview.short_description = c.IMAGE_PREVIEW
+    logo_preview.short_description = IMAGE_PREVIEW
 
     def _preview(self, obj):
         image = obj.image
         if image:
-            return get_image_preview(obj, img=image.url, title=c.IMAGE_PREVIEW)
+            return get_image_preview(obj, img=image.url, title=IMAGE_PREVIEW)
         return '-'
 
     _preview.allow_tags = True
-    _preview.short_description = c.IMAGE_PREVIEW
+    _preview.short_description = IMAGE_PREVIEW
 
 
 @admin.register(BannerGallery)
@@ -191,7 +208,7 @@ class BannerGalleryAdmin(NonSortableParentAdmin):
                 return get_image_preview(banner, banner.image.url, banner.title, 50)
         return get_image_preview(obj, "/static/no-image.png", 'no image', 50)
 
-    _preview.short_description = c.IMAGE_PREVIEW
+    _preview.short_description = IMAGE_PREVIEW
 
 
 class PostSettingsAdmin(admin.ModelAdmin):
@@ -258,10 +275,10 @@ class PostGalleryInline(SortableStackedInline):
     def _preview(self, obj):
         image_gallery = obj.image
         if image_gallery:
-            return get_image_preview(obj, image_gallery.url, title=c.IMAGE_PREVIEW)
+            return get_image_preview(obj, image_gallery.url, title=IMAGE_PREVIEW)
         return '-'
 
-    _preview.short_description = c.IMAGE_PREVIEW
+    _preview.short_description = IMAGE_PREVIEW
 
 
 class SectionLanguageInline(admin.StackedInline):
@@ -275,7 +292,7 @@ class PostSettingsInline(SortableInlineAdminMixin, admin.TabularInline):
     extra = 0
     suit_classes = 'suit-tab suit-tab-post_settings'
     raw_id_fields = ('post',)
-    verbose_name = c.POST
+    verbose_name = POST
 
 
 @admin.register(Section)
@@ -312,17 +329,17 @@ class SectionAdmin(admin.ModelAdmin):
         (None, {
             'classes': ('suit-tab suit-tab-general',),
             'fields': (
-                'active',
-                'title',
-                'background',
-                '_preview',
-                'background_color',
-                'slug_section',
-            ) + AuditAdmin.fieldsets
+                          'active',
+                          'title',
+                          'background',
+                          '_preview',
+                          'background_color',
+                          'slug_section',
+                      ) + AuditAdmin.fieldsets
         }),
-        (c.POST_SETTINGS_PLURAL, {
+        (POST_SETTINGS_PLURAL, {
             'classes': ('wide', 'suit-tab suit-tab-general'),
-            'description': c.VISIBILITY_HELP_TEXT,
+            'description': VISIBILITY_HELP_TEXT,
             'fields': (
                 'template',
                 'align',
@@ -341,7 +358,7 @@ class SectionAdmin(admin.ModelAdmin):
     suit_form_tabs = (
         ('general', 'General'),
         ('language', c.LANGUAGE_TAB),
-        ('post_settings', c.CHOOSE_POSTS),
+        ('post_settings', CHOOSE_POSTS),
     )
 
     def _background_color(self, obj):
@@ -351,7 +368,7 @@ class SectionAdmin(admin.ModelAdmin):
         else:
             return '-'
 
-    _background_color.short_description = c.SECTION_BACKGROUND_COLOR
+    _background_color.short_description = SECTION_BACKGROUND_COLOR
 
     def _show_pages(self, obj):
         pages = obj.page.all()
@@ -360,18 +377,18 @@ class SectionAdmin(admin.ModelAdmin):
             for page in pages:
                 html += f'<li><a href="/admin/contents/page/{page.id}/">{page}</a></li>'
                 return mark_safe(f'<ul>{html}</ul>')
-        return c.NO_PAGES
+        return NO_PAGES
 
-    _show_pages.short_description = c.SHOW_PAGES_SECTION
+    _show_pages.short_description = SHOW_PAGES_SECTION
 
     def _preview(self, obj):
         image = obj.background
         if image:
-            return get_image_preview(obj, img=image.url, title=c.IMAGE_PREVIEW, )
+            return get_image_preview(obj, img=image.url, title=IMAGE_PREVIEW, )
         return '-'
 
     _preview.allow_tags = True
-    _preview.short_description = c.IMAGE_PREVIEW
+    _preview.short_description = IMAGE_PREVIEW
 
     def _show_posts(self, obj):
         posts = obj.post_set.all()
@@ -380,9 +397,9 @@ class SectionAdmin(admin.ModelAdmin):
             for post in posts:
                 html += f'<li><a href="/admin/contents/post/{post.id}/">{post}</a></li>'
             return mark_safe(f'<ul>{html}</ul>')
-        return c.NO_POSTS
+        return NO_POSTS
 
-    _show_posts.short_description = c.POST
+    _show_posts.short_description = POST
 
     def update_json_content(self, request, queryset):
         from .utils import update_json_content_section
@@ -407,7 +424,7 @@ class ContactLanguageInline(StackedInline):
         (None, {
             'fields': ('language',)
         }),
-        (c.CONTACT_INFORMATION, {
+        (CONTACT_INFORMATION, {
             'fields': (
                 'about',
                 'title_form',
@@ -426,7 +443,7 @@ class ContactLanguageInline(StackedInline):
 @register(Contact)
 class ContactAdmin(admin.ModelAdmin):
     actions = ['update_json_content']
-    readonly_fields = ('slug_contact', '_preview', ) + AuditAdmin.readonly_fields
+    readonly_fields = ('slug_contact', '_preview',) + AuditAdmin.readonly_fields
     list_display = ('contact_title', 'active',)
     inlines = [ContactLanguageInline, ]
     change_form_template = 'admin/hide_button_save.html'
@@ -449,7 +466,6 @@ class ContactAdmin(admin.ModelAdmin):
         ('language', c.LANGUAGE_TAB),
     )
 
-
     def has_add_permission(self, request):
         if Contact.objects.first():
             return False
@@ -458,11 +474,11 @@ class ContactAdmin(admin.ModelAdmin):
     def _preview(self, obj):
         image = obj.background
         if image:
-            return get_image_preview(obj, img=image.url, title=c.IMAGE_PREVIEW)
+            return get_image_preview(obj, img=image.url, title=IMAGE_PREVIEW)
         return '-'
 
     _preview.allow_tags = True
-    _preview.short_description = c.IMAGE_PREVIEW
+    _preview.short_description = IMAGE_PREVIEW
 
     def update_json_content(self, request, queryset):
         from .utils import update_json_content_contact
@@ -485,7 +501,7 @@ class SectionInline(SortableInlineAdminMixin, admin.TabularInline):
     fields = ('section', 'active',)
     suit_classes = 'suit-tab suit-tab-section'
     raw_id_fields = ['section', ]
-    verbose_name = c.SECTION
+    verbose_name = SECTION
 
 
 class GallerySelectorInlineFormSet(BaseInlineFormSet):
@@ -496,7 +512,7 @@ class GallerySelectorInlineFormSet(BaseInlineFormSet):
             if form.cleaned_data['active']:
                 count += 1
                 if count > 1:
-                    form.add_error("active", ValidationError(c.ONE_GALLERY_ACTIVE))
+                    form.add_error("active", ValidationError(ONE_GALLERY_ACTIVE))
 
 
 class GallerySelectorInline(admin.TabularInline):
@@ -516,9 +532,9 @@ class GallerySelectorInline(admin.TabularInline):
                 if banner.image:
                     return get_image_preview(banner, banner.image.url, banner.title, 50)
 
-        return get_image_preview(obj, "/static/no-image.png", 'no image', 50, c.FIELD_MSG_GALLERY)
+        return get_image_preview(obj, "/static/no-image.png", 'no image', 50, FIELD_MSG_GALLERY)
 
-    _preview.short_description = c.IMAGE_PREVIEW
+    _preview.short_description = IMAGE_PREVIEW
 
 
 class PageLanguageInline(admin.StackedInline):
@@ -530,7 +546,7 @@ class PageLanguageInline(admin.StackedInline):
 @admin.register(Page)
 class PageAdmin(DraggableMPTTAdmin, NonSortableParentAdmin):
     actions = ['update_json_content']
-    DraggableMPTTAdmin.indented_title.short_description = c.TITLE
+    DraggableMPTTAdmin.indented_title.short_description = TITLE
     list_display = (
         'tree_actions',
         'indented_title',
@@ -555,10 +571,10 @@ class PageAdmin(DraggableMPTTAdmin, NonSortableParentAdmin):
     )
 
     suit_form_tabs = (
-        ('page', c.PAGE),
+        ('page', PAGE),
         ('language', c.LANGUAGE_TAB),
-        ('section', c.SECTION_PLURAL),
-        ('gallery_selector', c.GALLERY_SELECTOR),
+        ('section', SECTION_PLURAL),
+        ('gallery_selector', GALLERY_SELECTOR),
     )
 
     def _preview_gallery(self, obj):
@@ -575,7 +591,7 @@ class PageAdmin(DraggableMPTTAdmin, NonSortableParentAdmin):
 
         return get_image_preview(obj, "/static/no-image.png", 'no image', 50)
 
-    _preview_gallery.short_description = c.GALLERIES
+    _preview_gallery.short_description = GALLERIES
 
     def _show_sections(self, obj):
         sections = obj.section_set.all()
@@ -585,15 +601,15 @@ class PageAdmin(DraggableMPTTAdmin, NonSortableParentAdmin):
                 html += f'<li><a href="/admin/contents/section/{section.id}/">{section}</a></li>'
             return mark_safe(f'<ul>{html}</ul>')
 
-        return c.NO_SECTIONS
+        return NO_SECTIONS
 
-    _show_sections.short_description = c.SECTION_PLURAL
+    _show_sections.short_description = SECTION_PLURAL
 
     def _count_sections(self, obj):
         section_count = obj.section_count
         return section_count
 
-    _count_sections.short_description = c.COUNT_SECTIONS
+    _count_sections.short_description = COUNT_SECTIONS
     _count_sections.admin_order_field = 'section_count'
 
     def get_queryset(self, request):
@@ -615,7 +631,7 @@ class PageAdmin(DraggableMPTTAdmin, NonSortableParentAdmin):
 
 
 class CountImages(admin.SimpleListFilter):
-    title = c.COUNT_IMAGES
+    title = COUNT_IMAGES
 
     parameter_name = '_count_images'
 
@@ -673,22 +689,22 @@ class PostAdmin(ImportExportModelAdmin, DraggableMPTTAdmin, NonSortableParentAdm
         (None, {
             'classes': ('suit-tab suit-tab-general',),
             'fields': (
-                'active',
-                'title_post',
-                'logo',
-                '_preview',
-                'icon',
-                'parent',
-                'external_url',
-                'slug_post'
-            ) + AuditAdmin.fieldsets
+                          'active',
+                          'title_post',
+                          'logo',
+                          '_preview',
+                          'icon',
+                          'parent',
+                          'external_url',
+                          'slug_post'
+                      ) + AuditAdmin.fieldsets
         }),
     )
 
     suit_form_tabs = (
         ('general', 'General'),
         ('language', c.LANGUAGE_TAB),
-        ('gallery', c.GALLERY),
+        ('gallery', GALLERY),
     )
 
     def get_import_resource_class(self):
@@ -705,37 +721,37 @@ class PostAdmin(ImportExportModelAdmin, DraggableMPTTAdmin, NonSortableParentAdm
                         html += f"<li><a href='/admin/contents/section/{section.id}/'>{section}</a>" \
                                 f" | <a href='/admin/contents/page/{page.id}/'>{page}</a></li> "
                 else:
-                    html += f"<li><a href='/admin/contents/section/{section.id}/'>{section}</a> | {c.NO_PAGES} </li>"
+                    html += f"<li><a href='/admin/contents/section/{section.id}/'>{section}</a> | {NO_PAGES} </li>"
             return mark_safe(f'<ul>{html}</ul>')
-        return c.NO__POST_SECTIONS
+        return NO_POST_SECTIONS
 
-    _show_pages.short_description = c.SHOW_PAGES
+    _show_pages.short_description = SHOW_PAGES
 
     def _preview(self, obj):
         image = obj.logo
         if image:
-            return get_image_preview(obj, img=image.url, title=c.IMAGE_PREVIEW)
+            return get_image_preview(obj, img=image.url, title=IMAGE_PREVIEW)
         return '-'
 
     _preview.allow_tags = True
-    _preview.short_description = c.IMAGE_PREVIEW
+    _preview.short_description = IMAGE_PREVIEW
 
     def _count_languages(self, obj):
         language_count = obj.language_count
         return language_count
 
-    _count_languages.short_description = c.COUNT_TRANSLATIONS
+    _count_languages.short_description = COUNT_TRANSLATIONS
     _count_languages.admin_order_field = 'language_count'
 
     def _count_images(self, obj):
         image_count = obj.image_count
         return image_count
 
-    _count_images.short_description = c.COUNT_IMAGES
+    _count_images.short_description = COUNT_IMAGES
     _count_images.admin_order_field = 'image_count'
 
     def get_queryset(self, request):
-        queryset = super(__class__, self).get_queryset(request)
+        queryset = super(PostAdmin, self).get_queryset(request)
         return queryset.annotate(image_count=Count('postgallery'), language_count=Count('post_lang'))
 
     def update_json_content(self, request, queryset):
@@ -776,7 +792,7 @@ class SectionTemplateAdmin(admin.ModelAdmin):
     def _preview(self, obj):
         image = obj.preview
         if image:
-            return get_image_preview(obj, img=image.url, title=c.IMAGE_PREVIEW)
+            return get_image_preview(obj, img=image.url, title=IMAGE_PREVIEW)
         return '-'
 
     def has_add_permission(self, request):
@@ -798,7 +814,7 @@ class SocialNetworkInline(SortableStackedInline):
         return '-'
 
     get_icon.allow_tags = True
-    get_icon.short_description = c.ICON_PREVIEW
+    get_icon.short_description = ICON_PREVIEW
 
 
 class GeneralDataLanguageInline(admin.StackedInline):
@@ -817,11 +833,11 @@ class PartnersGalleryInline(SortableStackedInline):
     def _partner_preview(self, obj):
         image = obj.image
         if image:
-            return get_image_preview(obj, img=image.url, title=c.LOGO_PREVIEW)
+            return get_image_preview(obj, img=image.url, title=LOGO_PREVIEW)
         return '-'
 
     _partner_preview.allow_tags = True
-    _partner_preview.short_description = f'{c.IMAGE_INSTITUTION} ({c.IMAGE_PREVIEW})'
+    _partner_preview.short_description = f'{IMAGE_INSTITUTION} ({IMAGE_PREVIEW})'
 
 
 @admin.register(GeneralData)
@@ -839,29 +855,29 @@ class GeneralAdmin(NonSortableParentAdmin):
         (None, {
             'classes': ('suit-tab suit-tab-general',),
             'fields': (
-                'active',
-                'logo_site',
-                '_logo',
-                'title_one',
-                'slug_general_data',
-            ) + AuditAdmin.fieldsets
+                          'active',
+                          'logo_site',
+                          '_logo',
+                          'title_one',
+                          'slug_general_data',
+                      ) + AuditAdmin.fieldsets
         }),
     )
     suit_form_tabs = (
         ('general', 'General'),
         ('language', c.LANGUAGE_TAB),
-        ('social_networks', c.SOCIAL_NETWORK_PLUR),
-        ('partner_links', c.PARTNERS_GALLERY)
+        ('social_networks', SOCIAL_NETWORK_PLUR),
+        ('partner_links', PARTNERS_GALLERY)
     )
 
     def _logo(self, obj):
         image = obj.logo_site
         if image:
-            return get_image_preview(obj, img=image.url, title=c.LOGO_PREVIEW)
+            return get_image_preview(obj, img=image.url, title=LOGO_PREVIEW)
         return '-'
 
     _logo.allow_tags = True
-    _logo.short_description = c.IMAGE_PREVIEW
+    _logo.short_description = IMAGE_PREVIEW
 
     def update_json_content(self, request, queryset):
         from .utils import update_json_content_general_data

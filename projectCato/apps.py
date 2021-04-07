@@ -1,7 +1,12 @@
+from django.utils.translation import ugettext_lazy as _
 from suit.apps import DjangoSuitConfig
 from suit.menu import ParentItem, ChildItem
 
 from presentation import constants as c
+
+CONTENT = _('Content management')
+SETTINGS = _('Tools')
+IMPORT_EXPORT_LANGUAGE = _("Import-export data from post's language")
 
 
 class SuitConfig(DjangoSuitConfig):
@@ -15,7 +20,7 @@ class SuitConfig(DjangoSuitConfig):
             ChildItem(model='menus.menu'),
             ChildItem(model='menus.menuitem'),
         ]),
-        ParentItem(c.CONTENT, icon='fa fa-sitemap', children=[
+        ParentItem(CONTENT, icon='fa fa-sitemap', children=[
             ChildItem(model='contents.page'),
             ChildItem(model='contents.generaldata'),
             ChildItem(model='contents.section'),
@@ -24,11 +29,11 @@ class SuitConfig(DjangoSuitConfig):
 
             ChildItem(model='contents.contact'),
         ]),
-        ParentItem(c.SETTINGS, icon='fa fa-cogs', children=[
+        ParentItem(SETTINGS, icon='fa fa-cogs', children=[
             ChildItem(model='tools.language'),
             ChildItem(model='contents.tag'),
             ChildItem(model='contents.sectiontemplate'),
-            ChildItem(model='contents.postlanguage', label=c.IMPORT_EXPORT_LANGUAGE)
+            ChildItem(model='contents.postlanguage', label=IMPORT_EXPORT_LANGUAGE)
 
         ])
     )

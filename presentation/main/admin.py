@@ -1,9 +1,6 @@
 from django.utils.safestring import mark_safe
 
-CREATION_DATE_KEY = "creation_date"
-CREATED_BY_KEY = "created_by"
-UPDATE_DATE_KEY = "update_date"
-UPDATED_BY_KEY = "updated_by"
+from domain.main.models import CREATION_DATE_KEY, CREATED_BY_KEY, UPDATE_DATE_KEY, UPDATED_BY_KEY
 
 
 class AuditAdmin(object):
