@@ -49,7 +49,7 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 GRAPHENE = {
-    "SCHEMA": "main.schema.schema"
+    "SCHEMA": "domain.main.schema.schema"
 }
 
 # Database
