@@ -66,6 +66,22 @@ services:
     ports:
       - "5555:5555"
 
+  beat:
+    image: catocms:latest
+    container_name: catocms-beat
+    restart: always
+    command:
+      [
+        "celery",
+        "--app=projectCato",
+        "--loglevel=INFO",
+        "--pidfile=/src/tmp/beat.pid",
+        "beat",
+      ]
+    depends_on:
+      - broker
+      - web
+
   db:
     image: postgis/postgis:12-3.0
     container_name: catocms-postgis
