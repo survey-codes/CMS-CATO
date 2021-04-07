@@ -752,7 +752,7 @@ class PostAdmin(ImportExportModelAdmin, DraggableMPTTAdmin, NonSortableParentAdm
 
     def get_queryset(self, request):
         queryset = super(PostAdmin, self).get_queryset(request)
-        return queryset.annotate(image_count=Count('postgallery'), language_count=Count('post_lang'))
+        return queryset.annotate(image_count=Count('postgallery'), language_count=Count('postlanguage_post_lang_set'))
 
     def update_json_content(self, request, queryset):
         from .utils import update_json_content_post
