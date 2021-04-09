@@ -109,12 +109,9 @@ class GeneralDataAdmin(NonSortableParentAdmin):
     change_list_template = 'admin/change_date_filter.html'
     list_display = ('id', '_logo')
     fieldsets = (
-        (None, {
-            'fields': Audit2Admin.fieldsets
-        }),
         ('General', {
             'classes': ('suit-tab suit-tab-general',),
-            'fields': ('logo', '_logo')
+            'fields': ('logo', '_logo') + Audit2Admin.fieldsets
         }),
     )
     suit_form_tabs = (
@@ -155,12 +152,9 @@ class SectionAdmin(admin.ModelAdmin):
     inlines = [SectionLanguageInline, PostSettingsInline, ]
     readonly_fields = ('slug', '_background_preview',) + Audit2Admin.readonly_fields
     fieldsets = (
-        (None, {
-            'fields': Audit2Admin.fieldsets
-        }),
         (SECTION, {
             'classes': ('suit-tab suit-tab-general',),
-            'fields': ('active', 'title', 'background', '_background_preview', 'background_color', 'slug')
+            'fields': ('active', 'title', 'background', '_background_preview', 'background_color', 'slug') + Audit2Admin.fieldsets
         }),
         (POST_SETTINGS_PLURAL, {
             'classes': ('wide', 'suit-tab suit-tab-general'),
@@ -226,12 +220,9 @@ class PageAdmin(DraggableMPTTAdmin, NonSortableParentAdmin):
     inlines = [SectionInline, PageLanguageInline]
     readonly_fields = ('slug',) + Audit2Admin.readonly_fields
     fieldsets = (
-        (None, {
-            'fields': Audit2Admin.fieldsets
-        }),
         (PAGE, {
             'classes': ('suit-tab suit-tab-page',),
-            'fields': ('active', 'title', 'parent', 'inner_menu', 'slug')
+            'fields': ('active', 'title', 'parent', 'inner_menu', 'slug') + Audit2Admin.fieldsets
         }),
     )
 
@@ -309,12 +300,9 @@ class PostAdmin(ImportExportModelAdmin, DraggableMPTTAdmin, NonSortableParentAdm
     inlines = [PostLanguageInline, PostGalleryInline]
     readonly_fields = ('_preview', 'slug',) + Audit2Admin.readonly_fields
     fieldsets = (
-        (None, {
-            'fields': Audit2Admin.fieldsets
-        }),
         ('Post', {
             'classes': ('suit-tab suit-tab-general',),
-            'fields': ('active', 'title', 'logo', '_preview', 'icon', 'parent', 'link', 'slug')
+            'fields': ('active', 'title', 'logo', '_preview', 'icon', 'parent', 'link', 'slug') + Audit2Admin.fieldsets
         }),
     )
 

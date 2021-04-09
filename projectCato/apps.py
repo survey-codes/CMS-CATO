@@ -24,10 +24,10 @@ class SuitConfig(DjangoSuitConfig):
         ]),
         ParentItem(CONTENT, icon='fa fa-sitemap', children=[
             ChildItem(model='contents.page'),
-            ChildItem(model='contents.generaldata'),
             ChildItem(model='contents.section'),
             ChildItem(model='contents.post'),
-            ChildItem(model='contents.bannergallery'),
+            ChildItem(model='contents.generaldata'),
+
             ChildItem(model='contents.contact'),
         ]),
         ParentItem(MESSENGER_SERVICE, icon="fa fa-envelope", children=[
