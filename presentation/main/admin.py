@@ -3,9 +3,9 @@ from django.utils.safestring import mark_safe
 from domain.main.models import CREATION_DATE_KEY, CREATED_BY_KEY, UPDATE_DATE_KEY, UPDATED_BY_KEY
 
 
-class AuditAdmin(object):
-    readonly_fields = (CREATION_DATE_KEY, CREATED_BY_KEY, UPDATE_DATE_KEY, UPDATED_BY_KEY,)
-    fieldsets = ((CREATED_BY_KEY, CREATION_DATE_KEY), (UPDATED_BY_KEY, UPDATE_DATE_KEY),)
+class AuditAdmin:
+    readonly_fields = ('creation_date', 'created_by', 'update_date', 'updated_by')
+    fieldsets = (('created_by', 'creation_date'), ('updated_by', 'update_date'),)
 
 
 def _sect(sections, no_section):

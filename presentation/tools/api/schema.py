@@ -6,6 +6,7 @@ from domain.tools import models
 class LanguageType(DjangoObjectType):
     class Meta:
         model = models.Language
+        fields = ("name", "abbreviation")
 
 
 class LanguageQuery(graphene.ObjectType):

@@ -1,7 +1,7 @@
 import graphene
 
 from domain.contents import models
-from scalars import JSONCustom
+from presentation.contents.api.scalars import JSONCustom
 
 
 class GeneralInfoQuery(graphene.ObjectType):
@@ -61,17 +61,18 @@ class PageQuery(graphene.ObjectType):
     def resolve_page(self, info, **kwargs):
         slug = kwargs.get('slug', None)
         lang = kwargs.get('lang', 'ES')
-        assert slug, 'Debe proporcionar al menos el slug de la página para realizar la búsqueda'
+        assert slug, 'Debe proporcionar al menos el slug de la página'
 
         page = models.Page.objects.filter(slug_page=slug).first()
-        assert page, 'No se encontró la página'
+        assert page, f'No se encontró la página con slug {slug}:'
 
         page_lang = page.page_lang.filter(language__abbreviation=lang).first()
         if page_lang:
             data = page_lang.page_metadata
-            return data
 
+        # Return the default language translation
         else:
             page_lang = page.page_lang.filter(language__abbreviation='ES').first()
             data = page_lang.page_metadata
-            return data
+
+        return data

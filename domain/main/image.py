@@ -1,7 +1,8 @@
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
-PREVIEW_TEXT = _("(choose an image and save and continue editing to see the preview)")
+
+PREVIEW_TEXT = _("(Choose an image and save for continue editing and see the preview)")
 
 
 def get_image_preview(obj, img, title, width=100, field_msg=PREVIEW_TEXT):
