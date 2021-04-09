@@ -1,26 +1,18 @@
+from adminsortable.admin import SortableStackedInline, NonSortableParentAdmin
+from adminsortable2.admin import SortableInlineAdminMixin
 from django.contrib import admin
 from django.db.models import Count
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
-
-from adminsortable.admin import SortableStackedInline, NonSortableParentAdmin
-from adminsortable2.admin import SortableInlineAdminMixin
-from domain.entities.contents.models import extra, pages, posts, sections
-from domain.entities.main.image import get_image_preview
 from import_export.admin import ImportExportModelAdmin
 from mptt.admin import DraggableMPTTAdmin
 from rangefilter.filter import DateRangeFilter
 
-from domain.entities.contents.models import (
-    Banner, BannerGallery, BannerLanguage, Contact, ContactLanguage, GallerySelector, GeneralData, GeneralDataLanguage,
-    Page, PageLanguage, PartnersGallery, Post, PostGallery, PostLanguage, PostSettings, Section,
-    SectionLanguage, SectionSelector, SectionTemplate, SocialNetwork, Tag, TITLE
-)
+from domain.entities.contents.models import extra, pages, posts, sections
 from domain.entities.main.image import get_image_preview
 from presentation import constants as c
 from presentation.contents.resources import PostLanguageResource, ImportPostResource, ExportPostResource
 from presentation.main.admin.admin import Audit2Admin
-
 
 PAGE = _('Page')
 POSTS = _('Posts')
@@ -47,7 +39,7 @@ ONE_GALLERY_ACTIVE = _('Only one banner gallery must be active')
 NO_POST_SECTIONS = _("This post is not contained in any section")
 
 
-#---------INLINES---------
+# ---------INLINES---------
 class GeneralDataLanguageInline(admin.StackedInline):
     suit_classes = 'suit-tab suit-tab-language'
     model = extra.GeneralDataLanguage
@@ -106,7 +98,7 @@ class SectionLanguageInline(admin.StackedInline):
     suit_classes = 'suit-tab suit-tab-language'
 
 
-#---------ADMIN---------
+# ---------ADMIN---------
 @admin.register(extra.GeneralData)
 class GeneralDataAdmin(NonSortableParentAdmin):
     inlines = [GeneralDataLanguageInline]
