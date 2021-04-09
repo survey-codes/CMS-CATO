@@ -4,7 +4,9 @@ from suit.menu import ParentItem, ChildItem
 
 from presentation import constants as c
 
+USER = _('Registered users')
 CONTENT = _('Content management')
+MESSENGER_SERVICE = _("Messenger service management ")
 SETTINGS = _('Tools')
 IMPORT_EXPORT_LANGUAGE = _("Import-export data from post's language")
 
@@ -12,7 +14,7 @@ IMPORT_EXPORT_LANGUAGE = _("Import-export data from post's language")
 class SuitConfig(DjangoSuitConfig):
     layout = 'vertical'
     menu = (
-        ParentItem(c.USER, icon='fa fa-user', children=[
+        ParentItem(USER, icon='fa fa-user', children=[
             ChildItem(model='auth.user'),
             ChildItem(model='auth.group'),
         ]),
@@ -26,8 +28,13 @@ class SuitConfig(DjangoSuitConfig):
             ChildItem(model='contents.section'),
             ChildItem(model='contents.post'),
             ChildItem(model='contents.bannergallery'),
-
             ChildItem(model='contents.contact'),
+        ]),
+        ParentItem(MESSENGER_SERVICE, icon="fa fa-envelope", children=[
+            ChildItem(model='tools.userpqrd'),
+            ChildItem(model='tools.mail'),
+            ChildItem(model='tools.template'),
+            ChildItem(model='tools.quota'),
         ]),
         ParentItem(SETTINGS, icon='fa fa-cogs', children=[
             ChildItem(model='tools.language'),

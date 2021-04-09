@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from domain.tools.models import Language
 from domain.constants import RELATED_NAME, ACTIVE, LANGUAGE_TAB
+from domain.entities.tools.models import Language
 
 CREATION_DATE = _('creation date')
 CREATION_DATE_KEY = "creation_date"

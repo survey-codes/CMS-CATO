@@ -1,9 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from domain.constants import LANGUAGE_APP_PLURAL, LANGUAGE_TAB
-
-APP_LABEL = "tools"
+from domain.constants import LANGUAGE_APP_PLURAL, LANGUAGE_TAB, TOOLS_APP_LABEL
 
 LANGUAGE_NAME = _('Language Name')
 LANGUAGE_ABB = _('Language abbreviation')
@@ -26,7 +24,7 @@ class Language(models.Model):
     class Meta:
         verbose_name = LANGUAGE_TAB
         verbose_name_plural = LANGUAGE_APP_PLURAL
-        app_label = APP_LABEL
+        app_label = TOOLS_APP_LABEL
 
     def save(self, *args, **kwargs):
         self.abbreviation = self.abbreviation.upper()

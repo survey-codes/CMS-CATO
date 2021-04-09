@@ -1,6 +1,6 @@
 import graphene
 
-from domain.contents import models
+from domain.entities.contents import models
 from scalars import JSONCustom
 
 

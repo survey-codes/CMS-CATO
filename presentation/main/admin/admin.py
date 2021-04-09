@@ -1,9 +1,9 @@
 from django.utils.safestring import mark_safe
 
-from domain.main.models import CREATION_DATE_KEY, CREATED_BY_KEY, UPDATE_DATE_KEY, UPDATED_BY_KEY
+from domain.entities.main.models import CREATION_DATE_KEY, CREATED_BY_KEY, UPDATE_DATE_KEY, UPDATED_BY_KEY
 
 
-class AuditAdmin(object):
+class Audit2Admin(object):
     readonly_fields = (CREATION_DATE_KEY, CREATED_BY_KEY, UPDATE_DATE_KEY, UPDATED_BY_KEY,)
     fieldsets = ((CREATED_BY_KEY, CREATION_DATE_KEY), (UPDATED_BY_KEY, UPDATE_DATE_KEY),)
 

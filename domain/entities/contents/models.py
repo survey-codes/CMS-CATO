@@ -12,16 +12,15 @@ from mptt.models import MPTTModel, TreeForeignKey
 from url_or_relative_url_field.fields import URLOrRelativeURLField
 
 from domain.constants import (
-    SLUG, RELATED_NAME, JSON_CONTENT, ACTIVE, MAX_LENGTH_50, MENU, LANGUAGE_TAB, LANGUAGE_APP_PLURAL
+    SLUG, RELATED_NAME, JSON_CONTENT, ACTIVE, MAX_LENGTH_50, MENU, LANGUAGE_TAB, LANGUAGE_APP_PLURAL, MAX_LENGTH_200
 )
-from domain.main.models import Audit, LanguageAbstract, CREATION_DATE_KEY
-from domain.menus.models import Menu
+from domain.entities.main.models import Audit, LanguageAbstract, CREATION_DATE_KEY
+from domain.entities.menus.models import Menu
 
 APP_LABEL = "contents"
 
 MAX_LENGTH_20 = 20
 MAX_LENGTH_NAME = 35
-MAX_LENGTH_TITLE = 200
 MAX_LENGTH_SHORT_TITLE = 100
 MAX_LENGTH_DESCRIPTION = 500
 ORDER_VALUE_DEFAULT = 0
@@ -187,7 +186,7 @@ GENERAL_DATA_LANGUAGE_PLURAL = _("General data languages")
 class Banner(SortableMixin, Audit):
     title = models.CharField(
         verbose_name=BANNERS_TITLE,
-        max_length=MAX_LENGTH_TITLE
+        max_length=MAX_LENGTH_200
     )
 
     image = models.ImageField(
@@ -267,14 +266,14 @@ class Banner(SortableMixin, Audit):
 class BannerLanguage(LanguageAbstract):
     title = models.CharField(
         verbose_name=BANNERS_TITLE,
-        max_length=MAX_LENGTH_TITLE,
+        max_length=MAX_LENGTH_200,
         blank=True,
         null=True
     )
 
     subtitle = models.CharField(
         verbose_name=BANNERS_SUBTITLE,
-        max_length=MAX_LENGTH_TITLE,
+        max_length=MAX_LENGTH_200,
         blank=True,
         null=True
     )
@@ -321,7 +320,7 @@ class BannerLanguage(LanguageAbstract):
 class BannerGallery(Audit):
     title = models.CharField(
         verbose_name=BANNER_GALLERY_TITLE,
-        max_length=MAX_LENGTH_TITLE,
+        max_length=MAX_LENGTH_200,
         null=False,
         default=BANNER_GALLERY
     )
@@ -559,7 +558,7 @@ class PostLanguage(LanguageAbstract):
 
     subtitle = models.CharField(
         verbose_name=POST_SUBTITLE,
-        max_length=MAX_LENGTH_TITLE,
+        max_length=MAX_LENGTH_200,
         blank=True,
         null=True
     )

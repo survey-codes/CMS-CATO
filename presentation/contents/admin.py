@@ -15,15 +15,15 @@ from import_export.admin import ImportExportModelAdmin
 from mptt.admin import DraggableMPTTAdmin
 from rangefilter.filter import DateRangeFilter
 
-from domain.contents.models import (
+from domain.entities.contents.models import (
     Banner, BannerGallery, BannerLanguage, Contact, ContactLanguage, GallerySelector, GeneralData, GeneralDataLanguage,
     Page, PageLanguage, PartnersGallery, Post, PostGallery, PostLanguage, PostSettings, Section,
     SectionLanguage, SectionSelector, SectionTemplate, SocialNetwork, Tag, TITLE
 )
-from domain.main.image import get_image_preview
+from domain.entities.main.image import get_image_preview
 from presentation import constants as c
 from presentation.contents.resources import PostLanguageResource, ImportPostResource, ExportPostResource
-from presentation.main.admin import AuditAdmin
+from presentation.main.admin.admin import Audit2Admin
 
 PAGE = _('Page')
 POST = _('Post')
@@ -130,7 +130,7 @@ class BannerInline(SortableStackedInline):
     model = Banner
     extra = 0
     suit_classes = 'suit-tab suit-tab-banner'
-    readonly_fields = ('banner_language', '_preview', 'logo_preview', 'slug_banner',) + AuditAdmin.readonly_fields
+    readonly_fields = ('banner_language', '_preview', 'logo_preview', 'slug_banner',) + Audit2Admin.readonly_fields
     fieldsets = (
         (None, {
             'fields': (
@@ -183,7 +183,7 @@ class BannerInline(SortableStackedInline):
 class BannerGalleryAdmin(NonSortableParentAdmin):
     list_display = ['_preview', 'title', 'creation_date', 'slug_banner_gallery', 'active']
     list_display_links = ['title', ]
-    readonly_fields = ('slug_banner_gallery',) + AuditAdmin.readonly_fields
+    readonly_fields = ('slug_banner_gallery',) + Audit2Admin.readonly_fields
     search_fields = ('creation_date',)
     list_filter = (('creation_date', DateRangeFilter),)
     suit_list_filter_horizontal = ('creation_date',)
@@ -192,7 +192,7 @@ class BannerGalleryAdmin(NonSortableParentAdmin):
     fieldsets = (
         (None, {
             'classes': ('suit-tab suit-tab-general',),
-            'fields': ('active', 'title', 'slug_banner_gallery',) + AuditAdmin.fieldsets
+            'fields': ('active', 'title', 'slug_banner_gallery',) + Audit2Admin.fieldsets
         }),
     )
 
@@ -324,7 +324,7 @@ class SectionAdmin(admin.ModelAdmin):
     change_list_template = 'admin/change_date_filter.html'
 
     inlines = [SectionLanguageInline, PostSettingsInline, ]
-    readonly_fields = ('slug_section', '_preview',) + AuditAdmin.readonly_fields
+    readonly_fields = ('slug_section', '_preview',) + Audit2Admin.readonly_fields
     fieldsets = (
         (None, {
             'classes': ('suit-tab suit-tab-general',),
@@ -335,7 +335,7 @@ class SectionAdmin(admin.ModelAdmin):
                           '_preview',
                           'background_color',
                           'slug_section',
-                      ) + AuditAdmin.fieldsets
+                      ) + Audit2Admin.fieldsets
         }),
         (POST_SETTINGS_PLURAL, {
             'classes': ('wide', 'suit-tab suit-tab-general'),
@@ -443,7 +443,7 @@ class ContactLanguageInline(StackedInline):
 @register(Contact)
 class ContactAdmin(admin.ModelAdmin):
     actions = ['update_json_content']
-    readonly_fields = ('slug_contact', '_preview',) + AuditAdmin.readonly_fields
+    readonly_fields = ('slug_contact', '_preview',) + Audit2Admin.readonly_fields
     list_display = ('contact_title', 'active',)
     inlines = [ContactLanguageInline, ]
     change_form_template = 'admin/hide_button_save.html'
@@ -457,7 +457,7 @@ class ContactAdmin(admin.ModelAdmin):
                     'background',
                     '_preview',
                     'slug_contact',
-                ) + AuditAdmin.fieldsets
+                ) + Audit2Admin.fieldsets
         }),
     )
 
@@ -497,7 +497,7 @@ class ContactAdmin(admin.ModelAdmin):
 class SectionInline(SortableInlineAdminMixin, admin.TabularInline):
     model = SectionSelector
     extra = 0
-    readonly_fields = AuditAdmin.readonly_fields
+    readonly_fields = Audit2Admin.readonly_fields
     fields = ('section', 'active',)
     suit_classes = 'suit-tab suit-tab-section'
     raw_id_fields = ['section', ]
@@ -562,11 +562,11 @@ class PageAdmin(DraggableMPTTAdmin, NonSortableParentAdmin):
     suit_list_filter_horizontal = ('creation_date',)
     change_list_template = 'admin/change_date_filter.html'
     inlines = [SectionInline, GallerySelectorInline, PageLanguageInline]
-    readonly_fields = ('slug_page',) + AuditAdmin.readonly_fields
+    readonly_fields = ('slug_page',) + Audit2Admin.readonly_fields
     fieldsets = (
         (None, {
             'classes': ('suit-tab suit-tab-page',),
-            'fields': ('page_type', 'active', 'title', 'parent', 'inner_menu', 'slug_page',) + AuditAdmin.fieldsets
+            'fields': ('page_type', 'active', 'title', 'parent', 'inner_menu', 'slug_page',) + Audit2Admin.fieldsets
         }),
     )
 
@@ -684,7 +684,7 @@ class PostAdmin(ImportExportModelAdmin, DraggableMPTTAdmin, NonSortableParentAdm
     suit_list_filter_horizontal = ('creation_date', '_count_images',)
     change_list_template = 'admin/change_import_export_filter.html'
     inlines = [PostLanguageInline, PostGalleryInline]
-    readonly_fields = ('_preview', 'slug_post',) + AuditAdmin.readonly_fields
+    readonly_fields = ('_preview', 'slug_post',) + Audit2Admin.readonly_fields
     fieldsets = (
         (None, {
             'classes': ('suit-tab suit-tab-general',),
@@ -697,7 +697,7 @@ class PostAdmin(ImportExportModelAdmin, DraggableMPTTAdmin, NonSortableParentAdm
                           'parent',
                           'external_url',
                           'slug_post'
-                      ) + AuditAdmin.fieldsets
+                      ) + Audit2Admin.fieldsets
         }),
     )
 
@@ -844,7 +844,7 @@ class PartnersGalleryInline(SortableStackedInline):
 class GeneralAdmin(NonSortableParentAdmin):
     actions = ['update_json_content']
     inlines = [SocialNetworkInline, GeneralDataLanguageInline, PartnersGalleryInline]
-    readonly_fields = ('_logo', 'slug_general_data') + AuditAdmin.readonly_fields
+    readonly_fields = ('_logo', 'slug_general_data') + Audit2Admin.readonly_fields
     search_fields = ('creation_date',)
     list_filter = (('creation_date', DateRangeFilter),)
     suit_list_filter_horizontal = ('creation_date',)
@@ -860,7 +860,7 @@ class GeneralAdmin(NonSortableParentAdmin):
                           '_logo',
                           'title_one',
                           'slug_general_data',
-                      ) + AuditAdmin.fieldsets
+                      ) + Audit2Admin.fieldsets
         }),
     )
     suit_form_tabs = (
