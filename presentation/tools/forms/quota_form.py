@@ -2,7 +2,7 @@ from django import forms
 
 from domain.constants import TYPE_KEY
 from domain.entities.tools.models.quota import Quota
-from domain.exceptions.quota_exceptions import do_not_select_type_exception
+from domain.exceptions.quota_exceptions import DoNotSelectTypeException
 
 
 class QuotaForm(forms.ModelForm):
@@ -12,7 +12,7 @@ class QuotaForm(forms.ModelForm):
 
     def clean_type(self):
         type_quota = self.cleaned_data.get(TYPE_KEY)
-        if type_quota:
-            return type_quota
+        if not type_quota:
+            raise DoNotSelectTypeException()
         else:
-            raise do_not_select_type_exception()
+            return type_quota

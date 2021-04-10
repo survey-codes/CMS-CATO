@@ -5,6 +5,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from mptt.models import MPTTModel
 
+from domain.constants import MAX_LENGTH_50, RELATED_NAME, JSON_CONTENT, SLUG
 from domain.entities.main.models import Audit, LanguageAbstract
 
 APP_LABEL = 'menus'

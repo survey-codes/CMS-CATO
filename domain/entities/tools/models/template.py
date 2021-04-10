@@ -5,6 +5,7 @@ from domain.constants import NAME, MAX_LENGTH_200, TEMPLATE, TOOLS_APP_LABEL
 from domain.entities.main.models import Audit
 
 TEMPLATE_ID = _("Template ID")
+TEMPLATE_ID_KEY = "template_id"
 TEMPLATES = _("Templates")
 
 

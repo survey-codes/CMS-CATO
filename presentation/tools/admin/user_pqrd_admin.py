@@ -1,7 +1,6 @@
 from django.contrib import admin
 
 from domain.entities.tools.models.user_pqrd import UserPqrd, USER
-from presentation.constants import ACTIVE_KEY
 from presentation.tools.admin.base_send_admin import BaseSendAdmin
 from presentation.tools.forms.user_pqrd_form import EMAIL_KEY, UserPqrdForm
 
@@ -18,5 +17,4 @@ class UserPqrdAdmin(BaseSendAdmin):
         }),
     )
     search_fields = (EMAIL_KEY,)
-    suit_list_filter_horizontal = (ACTIVE_KEY,)
     actions = ('mail_action',)

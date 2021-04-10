@@ -4,11 +4,11 @@ from django.contrib import admin
 from django.db.models import Count
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
+from domain.entities.contents.models import extra, pages, posts, sections
 from import_export.admin import ImportExportModelAdmin
 from mptt.admin import DraggableMPTTAdmin
 from rangefilter.filter import DateRangeFilter
 
-from domain.entities.contents.models import extra, pages, posts, sections
 from domain.entities.main.image import get_image_preview
 from presentation import constants as c
 from presentation.contents.resources import PostLanguageResource, ImportPostResource, ExportPostResource
@@ -154,7 +154,8 @@ class SectionAdmin(admin.ModelAdmin):
     fieldsets = (
         (SECTION, {
             'classes': ('suit-tab suit-tab-general',),
-            'fields': ('active', 'title', 'background', '_background_preview', 'background_color', 'slug') + Audit2Admin.fieldsets
+            'fields': ('active', 'title', 'background', '_background_preview', 'background_color',
+                       'slug') + Audit2Admin.fieldsets
         }),
         (POST_SETTINGS_PLURAL, {
             'classes': ('wide', 'suit-tab suit-tab-general'),

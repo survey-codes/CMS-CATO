@@ -92,7 +92,7 @@ class BaseSendAdmin(ReadOnlyBaseAdmin):
 
     def mail_action(self, request, queryset):
         quota = Quota.objects.filter(type=MAIL_KEY).first()
-        if quota.zero_quota:
+        if not quota or quota.zero_quota:
             raise ZeroQuotaException()
         else:
             return self.__validate_active_users(request, queryset, quota)

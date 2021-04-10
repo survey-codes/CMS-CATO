@@ -17,6 +17,13 @@ class AuditAdmin(BaseAdmin):
         }),
     )
     list_filter_default = (ACTIVE_KEY,)
+    suit_list_filter_horizontal = (ACTIVE_KEY,)
+    search_fields_default = (CREATED_BY_KEY, UPDATED_BY_KEY)
+
+    def get_search_fields(self, request):
+        if self.search_fields:
+            return self.search_fields + self.search_fields_default
+        return self.search_fields_default
 
     def get_list_filter(self, request):
         if self.list_filter:

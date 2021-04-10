@@ -1,4 +1,4 @@
-# ----------CONTENTS APP CONSTANTS----------#
+#----------CONTENTS APP CONSTANTS----------#
 APP_LABEL = 'contents'
 
 DEFAULT_VALUE = '-'

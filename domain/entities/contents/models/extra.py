@@ -8,6 +8,7 @@ from domain.entities.contents.constants import APP_LABEL, PATH_APP
 from domain.entities.main.models import Audit, LanguageAbstract
 from domain.entities.menus.models import Menu
 
+
 PATH_SITE = 'site/'
 PATH_SITE_LOGO = f'{PATH_APP}{PATH_SITE}logo'
 ORDER = _('order')
@@ -38,6 +39,7 @@ class GeneralData(Audit):
 
 
 class GeneralDataLanguage(LanguageAbstract):
+
     footer = RichTextField(verbose_name=FOOTER, blank=True)
     main_menu = models.ForeignKey(Menu, verbose_name=MAIN_MENU, on_delete=models.CASCADE, null=True)
     metadata = JSONField(blank=True, default=dict, encoder=DjangoJSONEncoder, editable=False)
