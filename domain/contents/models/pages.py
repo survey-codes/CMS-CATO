@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from ckeditor.fields import RichTextField
 from domain.contents.constants import APP_LABEL, DEFAULT_VALUE, MAX_LENGTH_20
+from domain.contents.tasks import update_page_jsonfield
 from domain.main.models import Audit, LanguageAbstract
 from domain.menus.models import Menu
 from mptt.models import MPTTModel, TreeForeignKey
@@ -29,8 +30,8 @@ class Page(MPTTModel, Audit):
     """
 
     title = models.CharField(verbose_name=PAGE_TITLE, max_length=MAX_LENGTH_20, unique=True)
-    parent = TreeForeignKey('self', verbose_name=PAGE_PARENT, null=True, on_delete=models.CASCADE)
-    inner_menu = models.ForeignKey(Menu, verbose_name=PAGE_MENU, on_delete=models.CASCADE, null=True)
+    parent = TreeForeignKey('self', verbose_name=PAGE_PARENT, on_delete=models.CASCADE, null=True, blank=True)
+    inner_menu = models.ForeignKey(Menu, verbose_name=PAGE_MENU, on_delete=models.CASCADE, null=True, blank=True)
     order = models.PositiveSmallIntegerField(default=0)
     slug = models.SlugField(verbose_name=PAGE_SLUG, default=DEFAULT_VALUE)
 
@@ -39,12 +40,12 @@ class Page(MPTTModel, Audit):
         verbose_name_plural = PAGE_PLURAL
         app_label = APP_LABEL
 
+    def __str__(self):
+        return str(self.title)
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Page, self).save(*args, **kwargs)
-
-    def __str__(self):
-        return str(self.title)
 
 
 class PageLanguage(LanguageAbstract):
@@ -53,8 +54,8 @@ class PageLanguage(LanguageAbstract):
     """
 
     title = models.CharField(verbose_name=PAGE_TITLE, max_length=MAX_LENGTH_20)
-    description = RichTextField(verbose_name=PAGE_DESCRIPTION, blank=True, null=True)
-    metadata = JSONField(blank=True, default=dict, encoder=DjangoJSONEncoder, editable=False)
+    description = RichTextField(verbose_name=PAGE_DESCRIPTION, null=True, blank=True)
+    metadata = JSONField(default=dict, encoder=DjangoJSONEncoder, editable=False)
     page = models.ForeignKey(Page, on_delete=models.CASCADE, related_name=PAGE_TRANSLATIONS)
 
     class Meta:
@@ -64,4 +65,17 @@ class PageLanguage(LanguageAbstract):
         app_label = APP_LABEL
 
     def __str__(self):
-        return str(self.language)
+        return str(f'{self.page}-{self.language}')
+
+    def save(self, *args, **kwargs):
+        # Consume argument
+        if 'run_tasks' in kwargs:
+            run_tasks = kwargs['run_tasks']
+            del kwargs['run_tasks']
+        else:
+            run_tasks = True
+        super(PageLanguage, self).save(*args, **kwargs)
+
+        # Run background tasks on translation
+        if run_tasks:
+            update_page_jsonfield.delay(self.pk)

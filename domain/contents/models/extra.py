@@ -41,8 +41,8 @@ class GeneralData(Audit):
 class GeneralDataLanguage(LanguageAbstract):
 
     footer = RichTextField(verbose_name=FOOTER, blank=True)
-    main_menu = models.ForeignKey(Menu, verbose_name=MAIN_MENU, on_delete=models.CASCADE, null=True)
-    metadata = JSONField(blank=True, default=dict, encoder=DjangoJSONEncoder, editable=False)
+    main_menu = models.ForeignKey(Menu, verbose_name=MAIN_MENU, on_delete=models.CASCADE, null=True, blank=True)
+    metadata = JSONField(default=dict, encoder=DjangoJSONEncoder, editable=False)
     general_data = models.ForeignKey(GeneralData, related_name=GENERAL_DATA_TRANSLATIONS, on_delete=models.CASCADE)
 
     class Meta:
