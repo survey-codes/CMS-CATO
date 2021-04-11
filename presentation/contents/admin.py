@@ -234,7 +234,7 @@ class PageAdmin(DraggableMPTTAdmin, NonSortableParentAdmin):
     )
 
     def _show_sections(self, obj):
-        sections = obj.sections.all()
+        sections = obj.section_set.all()
         html = ""
         if sections.exists():
             for section in sections:
