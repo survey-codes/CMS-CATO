@@ -31,7 +31,7 @@ class Page(MPTTModel, Audit):
 
     title = models.CharField(verbose_name=PAGE_TITLE, max_length=MAX_LENGTH_20, unique=True)
     parent = TreeForeignKey('self', verbose_name=PAGE_PARENT, on_delete=models.CASCADE, null=True, blank=True)
-    inner_menu = models.ForeignKey(Menu, verbose_name=PAGE_MENU, on_delete=models.CASCADE, null=True, blank=True)
+    menu = models.ForeignKey(Menu, verbose_name=PAGE_MENU, on_delete=models.CASCADE, null=True, blank=True)
     order = models.PositiveSmallIntegerField(default=0)
     slug = models.SlugField(verbose_name=PAGE_SLUG, default=DEFAULT_VALUE)
 

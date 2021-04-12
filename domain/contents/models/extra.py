@@ -28,7 +28,7 @@ class GeneralData(Audit):
     """
 
     logo = models.ImageField(verbose_name=SITE_LOGO, upload_to=PATH_SITE_LOGO, blank=True)
-    main_menu = models.ForeignKey(Menu, verbose_name=MAIN_MENU, on_delete=models.CASCADE, null=True, blank=True)
+    menu = models.ForeignKey(Menu, verbose_name=MAIN_MENU, on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
         ordering = ['-active', 'creation_date']
@@ -52,13 +52,13 @@ class GeneralDataLanguage(LanguageAbstract):
 
     footer = RichTextField(verbose_name=FOOTER, blank=True)
     metadata = JSONField(default=dict, encoder=DjangoJSONEncoder, editable=False)
-    general_data = models.ForeignKey(GeneralData, related_name=GENERAL_DATA_TRANSLATIONS, on_delete=models.CASCADE)
+    info = models.ForeignKey(GeneralData, related_name=GENERAL_DATA_TRANSLATIONS, on_delete=models.CASCADE)
 
     class Meta:
-        unique_together = (('language', 'general_data'),)
+        unique_together = (('language', 'info'),)
         verbose_name = GENERAL_DATA_LANGUAGE
         verbose_name_plural = GENERAL_DATA_LANGUAGE_PLURAL
         app_label = APP_LABEL
 
     def __str__(self):
-        return f'{self.general_data}-{self.language}'
+        return f'{self.info}-{self.language}'
