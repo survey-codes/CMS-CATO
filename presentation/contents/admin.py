@@ -112,7 +112,7 @@ class GeneralDataAdmin(NonSortableParentAdmin):
     fieldsets = (
         ('General', {
             'classes': ('suit-tab suit-tab-general',),
-            'fields': ('logo', '_logo') + AuditAdmin.fieldsets
+            'fields': ('menu', 'logo', '_logo') + AuditAdmin.fieldsets
         }),
     )
     suit_form_tabs = (
@@ -223,7 +223,7 @@ class PageAdmin(DraggableMPTTAdmin, NonSortableParentAdmin):
     fieldsets = (
         (PAGE, {
             'classes': ('suit-tab suit-tab-page',),
-            'fields': ('active', 'title', 'parent', 'inner_menu', 'slug') + AuditAdmin.fieldsets
+            'fields': ('active', 'title', 'parent', 'menu', 'slug') + AuditAdmin.fieldsets
         }),
     )
 
