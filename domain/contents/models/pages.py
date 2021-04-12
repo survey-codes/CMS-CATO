@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from ckeditor.fields import RichTextField
 from domain.contents.constants import APP_LABEL, DEFAULT_VALUE, MAX_LENGTH_20
-from domain.contents.tasks import update_page_jsonfield
+from domain.contents.tasks import page_update_jsonfield
 from domain.main.models import Audit, LanguageAbstract
 from domain.menus.models import Menu
 from mptt.models import MPTTModel, TreeForeignKey
@@ -16,7 +16,7 @@ PAGE = _('Page')
 PAGE_DESCRIPTION = _("Page description")
 PAGE_LANGUAGE = _('Page language')
 PAGE_LANGUAGE_PLURAL = _('Page languages')
-PAGE_MENU = _('Page main menu')
+PAGE_MENU = _('Page inner menu')
 PAGE_PARENT = _("Page parent")
 PAGE_PLURAL = _('Pages')
 PAGE_SLUG = _('Page slug')
@@ -46,6 +46,8 @@ class Page(MPTTModel, Audit):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Page, self).save(*args, **kwargs)
+        # Run background tasks on translations
+        page_update_jsonfield.apply_async(kwargs={'page_id': self.pk}, countdown=10)
 
 
 class PageLanguage(LanguageAbstract):
@@ -66,16 +68,3 @@ class PageLanguage(LanguageAbstract):
 
     def __str__(self):
         return str(f'{self.page}-{self.language}')
-
-    def save(self, *args, **kwargs):
-        # Consume argument
-        if 'run_tasks' in kwargs:
-            run_tasks = kwargs['run_tasks']
-            del kwargs['run_tasks']
-        else:
-            run_tasks = True
-        super(PageLanguage, self).save(*args, **kwargs)
-
-        # Run background tasks on translation
-        if run_tasks:
-            update_page_jsonfield.delay(self.pk)
