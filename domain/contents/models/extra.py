@@ -7,6 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from domain.contents.constants import APP_LABEL, PATH_APP
 from domain.main.models import Audit, LanguageAbstract
 from domain.menus.models import Menu
+from domain.contents.tasks import info_update_jsonfield
 
 
 PATH_SITE = 'site/'
@@ -27,6 +28,7 @@ class GeneralData(Audit):
     """
 
     logo = models.ImageField(verbose_name=SITE_LOGO, upload_to=PATH_SITE_LOGO, blank=True)
+    main_menu = models.ForeignKey(Menu, verbose_name=MAIN_MENU, on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
         ordering = ['-active', 'creation_date']
@@ -35,13 +37,20 @@ class GeneralData(Audit):
         app_label = APP_LABEL
 
     def __str__(self):
-        return GENERAL_DATA
+        return 'Site info'
+
+    def save(self, *args, **kwargs):
+        super(GeneralData, self).save(*args, **kwargs)
+        # Run background tasks on translations
+        info_update_jsonfield.apply_async(kwargs={'info_id': self.pk}, countdown=10)
 
 
 class GeneralDataLanguage(LanguageAbstract):
+    """
+
+    """
 
     footer = RichTextField(verbose_name=FOOTER, blank=True)
-    main_menu = models.ForeignKey(Menu, verbose_name=MAIN_MENU, on_delete=models.CASCADE, null=True, blank=True)
     metadata = JSONField(default=dict, encoder=DjangoJSONEncoder, editable=False)
     general_data = models.ForeignKey(GeneralData, related_name=GENERAL_DATA_TRANSLATIONS, on_delete=models.CASCADE)
 
