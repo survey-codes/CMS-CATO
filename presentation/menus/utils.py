@@ -1,22 +1,6 @@
 from django.db import transaction
 
 
-def get_menu_as_dict(menu, lang):
-    menu_data = {
-        "menu": list()
-    }
-    items = menu.menuitem_items.all()
-    if items:
-        for item in items:
-            lang_item = item.item_lang.filter(language__abbreviation=lang.language.abbreviation).first()
-            if lang_item is not None:
-                menu_data["menu"].append(
-                    lang_item.menu_item_metadata
-                )
-
-    return menu_data
-
-
 def get_menu_item_as_dict(menu_item, lang):
     menu_item_data = {
         "name": lang.name,

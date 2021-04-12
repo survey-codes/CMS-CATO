@@ -1,62 +1,6 @@
 from django.db import transaction
 
 
-def get_banner_as_dict(banner, lang):
-    banner_data = {
-        "title": lang.title,
-        "subtitle": lang.subtitle,
-        "description": lang.banner_description,
-        "background": "https://gqlcato.herokuapp.com{}".format(banner.image.url) if banner.image else None,
-        "Type": None,
-        "logo": "https://gqlcato.herokuapp.com{}".format(banner.animated_logo.url) if banner.animated_logo else None,
-        "button_link": banner.button_link if banner.button_link else None,
-        "icon_css": banner.icon_css_banner if banner.icon_css_banner else None,
-        "video_url": banner.url_youtube if banner.url_youtube else None,
-        "slug": banner.slug_banner,
-    }
-
-    return banner_data
-
-
-def get_contact_as_dict(contact, lang):
-    contact_data = {
-        "title": contact.contact_title,
-        "data": lang.about,
-        "form": {
-            "title": lang.title_form,
-            "subtitle": lang.subtitle_form,
-            "name": lang.name_form,
-            "mail": lang.mail_form,
-            "subject": {
-                "title": lang.subject_form,
-                "options": [
-                    "Envíame un correo",
-                    "Cotización",
-                    "Alianza"
-                ]
-            },
-            "body": lang.body_form,
-            "text_button": lang.text_button,
-        }
-    }
-
-    if contact.background:
-        contact_data["background"] = "https://gqlcato.herokuapp.com{}".format(contact.background.url)
-
-    return contact_data
-
-
-def get_general_data_as_dict(general_data, lang):
-    general_data_data = {
-        "footer": lang.about,
-    }
-
-    if general_data.logo_site:
-        general_data_data["logo"] = "https://gqlcato.herokuapp.com{}".format(general_data.logo_site.url)
-
-    return general_data_data
-
-
 def get_section_as_dict(section, lang):
     sect_data = {
         "title": lang.title,
@@ -154,30 +98,6 @@ def get_post_as_dict(post, lang):
     return post_data
 
 
-def get_gallery_as_dict(gallery, lang):
-    gallery_data = {
-        "title": gallery.title,
-        "slug": gallery.slug_banner_gallery,
-        "active": gallery.active,
-        "banners": list()
-    }
-
-    banners = gallery.banner_set.all().filter(
-        banner_lang__language__abbreviation=lang.language.abbreviation
-    )
-
-    if banners:
-        for banner in banners:
-            if banner.active:
-                gallery_data["banners"].append(
-                    banner.banner_lang.get(
-                        language__abbreviation=lang.language.abbreviation
-                    ).banner_metadata
-                )
-
-    return gallery_data
-
-
 def get_page_as_dict(page, lang):
     page_data = {
         "title": lang.title,
@@ -206,16 +126,6 @@ def get_page_as_dict(page, lang):
                     )
                 except Exception:
                     pass
-
-    galleries = page.galleryselector_set.select_related("banner_gallery").all()
-    if galleries:
-        for gallery in galleries:
-            if gallery.active:
-                page_data["gallery"] = get_gallery_as_dict(
-                    gallery.banner_gallery,
-                    lang
-                )
-
     return page_data
 
 
@@ -244,23 +154,8 @@ def update_json_content_post(post, **kwargs):
 
 
 @transaction.atomic
-def update_json_content_banner(banner, **kwargs):
-    langs = banner.banner_lang.select_related("language")
-    for lang in langs:
-        lang.banner_metadata = get_banner_as_dict(banner, lang)
-        lang.save(update_fields=["banner_metadata"])
-
-
-@transaction.atomic
 def update_json_content_general_data(general_data, **kwargs):
     langs = general_data.general_data_lang.select_related("language")
     for lang in langs:
         lang.general_metadata = get_general_data_as_dict(general_data, lang)
         lang.save(update_fields=["general_metadata"])
-
-@transaction.atomic
-def update_json_content_contact(contact, **kwargs):
-    langs = contact.contact_lang.select_related("language")
-    for lang in langs:
-        lang.contact_metadata = get_contact_as_dict(contact, lang)
-        lang.save(update_fields=["contact_metadata"])
