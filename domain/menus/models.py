@@ -116,12 +116,12 @@ class MenuItemLanguage(LanguageAbstract):
 
     name = models.CharField(verbose_name=MENU_ITEM_NAME, max_length=MAX_LENGTH_NAME)
     metadata = JSONField(default=dict, encoder=DjangoJSONEncoder, editable=False)
-    menu_item = models.ForeignKey(MenuItem, related_name=MENU_ITEM_TRANSLATIONS, on_delete=models.CASCADE)
+    menuitem = models.ForeignKey(MenuItem, related_name=MENU_ITEM_TRANSLATIONS, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = MENU_ITEM_LANGUAGE
         verbose_name_plural = MENU_ITEM_LANGUAGE_PLURAL
-        unique_together = (("language", "menu_item"),)
+        unique_together = (("language", "menuitem"),)
         app_label = APP_LABEL
 
     def __str__(self):
