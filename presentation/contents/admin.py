@@ -121,7 +121,7 @@ class GeneralDataAdmin(NonSortableParentAdmin):
     )
 
     def _logo(self, obj):
-        image = obj.logo_site
+        image = obj.logo
         if image:
             return get_image_preview(obj, img=image.url, title=LOGO_PREVIEW)
         return '-'
