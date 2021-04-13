@@ -8,6 +8,7 @@ from ckeditor.fields import RichTextField
 from colorfield.fields import ColorField
 from domain.contents.models.pages import Page
 from domain.contents.constants import APP_LABEL, DEFAULT_VALUE, MAX_LENGTH_20, MAX_LENGTH_50, MAX_LENGTH_SHORT_TITLE, PATH_APP
+from domain.contents.tasks import section_update_jsonfield
 from domain.main.models import Audit, LanguageAbstract
 
 
@@ -115,12 +116,18 @@ class Section(Audit):
         verbose_name_plural = SECTION_PLURAL
         app_label = APP_LABEL
 
+    def __str__(self):
+        return str(self.title)
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Section, self).save(*args, **kwargs)
+        # Run background tasks on translations
+        section_update_jsonfield.apply_async(kwargs={'section_id': self.pk}, countdown=10)
 
-    def __str__(self):
-        return str(self.title)
+    @staticmethod
+    def update_pages():
+        pass
 
 
 class SectionLanguage(LanguageAbstract):
