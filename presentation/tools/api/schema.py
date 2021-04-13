@@ -13,6 +13,6 @@ class LanguageQuery(graphene.ObjectType):
     languages = graphene.List(LanguageType)
 
     def resolve_languages(self, info, **kwargs):
-        qs = models.Language.objects.all()
-        assert qs, 'No existen lenguajes'
-        return qs
+        queryset = models.Language.objects.all()
+        assert queryset.exists(), 'No hay lenguajes disponibles para el sitio'
+        return queryset
