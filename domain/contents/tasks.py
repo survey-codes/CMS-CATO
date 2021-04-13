@@ -16,6 +16,9 @@ def _get_sections(page, language):
 
 
 def _get_posts():
+    """
+
+    """
     pass
 
 
@@ -77,7 +80,7 @@ def info_update_jsonfield(info_id):
                 'footer': translation.footer
             }
             if translation.info.menu:
-                queryset = MenuLanguage.objects.filter(menu=translation.page.menu, language=translation.language)
+                queryset = MenuLanguage.objects.filter(menu=translation.info.menu, language=translation.language)
                 if queryset.exists():
                     menu = queryset.first()
                     translation.metadata['menu'] = menu.metadata
@@ -110,7 +113,7 @@ def section_update_jsonfield(section_id, task_callback=None):
                 'description': translation.description,
                 'background_image': translation.section.background.url,
                 'background_color': translation.section.background_color,
-                'template': translation.section.template,
+                'template': translation.section.template.name,
                 'posts': list(),
             }
 

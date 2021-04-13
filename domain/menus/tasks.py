@@ -1,10 +1,15 @@
 from celery.task import task
 from celery.utils.log import get_logger
 
-from domain.menus.models import Menu, MenuItem, MenuLanguage, MenuItemLanguage
-
 
 logger = get_logger(__name__)
+
+
+def _get_children(menuitem, language):
+    """
+
+    """
+    pass
 
 
 def _get_menu_items(menu, language):
@@ -12,12 +17,11 @@ def _get_menu_items(menu, language):
 
     """
 
+    from domain.menus.models import MenuItemLanguage
     items = []
-    menu_items = menu.items.all()
-    for item in menu_items:
-        item_translation = item.translations.filter(language=language).first()
-        if item_translation:
-            items.append(item_translation.metadata)
+    item_translations = MenuItemLanguage.objects.filter(menuitem__menu=menu, language=language)
+    for item in item_translations:
+        items.append(item.metadata)
 
     return items
 
@@ -30,16 +34,18 @@ def menu_update_jsonfield(menu_id):
     avoid stale data problems or non-existent references
     """
 
+    from domain.menus.models import MenuLanguage
     try:
-        menu = Menu.objects.get(pk=menu_id)
-        logger.debug(f'Found menu: {menu}')
+        menu_translations = MenuLanguage.objects.select_related(
+            'language', 'menu'
+        ).filter(menu_id=menu_id)
+        logger.debug(f'Retrieved {menu_translations.count()} translations')
 
         # Loop menu translations
-        menu_translations = menu.translations.all()
         for translation in menu_translations:
             translation.metadata = {
                 'name': translation.name,
-                'items': _get_menu_items(menu, translation.language)
+                'items': _get_menu_items(translation.menu, translation.language)
             }
 
         translation.save(update_fields=['metadata'])
@@ -54,12 +60,22 @@ def menuitem_update_jsonfield(menuitem_id):
 
     """
 
+    from domain.menus.models import MenuItemLanguage
     try:
-        menuitem = MenuItem.objects.get(pk=menuitem_id)
-        logger.debug(f'Found menu: {menuitem}')
+        item_translations = MenuItemLanguage.objects.select_related(
+            'language', 'menuitem__parent'
+        ).filter(menuitem_id=menuitem_id)
+        logger.debug(f'Retrieved {item_translations.count()} translations')
 
         # Loop menuitem translations
-        pass
+        for translation in item_translations:
+            translation.metadata = {
+                'name': translation.name,
+                'url': translation.menuitem.link,
+                'children': list()
+            }
+
+            translation.save(update_fields=['metadata'])
 
     except Exception as e:
         logger.warning(f'Error retrieving menuitem: \n{e}')
