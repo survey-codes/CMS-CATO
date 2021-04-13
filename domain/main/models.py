@@ -79,8 +79,5 @@ class LanguageAbstract(models.Model):
     class Meta:
         abstract = True
 
-    def __str__(self):
-        return str(self.language)
-
     def unique_error_message(self, model_class, unique_check):
         return LANGUAGE_MESSAGE
