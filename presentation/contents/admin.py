@@ -179,7 +179,7 @@ class SectionAdmin(admin.ModelAdmin):
     _background_color.short_description = SECTION_BACKGROUND_COLOR
 
     def _show_pages(self, obj):
-        pages = obj.page.all()
+        pages = obj.pages.all()
         html = ""
         if pages:
             for page in pages:
