@@ -1,16 +1,10 @@
 # from celery import current_app
 from celery.task import task
 from celery.utils.log import get_logger
+from django.db.models import Prefetch
 
 
 logger = get_logger(__name__)
-
-
-def _get_posts():
-    """
-
-    """
-    pass
 
 
 def _get_galleries(post_id):
@@ -124,7 +118,7 @@ def section_update_jsonfield(section_id, task_callback=None):
     avoid stale data problems or non-existent references
     """
 
-    from domain.contents.models import SectionLanguage
+    from domain.contents.models import SectionLanguage, PostLanguage
     try:
         section_translations = SectionLanguage.objects.select_related(
             'language', 'section__template'
@@ -136,12 +130,12 @@ def section_update_jsonfield(section_id, task_callback=None):
             translation.metadata = {
                 'title': translation.title,
                 'description': translation.description,
-                'background_image': translation.section.background.url,
+                'background_image': translation.section.background.url if translation.section.background else None,
                 'background_color': translation.section.background_color,
                 'template': translation.section.template.name,
-                'posts': list(),
             }
-
+            posts = PostLanguage.objects.filter(post__in=translation.section.posts.all(), language=translation.language)
+            translation.metadata['posts'] = [post.metadata for post in posts]
             translation.save(update_fields=['metadata'])
 
     except Exception as e:
