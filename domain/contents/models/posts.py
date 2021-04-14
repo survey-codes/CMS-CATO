@@ -9,6 +9,7 @@ from adminsortable.models import SortableMixin
 from ckeditor.fields import RichTextField
 from domain.contents.constants import APP_LABEL, DEFAULT_VALUE, MAX_LENGTH_50, MAX_LENGTH_URL, MAX_LENGTH_SHORT_TITLE, PATH_APP
 from domain.contents.models.sections import Section
+from domain.contents.tasks import post_update_jsonfield
 from domain.main.models import Audit, LanguageAbstract
 from mptt.models import MPTTModel, TreeForeignKey
 
@@ -63,14 +64,18 @@ class Post(MPTTModel, Audit):
     sections = models.ManyToManyField(Section, through='PostSettings')
 
     class Meta:
+        verbose_name = POST
+        verbose_name_plural = POST_PLURAL
         app_label = APP_LABEL
+
+    def __str__(self):
+        return str(self.title)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
-
-    def __str__(self):
-        return str(self.title)
+        # Run background tasks on translations
+        post_update_jsonfield.apply_async(kwargs={'post_id': self.pk}, countdown=10)
 
 
 class PostGallery(SortableMixin, Audit):
