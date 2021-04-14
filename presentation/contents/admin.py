@@ -199,7 +199,7 @@ class SectionAdmin(admin.ModelAdmin):
     _background_preview.short_description = IMAGE_PREVIEW
 
     def _show_posts(self, obj):
-        posts = obj.post_set.all()
+        posts = obj.posts.all()
         html = ""
         if posts:
             for post in posts:
