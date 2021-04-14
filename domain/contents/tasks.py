@@ -6,6 +6,38 @@ from celery.utils.log import get_logger
 logger = get_logger(__name__)
 
 
+def _get_posts():
+    """
+
+    """
+    pass
+
+
+def _get_galleries(post_id):
+    """
+
+    """
+
+    galleries = []
+    types = ('non_gallery', 'gallery')
+    from domain.contents.models import PostGallery
+    post_galleries = PostGallery.objects.filter(post_id=post_id, active=True).order_by('order')
+    type = types[post_galleries.count() > 1]
+    for gallery in post_galleries:
+        gallery_content = {
+            'title': gallery.title,
+            'image': gallery.image.url if gallery.image else None,
+            'is_360': gallery.is_360,
+            'youtube_url': gallery.youtube_url if gallery.youtube_url else None,
+        }
+        gallery_content['type'] = 'img' if gallery_content['image'] else 'youtube'
+        galleries.append(gallery_content)
+        if gallery_content['is_360']:
+            gallery_content['type'] = 'img360'
+
+    return galleries, type
+
+
 def _get_sections(page, language):
     """
 
@@ -13,13 +45,6 @@ def _get_sections(page, language):
 
     sections = []
     return sections
-
-
-def _get_posts():
-    """
-
-    """
-    pass
 
 
 @task(name='page_update_jsonfield', ignore_result=True)
@@ -121,6 +146,42 @@ def section_update_jsonfield(section_id, task_callback=None):
 
     except Exception as e:
         logger.warning(f'Error retrieving section: \n{e}')
+
+    # send_task callback
+    # if task_callback
+    #     args, kwargs = task_callback
+    #     current_app.send_task(*args, **str_keys(kwargs))
+
+
+@task(name='', ignore_result=True)
+def post_update_jsonfield(post_id, task_callback=None):
+    """
+    Update the JSON field of the translations available for a post.
+    This task is triggered 10 seconds after saving a page in order to
+    avoid stale data problems or non-existent references
+    """
+
+    from domain.contents.models import PostLanguage
+    try:
+        post_translations = PostLanguage.objects.select_related(
+            'language', 'post__parent'
+        ).filter(post_id=post_id)
+        logger.debug(f'Retrieved {post_translations.count()} translations')
+
+        # Loop translations
+        for translation in post_translations:
+            translation.metadata = {
+                'title': translation.title,
+                'description': translation.description,
+                'logo': translation.post.logo.url,
+                'link': translation.post.link,
+                'children': list()
+            }
+            translation.metadata['galleries'], translation.metadata['type'] = _get_galleries(post_id)
+            translation.save(update_fields=['metadata'])
+
+    except Exception as e:
+        logger.warning(f'Error retrieving post: \n{e}')
 
     # send_task callback
     # if task_callback
