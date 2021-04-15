@@ -1,18 +1,18 @@
+from adminsortable.models import SortableMixin
+from ckeditor.fields import RichTextField
 from django.contrib.postgres.fields import JSONField
 from django.core.exceptions import ValidationError
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
-
-from adminsortable.models import SortableMixin
-from ckeditor.fields import RichTextField
-from domain.contents.constants import APP_LABEL, DEFAULT_VALUE, MAX_LENGTH_50, MAX_LENGTH_URL, MAX_LENGTH_SHORT_TITLE, PATH_APP
-from domain.contents.models.sections import Section
-from domain.contents.tasks import post_update_jsonfield
-from domain.main.models import Audit, LanguageAbstract
 from mptt.models import MPTTModel, TreeForeignKey
 
+from domain.entities.contents.constants import APP_LABEL, DEFAULT_VALUE, MAX_LENGTH_50, MAX_LENGTH_URL, \
+    MAX_LENGTH_SHORT_TITLE, PATH_APP
+from domain.entities.contents.models.sections import Section
+from domain.entities.contents.tasks import post_update_jsonfield
+from domain.entities.main.models import Audit, LanguageAbstract
 
 CHOOSE_POSTS = _('Order posts')
 IMAGE_360 = _("Is it a 360 image?")
@@ -142,7 +142,7 @@ class PostSettings(models.Model):
     order = models.PositiveSmallIntegerField(default=0)
 
     class Meta:
-        ordering = ['order',]
+        ordering = ['order', ]
         verbose_name = POST_SETTINGS
         verbose_name_plural = CHOOSE_POSTS
         app_label = APP_LABEL

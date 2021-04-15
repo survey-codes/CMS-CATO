@@ -1,16 +1,16 @@
+from ckeditor.fields import RichTextField
+from colorfield.fields import ColorField
 from django.contrib.postgres.fields import JSONField
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
-from ckeditor.fields import RichTextField
-from colorfield.fields import ColorField
-from domain.contents.models.pages import Page
-from domain.contents.constants import APP_LABEL, DEFAULT_VALUE, MAX_LENGTH_20, MAX_LENGTH_50, MAX_LENGTH_SHORT_TITLE, PATH_APP
-from domain.contents.tasks import section_update_jsonfield
-from domain.main.models import Audit, LanguageAbstract
-
+from domain.entities.contents.constants import APP_LABEL, DEFAULT_VALUE, MAX_LENGTH_20, MAX_LENGTH_50, \
+    MAX_LENGTH_SHORT_TITLE, PATH_APP
+from domain.entities.contents.models.pages import Page
+from domain.entities.contents.tasks import section_update_jsonfield
+from domain.entities.main.models import Audit, LanguageAbstract
 
 ALIGN_TEXTS = _('Posts texts alignment')
 ALIGN_CHOICES = (
@@ -68,7 +68,8 @@ class SectionTemplate(models.Model):
 
 class Section(Audit):
     title = models.CharField(verbose_name=SECTION_TITLE, max_length=MAX_LENGTH_SHORT_TITLE, unique=True)
-    background = models.ImageField(verbose_name=SECTION_BACKGROUND_IMAGE, upload_to=PATH_SECTION_BACKGROUND, null=True, blank=True)
+    background = models.ImageField(verbose_name=SECTION_BACKGROUND_IMAGE, upload_to=PATH_SECTION_BACKGROUND, null=True,
+                                   blank=True)
     background_color = ColorField(verbose_name=SECTION_BACKGROUND_COLOR, default=DEFAULT_COLOR, null=True, blank=True)
     template = models.ForeignKey(SectionTemplate, verbose_name=SECTION_TEMPLATE, on_delete=models.CASCADE)
     slug = models.SlugField(verbose_name=SECTION_SLUG, default=DEFAULT_VALUE)

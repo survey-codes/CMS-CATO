@@ -1,7 +1,7 @@
 import graphene
 
-from domain.contents import models
-from presentation.contents.api.scalars import JSONCustom
+from domain.entities.contents import models
+from .scalars import JSONCustom
 
 
 class GeneralInfoQuery(graphene.ObjectType):
@@ -42,12 +42,12 @@ class PageQuery(graphene.ObjectType):
         assert page_translations.exists(), f'No existe la página {slug}'
 
         if lang:
-            data = page_translations.objects.filter(language__abbreviation=lang)
+            data = page_translations.filter(language__abbreviation=lang)
             if data.exists():
                 return data.first().metadata
 
-        # Default language translation
-        else:
-            data = models.PageLanguage.objects.filter(language__abbreviation='ES')
-            assert data.exists(), f'No se encontró ninguna traducción para la página {slug}'
-            return data.first().metadata
+            # Default language translation
+            else:
+                data = models.PageLanguage.objects.filter(language__abbreviation='ES')
+                assert data.exists(), f'No se encontró ninguna traducción para la página {slug}'
+                return data.first().metadata

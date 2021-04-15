@@ -5,11 +5,11 @@ from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
 from ckeditor.fields import RichTextField
-from domain.contents.constants import APP_LABEL, DEFAULT_VALUE, MAX_LENGTH_20
-from domain.contents.tasks import page_update_jsonfield
-from domain.main.models import Audit, LanguageAbstract
-from domain.menus.models import Menu
+from domain.entities.contents.constants import APP_LABEL, DEFAULT_VALUE, MAX_LENGTH_20
+from domain.entities.main.models import Audit, LanguageAbstract
+from domain.entities.menus.models import Menu
 from mptt.models import MPTTModel, TreeForeignKey
+from domain.entities.contents.tasks import page_update_jsonfield
 
 
 PAGE = _('Page')

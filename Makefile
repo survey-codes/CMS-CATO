@@ -8,7 +8,10 @@ makemigrations:
 	docker exec -it catocms-backend ./manage.py makemigrations
 
 migrate:
-	docker exec -it catocms-backend ./manage.py migrate
+	docker exec -it catocms-backend ./manage.py migrate contents
+	docker exec -it catocms-backend ./manage.py migrate main
+	docker exec -it catocms-backend ./manage.py migrate menus
+	docker exec -it catocms-backend ./manage.py migrate tools
 
 initialfixture:
 	docker exec -it catocms-backend ./manage.py loaddata initial

@@ -1,0 +1,10 @@
+{% extends 'admin/base.html' %}
+{% block object-tools %}
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="hidden" name="action" value="{{action}}"/>
+    <input class="btn btn-primary custom-button" type="submit" name="{{name}}" value="Submit">
+    <ul>{{users|unordered_list}}</ul>
+</form>
+{% endblock %}
