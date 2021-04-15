@@ -42,7 +42,7 @@ class GeneralData(Audit):
     def save(self, *args, **kwargs):
         super(GeneralData, self).save(*args, **kwargs)
         # Run background tasks on translations
-        info_update_jsonfield.apply_async(kwargs={'info_id': self.pk}, countdown=10)
+        info_update_jsonfield.apply_async(kwargs={'info_id': self.pk}, countdown=5)
 
 
 class GeneralDataLanguage(LanguageAbstract):
