@@ -5,7 +5,7 @@ shell:
 	docker exec -it catocms-backend ./manage.py shell
 
 makemigrations:
-	docker exec -it catocms-backend ./manage.py makemigrations contents main menus tools
+	docker exec -it catocms-backend ./manage.py makemigrations
 
 migrate:
 	docker exec -it catocms-backend ./manage.py migrate contents

@@ -9,6 +9,7 @@ from domain.entities.contents.constants import APP_LABEL, DEFAULT_VALUE, MAX_LEN
 from domain.entities.main.models import Audit, LanguageAbstract
 from domain.entities.menus.models import Menu
 from mptt.models import MPTTModel, TreeForeignKey
+from domain.entities.contents.tasks import page_update_jsonfield
 
 
 PAGE = _('Page')

@@ -13,7 +13,7 @@ MENU_KEY = "menu"
 URL_KEY = "link"
 
 
-#---------INLINES---------
+# ---------INLINES---------
 class MenuLanguageInline(admin.StackedInline):
     model = MenuLanguage
     extra = 1
@@ -26,7 +26,7 @@ class MenuItemLanguageInline(admin.StackedInline):
     suit_classes = 'suit-tab suit-tab-language'
 
 
-#---------ADMIN---------
+# ---------ADMIN---------
 @admin.register(Menu)
 class MenuAdmin(admin.ModelAdmin):
     list_display = (NAME_KEY, GENERAL_KEY)
