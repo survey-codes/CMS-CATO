@@ -1,3 +1,4 @@
+# Updated by nigga 2021-03-14 14:17
 from django.contrib import admin
 from django.db.models import Count
 from django.utils.safestring import mark_safe
