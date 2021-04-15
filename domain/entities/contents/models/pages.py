@@ -46,7 +46,10 @@ class Page(MPTTModel, Audit):
         self.slug = slugify(self.title)
         super(Page, self).save(*args, **kwargs)
         # Run background tasks on translations
-        page_update_jsonfield.apply_async(kwargs={'page_id': self.pk}, countdown=10)
+        self.update_translations()
+
+    def update_translations(self):
+        page_update_jsonfield.apply_async(kwargs={'page_id': self.pk}, countdown=5)
 
 
 class PageLanguage(LanguageAbstract):

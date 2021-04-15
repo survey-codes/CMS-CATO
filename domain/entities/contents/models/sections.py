@@ -72,7 +72,7 @@ class Section(Audit):
     template = models.ForeignKey(SectionTemplate, verbose_name=SECTION_TEMPLATE, on_delete=models.CASCADE)
     slug = models.SlugField(verbose_name=SECTION_SLUG, default=DEFAULT_VALUE)
     order = models.PositiveSmallIntegerField(default=0)
-    pages = models.ManyToManyField(Page, through='SectionSelector')
+    pages = models.ManyToManyField(Page, through='SectionSelector', related_name='sections')
     align = models.CharField(
         verbose_name=ALIGN_TEXTS,
         max_length=MAX_LENGTH_20,
@@ -122,11 +122,10 @@ class Section(Audit):
         self.slug = slugify(self.title)
         super(Section, self).save(*args, **kwargs)
         # Run background tasks on translations
-        section_update_jsonfield.apply_async(kwargs={'section_id': self.pk}, countdown=10)
+        self.update_translations()
 
-    @staticmethod
-    def update_pages():
-        pass
+    def update_translations(self):
+        section_update_jsonfield.apply_async(kwargs={'section_id': self.pk}, countdown=5)
 
 
 class SectionLanguage(LanguageAbstract):

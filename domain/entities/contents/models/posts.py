@@ -60,7 +60,7 @@ class Post(MPTTModel, Audit):
     parent = TreeForeignKey('self', verbose_name=POST_PARENT, on_delete=models.CASCADE, null=True, blank=True)
     link = models.CharField(verbose_name=POST_LINK, max_length=MAX_LENGTH_URL, blank=True)
     slug = models.SlugField(verbose_name=POST_SLUG, default=DEFAULT_VALUE)
-    sections = models.ManyToManyField(Section, through='PostSettings')
+    sections = models.ManyToManyField(Section, through='PostSettings', related_name='posts')
 
     class Meta:
         verbose_name = POST
@@ -73,8 +73,10 @@ class Post(MPTTModel, Audit):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
-        # Run background tasks on translations
-        post_update_jsonfield.apply_async(kwargs={'post_id': self.pk}, countdown=10)
+        self.update_translations()
+
+    def update_translations(self):
+        post_update_jsonfield.apply_async(kwargs={'post_id': self.pk}, countdown=5)
 
 
 class PostGallery(SortableMixin, Audit):
