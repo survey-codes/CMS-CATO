@@ -1,6 +1,0 @@
-.. _Section:
-
-Section
-=======
-
-Documentando...

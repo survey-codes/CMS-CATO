@@ -7,6 +7,9 @@ shell:
 makemigrations:
 	docker exec -it catocms-backend ./manage.py makemigrations
 
+showmigrations:
+	docker exec -it catocms-backend ./manage.py showmigrations
+
 migrate:
 	docker exec -it catocms-backend ./manage.py migrate contents
 	docker exec -it catocms-backend ./manage.py migrate main
@@ -16,6 +19,12 @@ migrate:
 initialfixture:
 	docker exec -it catocms-backend ./manage.py loaddata initial
 
+demofixture:
+	docker exec -it catocms-backend ./manage.py loaddata demo
+
+templatesfixture:
+	docker exec -it catocms-backend ./manage.py loaddata templates
+
 statics:
 	docker exec -it catocms-backend ./manage.py collectstatic --noinput
 
@@ -24,6 +33,3 @@ makemessages:
 
 compilemessages:
 	docker exec -it catocms-backend django-admin compilemessages
-
-templatesfixture:
-	docker exec -it catocms-backend ./manage.py loaddata templates
