@@ -27,7 +27,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_cleanup.apps.CleanupConfig',
     'adminsortable2',
     'adminsortable',
     'presentation.tools.apps.ToolsConfig',
@@ -39,6 +38,7 @@ INSTALLED_APPS = [
     'colorfield',
     'rangefilter',
     'import_export',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
