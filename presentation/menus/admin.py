@@ -37,12 +37,9 @@ class MenuAdmin(admin.ModelAdmin):
     readonly_fields = Audit2Admin.readonly_fields
     inlines = [MenuLanguageInline]
     fieldsets = (
-        (None, {
-            'fields': Audit2Admin.fieldsets
-        }),
         ('Menu', {
             'classes': ('suit-tab suit-tab-menu',),
-            'fields': (NAME_KEY, GENERAL_KEY)
+            'fields': (NAME_KEY, GENERAL_KEY) + Audit2Admin.fieldsets
         }),
     )
     suit_form_tabs = (
@@ -61,11 +58,8 @@ class MenuItemAdmin(admin.ModelAdmin):
     readonly_fields = Audit2Admin.readonly_fields
     fieldsets = (
         (None, {
-            'fields': Audit2Admin.fieldsets
-        }),
-        (None, {
             'classes': ('suit-tab suit-tab-menu',),
-            'fields': (NAME_KEY, PARENT_KEY, MENU_KEY, URL_KEY)
+            'fields': (NAME_KEY, PARENT_KEY, MENU_KEY, URL_KEY) + Audit2Admin.fieldsets
         }),
     )
     suit_form_tabs = (

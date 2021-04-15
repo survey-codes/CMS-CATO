@@ -111,7 +111,7 @@ class GeneralDataAdmin(NonSortableParentAdmin):
     fieldsets = (
         ('General', {
             'classes': ('suit-tab suit-tab-general',),
-            'fields': ('logo', '_logo') + Audit2Admin.fieldsets
+            'fields': ('menu', 'logo', '_logo') + Audit2Admin.fieldsets
         }),
     )
     suit_form_tabs = (
@@ -120,7 +120,7 @@ class GeneralDataAdmin(NonSortableParentAdmin):
     )
 
     def _logo(self, obj):
-        image = obj.logo_site
+        image = obj.logo
         if image:
             return get_image_preview(obj, img=image.url, title=LOGO_PREVIEW)
         return '-'
@@ -179,7 +179,7 @@ class SectionAdmin(admin.ModelAdmin):
     _background_color.short_description = SECTION_BACKGROUND_COLOR
 
     def _show_pages(self, obj):
-        pages = obj.page.all()
+        pages = obj.pages.all()
         html = ""
         if pages:
             for page in pages:
@@ -223,7 +223,7 @@ class PageAdmin(DraggableMPTTAdmin, NonSortableParentAdmin):
     fieldsets = (
         (PAGE, {
             'classes': ('suit-tab suit-tab-page',),
-            'fields': ('active', 'title', 'parent', 'inner_menu', 'slug') + Audit2Admin.fieldsets
+            'fields': ('active', 'title', 'parent', 'menu', 'slug') + Audit2Admin.fieldsets
         }),
     )
 
@@ -234,7 +234,7 @@ class PageAdmin(DraggableMPTTAdmin, NonSortableParentAdmin):
     )
 
     def _show_sections(self, obj):
-        sections = obj.sections.all()
+        sections = obj.section_set.all()
         html = ""
         if sections.exists():
             for section in sections:

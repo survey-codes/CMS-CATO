@@ -56,6 +56,11 @@ class Menu(Audit):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        super(Menu, self).save(*args, **kwargs)
+        # Run background tasks on translations
+        menu_update_jsonfield.apply_async(kwargs={'menu_id': self.pk}, countdown=10)
+
 
 class MenuLanguage(LanguageAbstract):
     """
@@ -64,7 +69,7 @@ class MenuLanguage(LanguageAbstract):
 
     name = models.CharField(verbose_name=MENU_NAME, max_length=MAX_LENGTH_NAME, default='')
     menu = models.ForeignKey(Menu, related_name=MENU_TRANSLATIONS, on_delete=models.CASCADE)
-    metadata = JSONField(blank=True, default=dict, encoder=DjangoJSONEncoder, editable=False)
+    metadata = JSONField(default=dict, encoder=DjangoJSONEncoder, editable=False)
 
     class Meta:
         verbose_name = MENU_LANGUAGE
@@ -88,7 +93,8 @@ class MenuItem(MPTTModel, Audit):
         verbose_name=MENU,
         related_name=MENU_ITEMS,
         on_delete=models.CASCADE,
-        null=True
+        null=True,
+        blank=True
     )
 
     parent = models.ForeignKey(
@@ -97,6 +103,7 @@ class MenuItem(MPTTModel, Audit):
         related_name=MENU_CHILDREN,
         on_delete=models.CASCADE,
         null=True,
+        blank=True
     )
 
     class Meta:
@@ -107,6 +114,11 @@ class MenuItem(MPTTModel, Audit):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        super(MenuItem, self).save(*args **kwargs)
+        # Run background tasks on translations
+        menuitem_update_jsonfield.apply_async(kwargs={'menuitem_id': self.pk}, countdown=10)
+
 
 class MenuItemLanguage(LanguageAbstract):
     """
@@ -114,13 +126,13 @@ class MenuItemLanguage(LanguageAbstract):
     """
 
     name = models.CharField(verbose_name=MENU_ITEM_NAME, max_length=MAX_LENGTH_NAME)
-    metadata = JSONField(blank=True, default=dict, encoder=DjangoJSONEncoder, editable=False)
-    menu_item = models.ForeignKey(MenuItem, related_name=MENU_ITEM_TRANSLATIONS, on_delete=models.CASCADE)
+    metadata = JSONField(default=dict, encoder=DjangoJSONEncoder, editable=False)
+    menuitem = models.ForeignKey(MenuItem, related_name=MENU_ITEM_TRANSLATIONS, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = MENU_ITEM_LANGUAGE
         verbose_name_plural = MENU_ITEM_LANGUAGE_PLURAL
-        unique_together = (("language", "menu_item"),)
+        unique_together = (("language", "menuitem"),)
         app_label = APP_LABEL
 
     def __str__(self):

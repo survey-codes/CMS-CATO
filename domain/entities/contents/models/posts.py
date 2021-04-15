@@ -57,20 +57,24 @@ class Post(MPTTModel, Audit):
     title = models.CharField(verbose_name=POST_TITLE, max_length=MAX_LENGTH_50, default='')
     logo = models.ImageField(verbose_name=POST_LOGO, upload_to=PATH_POSTS_LOGOS, blank=True)
     icon = models.ImageField(verbose_name=POST_ICON, upload_to=PATH_POSTS_ICONS, blank=True)
-    parent = TreeForeignKey('self', verbose_name=POST_PARENT, null=True, on_delete=models.CASCADE)
+    parent = TreeForeignKey('self', verbose_name=POST_PARENT, on_delete=models.CASCADE, null=True, blank=True)
     link = models.CharField(verbose_name=POST_LINK, max_length=MAX_LENGTH_URL, blank=True)
     slug = models.SlugField(verbose_name=POST_SLUG, default=DEFAULT_VALUE)
     sections = models.ManyToManyField(Section, through='PostSettings')
 
     class Meta:
+        verbose_name = POST
+        verbose_name_plural = POST_PLURAL
         app_label = APP_LABEL
+
+    def __str__(self):
+        return str(self.title)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
-
-    def __str__(self):
-        return str(self.title)
+        # Run background tasks on translations
+        post_update_jsonfield.apply_async(kwargs={'post_id': self.pk}, countdown=10)
 
 
 class PostGallery(SortableMixin, Audit):
@@ -109,9 +113,9 @@ class PostLanguage(LanguageAbstract):
     """
 
     title = models.CharField(verbose_name=POST_TITLE, max_length=MAX_LENGTH_50, default='')
-    description = RichTextField(verbose_name=POST_DESCRIPTION, blank=True)
+    description = RichTextField(verbose_name=POST_DESCRIPTION, null=True, blank=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name=POST_TRANSLATIONS)
-    metadata = JSONField(blank=True, default=dict, encoder=DjangoJSONEncoder, editable=False)
+    metadata = JSONField(default=dict, encoder=DjangoJSONEncoder, editable=False)
 
     class Meta:
         unique_together = (('language', 'post'),)

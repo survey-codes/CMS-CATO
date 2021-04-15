@@ -67,8 +67,8 @@ class SectionTemplate(models.Model):
 
 class Section(Audit):
     title = models.CharField(verbose_name=SECTION_TITLE, max_length=MAX_LENGTH_SHORT_TITLE, unique=True)
-    background = models.ImageField(verbose_name=SECTION_BACKGROUND_IMAGE, upload_to=PATH_SECTION_BACKGROUND, blank=True)
-    background_color = ColorField(verbose_name=SECTION_BACKGROUND_COLOR, default=DEFAULT_COLOR)
+    background = models.ImageField(verbose_name=SECTION_BACKGROUND_IMAGE, upload_to=PATH_SECTION_BACKGROUND, null=True, blank=True)
+    background_color = ColorField(verbose_name=SECTION_BACKGROUND_COLOR, default=DEFAULT_COLOR, null=True, blank=True)
     template = models.ForeignKey(SectionTemplate, verbose_name=SECTION_TEMPLATE, on_delete=models.CASCADE)
     slug = models.SlugField(verbose_name=SECTION_SLUG, default=DEFAULT_VALUE)
     order = models.PositiveSmallIntegerField(default=0)
@@ -115,12 +115,18 @@ class Section(Audit):
         verbose_name_plural = SECTION_PLURAL
         app_label = APP_LABEL
 
+    def __str__(self):
+        return str(self.title)
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Section, self).save(*args, **kwargs)
+        # Run background tasks on translations
+        section_update_jsonfield.apply_async(kwargs={'section_id': self.pk}, countdown=10)
 
-    def __str__(self):
-        return str(self.title)
+    @staticmethod
+    def update_pages():
+        pass
 
 
 class SectionLanguage(LanguageAbstract):
@@ -129,8 +135,8 @@ class SectionLanguage(LanguageAbstract):
     """
 
     title = models.CharField(verbose_name=SECTION_TITLE, max_length=MAX_LENGTH_SHORT_TITLE)
-    description = RichTextField(verbose_name=SECTION_DESCRIPTION, blank=True, null=True)
-    metadata = JSONField(blank=True, default=dict, encoder=DjangoJSONEncoder, editable=False)
+    description = RichTextField(verbose_name=SECTION_DESCRIPTION, null=True, blank=True)
+    metadata = JSONField(default=dict, encoder=DjangoJSONEncoder, editable=False)
     section = models.ForeignKey(Section, on_delete=models.CASCADE, related_name=SECTION_TRANSLATIONS)
 
     class Meta:
@@ -140,7 +146,7 @@ class SectionLanguage(LanguageAbstract):
         app_label = APP_LABEL
 
     def __str__(self):
-        return str(self.language)
+        return str(f'{self.section}-{self.language}')
 
 
 class SectionSelector(Audit):
