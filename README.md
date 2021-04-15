@@ -82,7 +82,6 @@ And again run:
 docker-compose up --build
 ```
 
-
 *CMS-CATO app will run in url `localhost:8010`*
 
 To recreate the docker images after dependencies changes run:
@@ -125,8 +124,8 @@ deploy approach. You should follow those steps to deploy it as heroku app.
 
 ### Prerequisites 📋 ###
 
-The production environment requires certain configuration before deploying the docker
-containers, such as the database, the AWS and the CELERY settings.
+The production environment requires certain configuration before deploying the docker image,
+such as the database, the AWS and the CELERY settings.
 
 ### Environment variables 🛠️ ###
 
@@ -138,7 +137,7 @@ environment variables that are required or optional before deploying the system:
 | `DJANGO_SECRET_KEY` | Key used by Django for tokens like CSRF and cookies, it can be any secret key but it's recommended to generate it using https://djecrety.ir/ | **yes** | *None* |
 | `RABBITMQ_USER` | Custom username for the Rabbitmq broker | **yes** | *None* |
 | `RABBITMQ_PASS` | Custom password for the Rabbitmq broker | **yes** | *None* |
-| `ENVIRONMENT` | Project environment settings | **no** | *True* |
+| `ENVIRONMENT` | Project environment settings | **no** | *development* |
 | `USE_S3` | Used to turn the S3 storage on | **no** | *True* |
 | `AWS_ACCESS_KEY_ID` | Your Amazon Web Services access key, as a string | **yes** | *None* |
 | `AWS_SECRET_KEY_ACCESS` | Your Amazon Web Services secret access key, as a string | **yes** | *None* |
