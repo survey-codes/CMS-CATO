@@ -1,7 +1,5 @@
-# from celery import current_app
 from celery.task import task
 from celery.utils.log import get_logger
-from django.db.models import Prefetch
 
 
 logger = get_logger(__name__)
@@ -16,7 +14,7 @@ def _get_galleries(post_id):
     types = ('non_gallery', 'gallery')
     from domain.contents.models import PostGallery
     post_galleries = PostGallery.objects.filter(post_id=post_id, active=True).order_by('order')
-    type = types[post_galleries.count() > 1]
+    post_type = types[post_galleries.count() > 1]
     for gallery in post_galleries:
         gallery_content = {
             'title': gallery.title,
@@ -29,16 +27,17 @@ def _get_galleries(post_id):
         if gallery_content['is_360']:
             gallery_content['type'] = 'img360'
 
-    return galleries, type
+    return galleries, post_type
 
 
-def _get_sections(page, language):
+def _get_menu(menu, language):
     """
 
     """
 
-    sections = []
-    return sections
+    from domain.menus.models import MenuLanguage
+    queryset = MenuLanguage.objects.filter(menu=menu, language=language)
+    return queryset.first().metadata if queryset.exists() else None
 
 
 @task(name='page_update_jsonfield', ignore_result=True)
@@ -50,7 +49,6 @@ def page_update_jsonfield(page_id):
     """
 
     from domain.contents.models import PageLanguage
-    from domain.menus.models import MenuLanguage
     try:
         page_translations = PageLanguage.objects.select_related(
             'language', 'page__menu'
@@ -65,10 +63,7 @@ def page_update_jsonfield(page_id):
                 'sections': list()
             }
             if translation.page.menu:
-                queryset = MenuLanguage.objects.filter(menu=translation.page.menu, language=translation.language)
-                if queryset.exists():
-                    menu = queryset.first()
-                    translation.metadata['menu'] = menu.metadata
+                translation.metadata['menu'] = _get_menu(translation.page.menu, translation.language)
 
             translation.save(update_fields=['metadata'])
 
@@ -85,7 +80,6 @@ def info_update_jsonfield(info_id):
     """
 
     from domain.contents.models import GeneralDataLanguage
-    from domain.menus.models import MenuLanguage
     try:
         info_translations = GeneralDataLanguage.objects.select_related(
             'language', 'info__menu'
@@ -99,10 +93,7 @@ def info_update_jsonfield(info_id):
                 'footer': translation.footer
             }
             if translation.info.menu:
-                queryset = MenuLanguage.objects.filter(menu=translation.info.menu, language=translation.language)
-                if queryset.exists():
-                    menu = queryset.first()
-                    translation.metadata['menu'] = menu.metadata
+                translation.metadata['menu'] = _get_menu(translation.info.menu, translation.language)
 
             translation.save(update_fields=['metadata'])
 
@@ -111,7 +102,7 @@ def info_update_jsonfield(info_id):
 
 
 @task(name='section_update_jsonfield', ignore_result=True)
-def section_update_jsonfield(section_id, task_callback=None):
+def section_update_jsonfield(section_id):
     """
     Update the JSON field of the translations available for a section.
     This task is triggered 10 seconds after saving a page in order to
@@ -141,14 +132,9 @@ def section_update_jsonfield(section_id, task_callback=None):
     except Exception as e:
         logger.warning(f'Error retrieving section: \n{e}')
 
-    # send_task callback
-    # if task_callback
-    #     args, kwargs = task_callback
-    #     current_app.send_task(*args, **str_keys(kwargs))
-
 
 @task(name='', ignore_result=True)
-def post_update_jsonfield(post_id, task_callback=None):
+def post_update_jsonfield(post_id):
     """
     Update the JSON field of the translations available for a post.
     This task is triggered 10 seconds after saving a page in order to
@@ -176,8 +162,3 @@ def post_update_jsonfield(post_id, task_callback=None):
 
     except Exception as e:
         logger.warning(f'Error retrieving post: \n{e}')
-
-    # send_task callback
-    # if task_callback
-    #     args, kwargs = task_callback
-    #     current_app.send_task(*args, **str_keys(kwargs))
