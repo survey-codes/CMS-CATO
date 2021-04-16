@@ -68,7 +68,7 @@ docker-compose up
 > If it's first time, the images will be created. Sometimes the project doesn't run at first time because
 > the init of postgres, just run again `docker-compose up` and it will work.
 
-### Tip ###
+#### Tip ####
 
 To remove the docker containers including database (Useful sometimes when dealing with migrations):
 
@@ -82,7 +82,7 @@ And again run:
 docker-compose up --build
 ```
 
-*CMS-CATO app will run in url `localhost:8010`*
+CMS-CATO app will run in url `localhost:8010`
 
 To recreate the docker images after dependencies changes run:
 
@@ -163,17 +163,14 @@ heroku update beta
 heroku plugins:install @heroku-cli/plugin-manifest
 ```
 
-> You can switch back to the stable update stream and remove the plugin at any time with:
-> ``` heroku update beta heroku plugins:install @heroku-cli/plugin-manifest ```
-
 Then create your app using the --manifest flag. The stack of the app will
 automatically be set to container:
 
 ```
-heroku create <app-name> --manifest
+heroku create app-name --manifest
 ```
 
-> Do not forget change <app-name> for your app name
+> Do not forget change app-name for your app name
 
 Commit your [heroku.yml](heroku.yml) to git:
 
