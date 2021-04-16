@@ -54,7 +54,7 @@ def menu_update_jsonfield(menu_id):
         logger.warning(f'Error retrieving menu: \n{e}')
 
 
-@task(name='', ignore_result=True)
+@task(name='menuitem_update_jsonfield', ignore_result=True)
 def menuitem_update_jsonfield(menuitem_id):
     """
 

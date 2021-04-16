@@ -2,6 +2,7 @@ from __future__ import absolute_import
 import os
 from celery import Celery
 
+
 # set the default Django settings module for the 'celery' program.
 environment = os.environ.get('ENVIRONMENT', 'development')
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'projectCato.settings.{}'.format(environment))

@@ -133,7 +133,7 @@ def section_update_jsonfield(section_id):
         logger.warning(f'Error retrieving section: \n{e}')
 
 
-@task(name='', ignore_result=True)
+@task(name='post_update_jsonfield', ignore_result=True)
 def post_update_jsonfield(post_id):
     """
     Update the JSON field of the translations available for a post.

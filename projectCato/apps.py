@@ -2,13 +2,13 @@ from django.utils.translation import ugettext_lazy as _
 from suit.apps import DjangoSuitConfig
 from suit.menu import ParentItem, ChildItem
 
-from presentation import constants as c
 
 USER = _('Registered users')
 CONTENT = _('Content management')
+MENU = _('Menus')
 MESSENGER_SERVICE = _("Messenger service management ")
 SETTINGS = _('Tools')
-IMPORT_EXPORT_LANGUAGE = _("Import-export data from post's language")
+IMPORT_EXPORT_LANGUAGE = _("Import-export data from post languages")
 
 
 class SuitConfig(DjangoSuitConfig):
@@ -18,7 +18,7 @@ class SuitConfig(DjangoSuitConfig):
             ChildItem(model='auth.user'),
             ChildItem(model='auth.group'),
         ]),
-        ParentItem(c.MENU, icon='fa fa-bars', children=[
+        ParentItem(MENU, icon='fa fa-bars', children=[
             ChildItem(model='menus.menu'),
             ChildItem(model='menus.menuitem'),
         ]),

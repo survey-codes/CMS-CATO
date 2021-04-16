@@ -4,7 +4,6 @@ from django.utils.translation import ugettext_lazy as _
 TOOLS_APP_LABEL = "tools"
 
 LANGUAGE_TAB = _('Language')
-JSON_CONTENT = _('Json content')
 MAX_LENGTH_50 = 50
 
 # -------------Core-----------#

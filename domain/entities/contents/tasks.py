@@ -152,7 +152,7 @@ def section_update_jsonfield(section_id, task_callback=None):
     #     current_app.send_task(*args, **str_keys(kwargs))
 
 
-@task(name='', ignore_result=True)
+@task(name='post_update_jsonfield', ignore_result=True)
 def post_update_jsonfield(post_id, task_callback=None):
     """
     Update the JSON field of the translations available for a post.
