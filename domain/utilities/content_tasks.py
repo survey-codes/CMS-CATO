@@ -1,6 +1,6 @@
+# from celery import current_app
 from celery.task import task
 from celery.utils.log import get_logger
-
 
 logger = get_logger(__name__)
 
@@ -12,7 +12,7 @@ def _get_galleries(post_id):
 
     galleries = []
     types = ('non_gallery', 'gallery')
-    from domain.contents.models import PostGallery
+    from domain.entities.contents.models.posts import PostGallery
     post_galleries = PostGallery.objects.filter(post_id=post_id, active=True).order_by('order')
     post_type = types[post_galleries.count() > 1]
     for gallery in post_galleries:
@@ -35,7 +35,7 @@ def _get_menu(menu, language):
 
     """
 
-    from domain.menus.models import MenuLanguage
+    from domain.entities.menus.models import MenuLanguage
     queryset = MenuLanguage.objects.filter(menu=menu, language=language)
     return queryset.first().metadata if queryset.exists() else None
 
@@ -48,7 +48,7 @@ def page_update_jsonfield(page_id):
     avoid stale data problems or non-existent references
     """
 
-    from domain.contents.models import PageLanguage
+    from domain.entities.contents.models.pages import PageLanguage
     try:
         page_translations = PageLanguage.objects.select_related(
             'language', 'page__menu'
@@ -79,7 +79,7 @@ def info_update_jsonfield(info_id):
     avoid stale data problems or non-existent references
     """
 
-    from domain.contents.models import GeneralDataLanguage
+    from domain.entities.contents.models import GeneralDataLanguage
     try:
         info_translations = GeneralDataLanguage.objects.select_related(
             'language', 'info__menu'
@@ -109,7 +109,7 @@ def section_update_jsonfield(section_id):
     avoid stale data problems or non-existent references
     """
 
-    from domain.contents.models import SectionLanguage, PostLanguage
+    from domain.entities.contents.models.sections import SectionLanguage
     try:
         section_translations = SectionLanguage.objects.select_related(
             'language', 'section__template'
@@ -121,12 +121,12 @@ def section_update_jsonfield(section_id):
             translation.metadata = {
                 'title': translation.title,
                 'description': translation.description,
-                'background_image': translation.section.background.url if translation.section.background else None,
+                'background_image': translation.section.background.url,
                 'background_color': translation.section.background_color,
                 'template': translation.section.template.name,
+                'posts': list(),
             }
-            posts = PostLanguage.objects.filter(post__in=translation.section.posts.all(), language=translation.language)
-            translation.metadata['posts'] = [post.metadata for post in posts]
+
             translation.save(update_fields=['metadata'])
 
     except Exception as e:
@@ -141,7 +141,7 @@ def post_update_jsonfield(post_id):
     avoid stale data problems or non-existent references
     """
 
-    from domain.contents.models import PostLanguage
+    from domain.entities.contents.models.posts import PostLanguage
     try:
         post_translations = PostLanguage.objects.select_related(
             'language', 'post__parent'

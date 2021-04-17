@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from domain.entities.contents.constants import APP_LABEL, DEFAULT_VALUE, MAX_LENGTH_20, MAX_LENGTH_50, \
     MAX_LENGTH_SHORT_TITLE, PATH_APP
 from domain.entities.contents.models.pages import Page
-from domain.entities.contents.tasks import section_update_jsonfield
+from domain.utilities.content_tasks import section_update_jsonfield
 from domain.entities.main.models import Audit, LanguageAbstract
 
 ALIGN_TEXTS = _('Posts texts alignment')

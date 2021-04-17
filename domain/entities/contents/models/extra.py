@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from domain.entities.contents.constants import APP_LABEL, PATH_APP
 from domain.entities.main.models import Audit, LanguageAbstract
 from domain.entities.menus.models import Menu
-from domain.entities.contents.tasks import info_update_jsonfield
+from domain.utilities.content_tasks import info_update_jsonfield
 
 
 PATH_SITE = 'site/'
