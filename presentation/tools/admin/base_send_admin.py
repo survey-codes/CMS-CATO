@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from domain.entities.response_user_send import ResponseUserSend
 from domain.entities.tools.models import Quota
-from domain.exceptions.empty_template_exceltion import EmptyTemplateException
+from domain.exceptions.empty_template_exception import EmptyTemplateException
 from domain.exceptions.invalid_form_exception import InvalidFromException
 from domain.exceptions.zero_active_users_exception import ZeroActiveUsersException
 from domain.exceptions.zero_quota_exception import ZeroQuotaException
