@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from domain.constants import TOOLS_APP_LABEL
+from infrastructure.data_access.constants import TOOLS_APP_LABEL
 from infrastructure.data_access.entities.main.audit import Audit
 
 

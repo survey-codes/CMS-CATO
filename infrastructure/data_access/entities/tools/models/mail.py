@@ -1,9 +1,10 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from domain.constants import TOOLS_APP_LABEL, MAX_LENGTH_200, NAME, TEMPLATE
+from infrastructure.data_access.constants import TOOLS_APP_LABEL, MAX_LENGTH_200, NAME, TEMPLATE
 from infrastructure.data_access.entities.main.audit import Audit
 from infrastructure.data_access.entities.tools.models.template import Template
+from presentation.constants import DEFAULT_NUMBER
 
 
 class Mail(Audit):
@@ -15,7 +16,7 @@ class Mail(Audit):
     )
     amount_send = models.PositiveIntegerField(
         verbose_name=__AMOUNT_SEND,
-        default=0
+        default=DEFAULT_NUMBER
     )
     template = models.ForeignKey(
         Template,

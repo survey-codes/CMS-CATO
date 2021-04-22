@@ -3,8 +3,6 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from domain.constants import RELATED_NAME
-
 
 class Audit(models.Model):
     """
@@ -19,6 +17,7 @@ class Audit(models.Model):
     __UPDATE_DATE_KEY = 'update_date'
     __UPDATED_BY = _('Updated by')
     __UPDATED_BY_KEY = 'updated_by'
+    __RELATED_NAME = '%(class)s_{}_set'
 
     creation_date = models.DateTimeField(
         verbose_name=__CREATION_DATE,
@@ -31,7 +30,7 @@ class Audit(models.Model):
         verbose_name=__CREATED_BY,
         on_delete=models.CASCADE,
         null=True,
-        related_name=RELATED_NAME.format(__CREATED_BY_KEY)
+        related_name=__RELATED_NAME.format(__CREATED_BY_KEY)
     )
 
     update_date = models.DateTimeField(
@@ -44,7 +43,7 @@ class Audit(models.Model):
         verbose_name=__UPDATED_BY,
         on_delete=models.CASCADE,
         null=True,
-        related_name=RELATED_NAME.format(__UPDATED_BY_KEY),
+        related_name=__RELATED_NAME.format(__UPDATED_BY_KEY),
     )
 
     active = models.BooleanField(verbose_name=__ACTIVE, default=True)
