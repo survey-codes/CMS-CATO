@@ -5,12 +5,25 @@ from celery.utils.log import get_logger
 logger = get_logger(__name__)
 
 
+def _get_component_translation(content, language):
+    """
+
+    """
+
+    data = dict()
+    translation = content.translations.filter(language=language)
+    if translation.exists():
+        data = translation.first().metadata
+
+    return data
+
+
 def _get_galleries(post_id):
     """
 
     """
 
-    galleries = []
+    galleries = list()
     types = ('non_gallery', 'gallery')
     from domain.entities.contents.models.posts import PostGallery
     post_galleries = PostGallery.objects.filter(post_id=post_id, active=True).order_by('order')
@@ -110,6 +123,7 @@ def section_update_jsonfield(section_id):
     """
 
     from domain.entities.contents.models.sections import SectionLanguage
+    from domain.entities.contents.models.posts import PostSettings
     try:
         section_translations = SectionLanguage.objects.select_related(
             'language', 'section__template'
@@ -121,11 +135,15 @@ def section_update_jsonfield(section_id):
             translation.metadata = {
                 'title': translation.title,
                 'description': translation.description,
-                'background_image': translation.section.background.url,
+                'background_image': translation.section.background.url if translation.section.background else None,
                 'background_color': translation.section.background_color,
                 'template': translation.section.template.name,
                 'posts': list(),
             }
+
+            components = PostSettings.objects.select_related('post').filter(section=translation.section)
+            for component in components:
+                translation.metadata['posts'].append(_get_component_translation(component.post, translation.language))
 
             translation.save(update_fields=['metadata'])
 
