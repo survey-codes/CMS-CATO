@@ -8,11 +8,11 @@ from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 from mptt.models import MPTTModel, TreeForeignKey
 
-from domain.entities.contents.constants import APP_LABEL, DEFAULT_VALUE, MAX_LENGTH_50, MAX_LENGTH_URL, \
-    MAX_LENGTH_SHORT_TITLE, PATH_APP
-from domain.entities.contents.models.sections import Section
 from domain.utilities.content_tasks import post_update_jsonfield
-from domain.entities.main.models import Audit, LanguageAbstract
+from infrastructure.data_access.entities.contents.constants import APP_LABEL, DEFAULT_VALUE, MAX_LENGTH_50, \
+    MAX_LENGTH_URL, MAX_LENGTH_SHORT_TITLE, PATH_APP
+from infrastructure.data_access.entities.contents.models.sections import Section
+from infrastructure.data_access.entities.main.models import Audit, LanguageAbstract
 
 CHOOSE_POSTS = _('Order posts')
 IMAGE_360 = _("Is it a 360 image?")

@@ -5,8 +5,8 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from mptt.models import MPTTModel
 
-from domain.entities.main.models import Audit, LanguageAbstract
 from domain.utilities.menu_tasks import menu_update_jsonfield, menuitem_update_jsonfield
+from infrastructure.data_access.entities.main.models import Audit, LanguageAbstract
 
 APP_LABEL = 'menus'
 
@@ -115,7 +115,7 @@ class MenuItem(MPTTModel, Audit):
         return self.name
 
     def save(self, *args, **kwargs):
-        super(MenuItem, self).save(*args ** kwargs)
+        super(MenuItem, self).save(*args, **kwargs)
         # Run background tasks on translations
         menuitem_update_jsonfield.apply_async(kwargs={'menuitem_id': self.pk}, countdown=10)
 

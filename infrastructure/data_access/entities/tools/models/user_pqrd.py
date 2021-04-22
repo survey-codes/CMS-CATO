@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from domain.constants import TOOLS_APP_LABEL
-from domain.entities.main.models import Audit
+from infrastructure.data_access.entities.main.models import Audit
 
 EMAIL = _("Email")
 USER = _("User")

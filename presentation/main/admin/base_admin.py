@@ -9,7 +9,7 @@ class BaseAdmin(admin.ModelAdmin):
             return super(BaseAdmin, self).changelist_view(request, extra_context)
         except Exception as exception:
             self.show_error_message(request, exception)
-            return HttpResponseRedirect(request.path)
+            return HttpResponseRedirect(request.get_full_path())
 
     def show_error_message(self, request, message):
         self.message_user(request, message, messages.ERROR)

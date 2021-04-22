@@ -1,6 +1,5 @@
 from django.utils.translation import ugettext_lazy as _
 
-
 TOOLS_APP_LABEL = "tools"
 
 LANGUAGE_TAB = _('Language')
@@ -19,3 +18,4 @@ LANGUAGE_APP_PLURAL = _('Languages')
 TYPE_KEY = "type"
 NAME = _("Name")
 TEMPLATE = _("Template")
+DEFAULT_BOOL = True

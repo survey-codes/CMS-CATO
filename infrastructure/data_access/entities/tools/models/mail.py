@@ -2,8 +2,8 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from domain.constants import TOOLS_APP_LABEL, MAX_LENGTH_200, NAME, TEMPLATE
-from domain.entities.main.models import Audit
-from domain.entities.tools.models.template import Template
+from infrastructure.data_access.entities.main.models import Audit
+from infrastructure.data_access.entities.tools.models.template import Template
 
 AMOUNT_SEND = _("Amount send")
 MAIL = _("Mail")
@@ -31,10 +31,6 @@ class Mail(Audit):
         verbose_name = MAIL
         verbose_name_plural = MAILS
         app_label = TOOLS_APP_LABEL
-
-    @property
-    def empty_template(self):
-        return not self.template
 
     def add_to_amount_send(self, count):
         self.amount_send += count

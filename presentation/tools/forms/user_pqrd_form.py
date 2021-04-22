@@ -1,6 +1,6 @@
 from django import forms
 
-from domain.entities.tools.models import UserPqrd
+from infrastructure.data_access.entities.tools.models import UserPqrd
 from domain.exceptions.user_pqrd_exceptions import do_not_write_email_exception
 
 EMAIL_KEY = "email"

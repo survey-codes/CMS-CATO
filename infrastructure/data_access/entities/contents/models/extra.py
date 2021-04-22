@@ -4,9 +4,9 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from domain.entities.contents.constants import APP_LABEL, PATH_APP
-from domain.entities.main.models import Audit, LanguageAbstract
-from domain.entities.menus.models import Menu
+from infrastructure.data_access.entities.contents.constants import APP_LABEL, PATH_APP
+from infrastructure.data_access.entities.main.models import Audit, LanguageAbstract
+from infrastructure.data_access.entities.menus.models import Menu
 from domain.utilities.content_tasks import info_update_jsonfield
 
 
