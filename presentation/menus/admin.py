@@ -1,11 +1,12 @@
 from django.contrib import admin
 from rangefilter.filter import DateRangeFilter
 
-from domain.entities.menus.models import Menu, MenuItem, MenuItemLanguage, MenuLanguage
+from domain.constants import NAME_KEY
+from infrastructure.data_access.entities.menus.models import Menu, MenuItem, MenuItemLanguage, MenuLanguage
 from presentation import constants as c
 from presentation.main.admin.admin import CREATION_DATE_KEY, Audit2Admin
 
-NAME_KEY = "name"
+
 GENERAL_KEY = "is_general"
 SHORT_DESCRIPTION_UPDATE_JSON_CONTENT = "Update json content"
 PARENT_KEY = "parent"

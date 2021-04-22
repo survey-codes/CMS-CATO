@@ -5,9 +5,9 @@ from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
 from ckeditor.fields import RichTextField
-from domain.entities.contents.constants import APP_LABEL, DEFAULT_VALUE, MAX_LENGTH_20
-from domain.entities.main.models import Audit, LanguageAbstract
-from domain.entities.menus.models import Menu
+from infrastructure.data_access.entities.contents.constants import APP_LABEL, DEFAULT_VALUE, MAX_LENGTH_20
+from infrastructure.data_access.entities.main.models import Audit, LanguageAbstract
+from infrastructure.data_access.entities.menus.models import Menu
 from mptt.models import MPTTModel, TreeForeignKey
 from domain.utilities.content_tasks import page_update_jsonfield
 

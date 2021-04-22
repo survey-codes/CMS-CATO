@@ -1,6 +1,7 @@
 from django.utils.safestring import mark_safe
 
-from domain.entities.main.models import CREATION_DATE_KEY, CREATED_BY_KEY, UPDATE_DATE_KEY, UPDATED_BY_KEY
+from infrastructure.data_access.entities.main.models import CREATION_DATE_KEY, CREATED_BY_KEY, UPDATE_DATE_KEY, \
+    UPDATED_BY_KEY
 
 
 class Audit2Admin(object):

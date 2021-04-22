@@ -3,13 +3,17 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 
-from domain.entities.response_user_send import ResponseUserSend
-from domain.entities.tools.models import Quota
+from domain.exceptions.empty_mail_exception import EmptyMailException
 from domain.exceptions.empty_template_exception import EmptyTemplateException
 from domain.exceptions.invalid_form_exception import InvalidFromException
 from domain.exceptions.zero_active_users_exception import ZeroActiveUsersException
 from domain.exceptions.zero_quota_exception import ZeroQuotaException
-from presentation.constants import MAIL_KEY
+from domain.services.mail_service import MailService
+from domain.services.quota_service import QuotaService
+from domain.services.user_pqrd_service import UserPqrdService
+from infrastructure.data_access.entities.response_user_send import ResponseUserSend
+from infrastructure.data_access.entities.tools.models import Quota
+from presentation.constants import MAIL_KEY, DEFAULT_BOOL
 from presentation.main.admin.read_only_base_admin import ReadOnlyBaseAdmin
 from presentation.tools.forms.select_mail_form import SelectMailForm
 
@@ -21,6 +25,9 @@ MAIL_ACTION_KEY = "mail_action"
 
 
 class BaseSendAdmin(ReadOnlyBaseAdmin):
+    quota_service = QuotaService()
+    mail_service = MailService()
+    user_pqrd_service = UserPqrdService()
 
     @staticmethod
     def __get_mail_select_form(request):
@@ -42,10 +49,6 @@ class BaseSendAdmin(ReadOnlyBaseAdmin):
             return SelectMailForm(request.POST)
 
     @staticmethod
-    def __get_selected_mail(form):
-        return form.cleaned_data[MAIL_KEY]
-
-    @staticmethod
     def __send_mail_to_users(users, mail):
         response_user_send = ResponseUserSend()
         for user in users:
@@ -64,37 +67,42 @@ class BaseSendAdmin(ReadOnlyBaseAdmin):
         quota.subtract_quota(amount_success)
         quota.save()
 
-    def __validate_active_users(self, request, queryset, quota):
-        users = queryset.filter(active=True)
+    def __validate_active_users(self, request, queryset):
+        users = queryset.filter(active=DEFAULT_BOOL)
         if not users:
             raise ZeroActiveUsersException()
-        else:
-            form = self.__get_form_by_button(request)
-            if not form:
-                form = self.__get_mail_select_form(request)
-            elif form.is_valid():
-                mail = self.__get_selected_mail(form)
-                if mail.empty_template:
-                    self.show_error_message(request, EmptyTemplateException())
-                else:
-                    response_send = self.__send_mail_to_users(users, mail)
-                    if response_send.has_failed_users():
-                        self.show_warning_message(request, response_send.message_failed_shipment())
-                        form = self.__get_mail_select_form(request)
-                    else:
-                        self.show_success_message(request, response_send.message_successful_shipment())
-                        self.__update_number_of_shipments(mail, response_send.successful_amount)
-                        self.__update_quota(quota, response_send.successful_amount)
-                        return HttpResponseRedirect(request.get_full_path())
+        form = self.__get_form_by_button(request)
+        if not form:
+            form = self.__get_mail_select_form(request)
+        elif not form.is_valid():
+            raise InvalidFromException()
+        elif form.is_valid():
+            mail = form.cleaned_data[MAIL_KEY]
+            if not mail.template:
+                raise EmptyTemplateException()
+                # self.show_error_message(request, EmptyTemplateException())
             else:
-                raise InvalidFromException()
-            return self.__render_form(request, form, users)
+                response_send = self.__send_mail_to_users(users, mail)
+                if response_send.has_failed_users():
+                    self.show_warning_message(request, response_send.message_failed_shipment())
+                    form = self.__get_mail_select_form(request)
+                else:
+                    self.show_success_message(request, response_send.message_successful_shipment())
+                    self.__update_number_of_shipments(mail, response_send.successful_amount)
+                    self.__update_quota(self.quota_service.select_by_type(MAIL_KEY), response_send.successful_amount)
+                    return HttpResponseRedirect(request.get_full_path())
+        return self.__render_form(request, form, users)
+
+    def __validate_that_there_are_mails(self, request, queryset):
+        mail = self.mail_service.select()
+        if not mail:
+            raise EmptyMailException()
+        return self.__validate_active_users(request, queryset)
 
     def mail_action(self, request, queryset):
-        quota = Quota.objects.filter(type=MAIL_KEY).first()
+        quota: Quota = self.quota_service.select_by_type(MAIL_KEY)
         if not quota or quota.zero_quota:
             raise ZeroQuotaException()
-        else:
-            return self.__validate_active_users(request, queryset, quota)
+        return self.__validate_that_there_are_mails(request, queryset)
 
     mail_action.short_description = MAIL_SHORT_DESCRIPTION

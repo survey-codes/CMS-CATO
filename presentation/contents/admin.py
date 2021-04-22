@@ -6,8 +6,9 @@ from django.utils.translation import ugettext_lazy as _
 
 from adminsortable.admin import SortableStackedInline, NonSortableParentAdmin
 from adminsortable2.admin import SortableInlineAdminMixin
-from domain.entities.contents.models import extra, pages, posts, sections
-from domain.entities.main.image import get_image_preview
+from infrastructure.data_access.entities.contents.models import extra, posts, sections
+from infrastructure.data_access.entities.contents.models import pages
+from infrastructure.data_access.entities.main.image import get_image_preview
 from import_export.admin import ImportExportModelAdmin
 from mptt.admin import DraggableMPTTAdmin
 from rangefilter.filter import DateRangeFilter

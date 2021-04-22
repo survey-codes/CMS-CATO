@@ -61,7 +61,7 @@ def page_update_jsonfield(page_id):
     avoid stale data problems or non-existent references
     """
 
-    from domain.entities.contents.models.pages import PageLanguage
+    from infrastructure.data_access.entities.contents.models.pages import PageLanguage
     try:
         page_translations = PageLanguage.objects.select_related(
             'language', 'page__menu'
