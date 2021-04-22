@@ -1,7 +1,7 @@
 from django.utils.translation import ugettext_lazy as _
 
 from domain.constants import ACTIVE_KEY
-from infrastructure.data_access.entities.main.models import CREATION_DATE_KEY, CREATED_BY_KEY, UPDATE_DATE_KEY, \
+from infrastructure.data_access.entities.main.language_abstract import CREATION_DATE_KEY, CREATED_BY_KEY, UPDATE_DATE_KEY, \
     UPDATED_BY_KEY
 from presentation.main.admin.base_admin import BaseAdmin
 

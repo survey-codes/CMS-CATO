@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from domain.constants import NAME, MAX_LENGTH_200, TEMPLATE, TOOLS_APP_LABEL
-from infrastructure.data_access.entities.main.models import Audit
+from infrastructure.data_access.entities.main.audit import Audit
 
 TEMPLATE_ID = _("Template ID")
 TEMPLATE_ID_KEY = "template_id"

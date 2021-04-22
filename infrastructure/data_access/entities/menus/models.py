@@ -6,7 +6,8 @@ from django.utils.translation import ugettext_lazy as _
 from mptt.models import MPTTModel
 
 from domain.utilities.menu_tasks import menu_update_jsonfield, menuitem_update_jsonfield
-from infrastructure.data_access.entities.main.models import Audit, LanguageAbstract
+from infrastructure.data_access.entities.main.audit import Audit
+from infrastructure.data_access.entities.main.language_abstract import LanguageAbstract
 
 APP_LABEL = 'menus'
 
