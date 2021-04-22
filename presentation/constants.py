@@ -5,3 +5,6 @@ LANGUAGE_TAB = _('Language')
 MENU = _("Menu")
 ACTIVE_KEY = "active"
 MAIL_KEY = "mail"
+NAME_KEY = "name"
+MAIL = _("Mail")
+DEFAULT_BOOL = True

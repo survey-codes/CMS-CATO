@@ -4,7 +4,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from domain.constants import RELATED_NAME
-from domain.entities.tools.models import Language
+from infrastructure.data_access.entities.tools.models import Language
 
 ACTIVE = _('Active')
 CREATION_DATE = _('Creation date')

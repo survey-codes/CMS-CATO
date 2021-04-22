@@ -1,7 +1,9 @@
 from import_export import resources
-# from import_export.fields import Field
 
-from domain.entities.contents.models.posts import Post, PostLanguage
+from infrastructure.data_access.entities.contents.models.posts import Post, PostLanguage
+
+
+# from import_export.fields import Field
 
 
 class ExportPostResource(resources.ModelResource):
