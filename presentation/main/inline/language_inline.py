@@ -8,4 +8,4 @@ class LanguageInline(AuditInline):
 
     def get_fields(self, request, obj=None):
         fields = super(LanguageInline, self).get_fields(request, obj)
-        return self.__fields_default + self.fields + fields
+        return self._validate_field_none(self.__fields_default, self.fields, fields)

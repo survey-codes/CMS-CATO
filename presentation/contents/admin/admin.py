@@ -1,21 +1,20 @@
 # Updated by nigga 2021-03-14 14:17
+from adminsortable.admin import SortableStackedInline, NonSortableParentAdmin
+from adminsortable2.admin import SortableInlineAdminMixin
 from django.contrib import admin
 from django.db.models import Count
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
-
-from adminsortable.admin import SortableStackedInline, NonSortableParentAdmin
-from adminsortable2.admin import SortableInlineAdminMixin
-from infrastructure.data_access.entities.contents.models import extra, posts, sections
-from infrastructure.data_access.entities.contents.models import pages
-from infrastructure.data_access.entities.main.image import get_image_preview
 from import_export.admin import ImportExportModelAdmin
 from mptt.admin import DraggableMPTTAdmin
 from rangefilter.filter import DateRangeFilter
+
+from infrastructure.data_access.entities.contents.models import pages
+from infrastructure.data_access.entities.contents.models import posts, sections
+from infrastructure.data_access.entities.main.image import get_image_preview
 from presentation import constants as c
 from presentation.contents.resources import PostLanguageResource, ImportPostResource, ExportPostResource
 from presentation.main.admin.admin import Audit2Admin
-
 
 PAGE = _('Page')
 POSTS = _('Posts')
@@ -41,11 +40,7 @@ SHOW_PAGES_SECTION = _('Pages in which appears ')
 NO_POST_SECTIONS = _("This post is not contained in any section")
 
 
-#---------INLINES---------
-class GeneralDataLanguageInline(admin.StackedInline):
-    suit_classes = 'suit-tab suit-tab-language'
-    model = extra.GeneralDataLanguage
-    extra = 1
+# ---------INLINES---------
 
 
 class PageLanguageInline(admin.StackedInline):
@@ -100,35 +95,7 @@ class SectionLanguageInline(admin.StackedInline):
     suit_classes = 'suit-tab suit-tab-language'
 
 
-#---------ADMIN---------
-@admin.register(extra.GeneralData)
-class GeneralDataAdmin(NonSortableParentAdmin):
-    inlines = [GeneralDataLanguageInline]
-    readonly_fields = ('_logo',) + Audit2Admin.readonly_fields
-    search_fields = ('creation_date',)
-    list_filter = (('creation_date', DateRangeFilter),)
-    suit_list_filter_horizontal = ('creation_date',)
-    change_list_template = 'admin/change_date_filter.html'
-    list_display = ('id', '_logo')
-    fieldsets = (
-        ('General', {
-            'classes': ('suit-tab suit-tab-general',),
-            'fields': ('menu', 'logo', '_logo') + Audit2Admin.fieldsets
-        }),
-    )
-    suit_form_tabs = (
-        ('general', 'General'),
-        ('language', c.LANGUAGE_TAB)
-    )
-
-    def _logo(self, obj):
-        image = obj.logo
-        if image:
-            return get_image_preview(obj, img=image.url, title=LOGO_PREVIEW)
-        return '-'
-
-    _logo.allow_tags = True
-    _logo.short_description = IMAGE_PREVIEW
+# ---------ADMIN---------
 
 
 @admin.register(posts.PostLanguage)
@@ -156,7 +123,8 @@ class SectionAdmin(admin.ModelAdmin):
     fieldsets = (
         (SECTION, {
             'classes': ('suit-tab suit-tab-general',),
-            'fields': ('active', 'title', 'background', '_background_preview', 'background_color', 'slug') + Audit2Admin.fieldsets
+            'fields': ('active', 'title', 'background', '_background_preview', 'background_color',
+                       'slug') + Audit2Admin.fieldsets
         }),
         (POST_SETTINGS_PLURAL, {
             'classes': ('wide', 'suit-tab suit-tab-general'),

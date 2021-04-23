@@ -13,3 +13,4 @@ AUDIT = _("Audit")
 CREATED_BY_KEY = 'created_by'
 UPDATED_BY_KEY = 'updated_by'
 MENU_KEY = "menu"
+EMPTY_VALUE = "-"
