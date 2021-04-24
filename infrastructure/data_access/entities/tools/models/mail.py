@@ -1,23 +1,22 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from domain.constants import TOOLS_APP_LABEL, MAX_LENGTH_200, NAME, TEMPLATE
-from infrastructure.data_access.entities.main.models import Audit
+from infrastructure.data_access.constants import TOOLS_APP_LABEL, MAX_LENGTH_200, NAME, TEMPLATE
+from infrastructure.data_access.entities.main.audit import Audit
 from infrastructure.data_access.entities.tools.models.template import Template
-
-AMOUNT_SEND = _("Amount send")
-MAIL = _("Mail")
-MAILS = _("Mails")
+from presentation.constants import DEFAULT_NUMBER
 
 
 class Mail(Audit):
+    __AMOUNT_SEND = _("Amount send")
+
     name = models.CharField(
         verbose_name=NAME,
         max_length=MAX_LENGTH_200
     )
     amount_send = models.PositiveIntegerField(
-        verbose_name=AMOUNT_SEND,
-        default=0
+        verbose_name=__AMOUNT_SEND,
+        default=DEFAULT_NUMBER
     )
     template = models.ForeignKey(
         Template,
@@ -28,8 +27,11 @@ class Mail(Audit):
     )
 
     class Meta:
-        verbose_name = MAIL
-        verbose_name_plural = MAILS
+        __MAIL = _("Mail")
+        __MAILS = _("Mails")
+
+        verbose_name = __MAIL
+        verbose_name_plural = __MAILS
         app_label = TOOLS_APP_LABEL
 
     def add_to_amount_send(self, count):

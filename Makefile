@@ -11,10 +11,7 @@ showmigrations:
 	docker exec -it catocms-backend ./manage.py showmigrations
 
 migrate:
-	docker exec -it catocms-backend ./manage.py migrate contents
-	docker exec -it catocms-backend ./manage.py migrate main
-	docker exec -it catocms-backend ./manage.py migrate menus
-	docker exec -it catocms-backend ./manage.py migrate tools
+	docker exec -it catocms-backend ./manage.py migrate
 
 initialfixture:
 	docker exec -it catocms-backend ./manage.py loaddata initial

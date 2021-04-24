@@ -1,8 +1,12 @@
 from django.contrib import admin, messages
 from django.http import HttpResponseRedirect
 
+from presentation.constants import EMPTY_VALUE
+from presentation.main.admin.base import Base
 
-class BaseAdmin(admin.ModelAdmin):
+
+class BaseAdmin(admin.ModelAdmin, Base):
+    empty_value_display = EMPTY_VALUE
 
     def changelist_view(self, request, extra_context=None):
         try:

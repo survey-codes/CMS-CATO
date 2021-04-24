@@ -6,8 +6,9 @@ from django.utils.translation import ugettext_lazy as _
 
 from ckeditor.fields import RichTextField
 from infrastructure.data_access.entities.contents.constants import APP_LABEL, DEFAULT_VALUE, MAX_LENGTH_20
-from infrastructure.data_access.entities.main.models import Audit, LanguageAbstract
-from infrastructure.data_access.entities.menus.models import Menu
+from infrastructure.data_access.entities.main.audit import Audit
+from infrastructure.data_access.entities.main.language_abstract import LanguageAbstract
+from infrastructure.data_access.entities.menus.menu import Menu
 from mptt.models import MPTTModel, TreeForeignKey
 from domain.utilities.content_tasks import page_update_jsonfield
 
