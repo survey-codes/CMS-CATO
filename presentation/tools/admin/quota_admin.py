@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
 
-from domain.constants import TYPE_KEY
 from infrastructure.data_access.entities.tools.models import Quota
 from presentation.constants import MAIL_KEY
 from presentation.main.admin.audit_admin import AuditAdmin
@@ -22,14 +21,15 @@ class QuotaAdmin(AuditAdmin):
         (MAIL_KEY, __MAIL),
         (__SMS_KEY, __SMS)
     )
+    __TYPE_KEY = "type"
 
-    list_display = (TYPE_KEY, __AMOUNT_KEY)
+    list_display = (__TYPE_KEY, __AMOUNT_KEY)
     list_display_links = list_display
     form = QuotaForm
     fieldsets = (
         (__QUOTA, {
             'classes': ('suit-tab suit-tab-menu',),
-            'fields': ((__AMOUNT_KEY, TYPE_KEY),)
+            'fields': ((__AMOUNT_KEY, __TYPE_KEY),)
         }),
     )
 

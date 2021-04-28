@@ -1,26 +1,26 @@
-
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-
-APP_LABEL = 'tools'
-
-LANGUAGE = _('Language')
-LANGUAGE_PLURAL = _('Languages')
-LANGUAGE_NAME = _('Language Name')
-LANGUAGE_ABBREVIATION = _('Language abbreviation')
-MAX_LENGTH_NAME = 25
-MAX_LENGTH_ABBREVIATION = 2
+from infrastructure.data_access.constants import TOOLS_APP_LABEL
+from infrastructure.data_access.entities.main.audit import Audit
 
 
-class Language(models.Model):
-    name = models.CharField(verbose_name=LANGUAGE_NAME, max_length=MAX_LENGTH_NAME, unique=True)
-    abbreviation = models.CharField(verbose_name=LANGUAGE_ABBREVIATION, max_length=MAX_LENGTH_ABBREVIATION)
+class Language(Audit):
+    __LANGUAGE_NAME = _('Language Name')
+    __LANGUAGE_ABBREVIATION = _('Language abbreviation')
+    __MAX_LENGTH_NAME = 25
+    __MAX_LENGTH_ABBREVIATION = 2
+
+    name = models.CharField(verbose_name=__LANGUAGE_NAME, max_length=__MAX_LENGTH_NAME, unique=True)
+    abbreviation = models.CharField(verbose_name=__LANGUAGE_ABBREVIATION, max_length=__MAX_LENGTH_ABBREVIATION)
 
     class Meta:
-        verbose_name = LANGUAGE
-        verbose_name_plural = LANGUAGE_PLURAL
-        app_label = APP_LABEL
+        __LANGUAGE = _('Language')
+        __LANGUAGE_PLURAL = _('Languages')
+
+        verbose_name = __LANGUAGE
+        verbose_name_plural = __LANGUAGE_PLURAL
+        app_label = TOOLS_APP_LABEL
 
     def save(self, *args, **kwargs):
         self.abbreviation = self.abbreviation.upper()
