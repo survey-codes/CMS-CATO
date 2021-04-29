@@ -1,11 +1,10 @@
 {% extends 'admin/base.html' %}
 {% block object-tools %}
-{% load user_pqrd_tag %}
 <form action="" method="post">
     {% csrf_token %}
     {{ form }}
-    <input type="hidden" name="action" value="{{action}}"/>
     <input class="btn btn-primary" type="submit" name="{{name}}" value="Submit">
-    <ul>{{users|unordered_list}}</ul>
+    <h1>{{ids}}</h1>
+    <ul>{{ users|unordered_list }}</ul>
 </form>
 {% endblock %}

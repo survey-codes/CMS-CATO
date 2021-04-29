@@ -23,3 +23,9 @@ class UserPqrd(Audit):
 
     def __str__(self):
         return self.email
+
+    def get_app_label(self):
+        return self._meta.app_label
+
+    def get_model_name(self):
+        return self._meta.model_name

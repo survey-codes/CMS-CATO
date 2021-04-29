@@ -19,3 +19,6 @@ TITLE_KEY = "title"
 NO_PAGES = _("It is not associated with any page")
 IMAGE_PREVIEW = _("Preview")
 SLUG_KEY = "slug"
+URL_SEND = "send/"
+URL_MAIL = f"{URL_SEND}main/"
+IDS = "ids"
