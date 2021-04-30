@@ -9,7 +9,7 @@ from domain.exceptions.zero_quota_exception import ZeroQuotaException
 from domain.services.mail_service import MailService
 from domain.services.quota_service import QuotaService
 from domain.services.user_pqrd_service import UserPqrdService
-from infrastructure.data_access.entities.response_user_send import ResponseUserSend
+from domain.dto.response_user_send import ResponseUserSend
 from infrastructure.data_access.entities.tools.models import Quota
 from presentation.constants import MAIL_KEY, DEFAULT_BOOL, URL_MAIL, IDS
 from presentation.main.admin.read_only_base_admin import ReadOnlyBaseAdmin

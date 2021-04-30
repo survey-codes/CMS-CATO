@@ -4,10 +4,11 @@ SUCCESSFUL_SHIPMENT = _("We send the message to {} users.")
 FAILED_SHIPMENT = _("We send the message to {} users.")
 
 
-class ResponseUserSend:
+class ResponseUserSend(object):
     successful_amount = 0
     failed_amount = 0
-    users_failed = None
+    users_successful = list()
+    users_failed = list()
 
     def plus_one_successful_amount(self):
         self.successful_amount += 1
@@ -21,5 +22,9 @@ class ResponseUserSend:
     def message_failed_shipment(self):
         return FAILED_SHIPMENT.format(self.failed_amount)
 
-    def has_failed_users(self):
-        return self.failed_amount > 0
+    def add_user(self, user):
+        self.users_successful.append(user)
+        self.plus_one_successful_amount()
+
+    def __str__(self):
+        return f"successful_amount: {self.successful_amount}, failed_amount: {self.failed_amount}"

@@ -12,7 +12,7 @@ def _get_galleries(post_id):
 
     galleries = []
     types = ('non_gallery', 'gallery')
-    from domain.entities.contents.models.posts import PostGallery
+    from infrastructure.data_access.entities.contents.models.posts import PostGallery
     post_galleries = PostGallery.objects.filter(post_id=post_id, active=True).order_by('order')
     post_type = types[post_galleries.count() > 1]
     for gallery in post_galleries:
@@ -35,7 +35,7 @@ def _get_menu(menu, language):
 
     """
 
-    from domain.entities.menus.models import MenuLanguage
+    from infrastructure.data_access.entities.menus.menu_language import MenuLanguage
     queryset = MenuLanguage.objects.filter(menu=menu, language=language)
     return queryset.first().metadata if queryset.exists() else None
 
@@ -79,7 +79,7 @@ def info_update_jsonfield(info_id):
     avoid stale data problems or non-existent references
     """
 
-    from domain.entities.contents.models import GeneralDataLanguage
+    from infrastructure.data_access.entities.contents.models.extra import GeneralDataLanguage
     try:
         info_translations = GeneralDataLanguage.objects.select_related(
             'language', 'info__menu'
@@ -109,7 +109,7 @@ def section_update_jsonfield(section_id):
     avoid stale data problems or non-existent references
     """
 
-    from domain.entities.contents.models.sections import SectionLanguage
+    from infrastructure.data_access.entities.contents.models.sections import SectionLanguage
     try:
         section_translations = SectionLanguage.objects.select_related(
             'language', 'section__template'
@@ -141,7 +141,7 @@ def post_update_jsonfield(post_id):
     avoid stale data problems or non-existent references
     """
 
-    from domain.entities.contents.models.posts import PostLanguage
+    from infrastructure.data_access.entities.contents.models.posts import PostLanguage
     try:
         post_translations = PostLanguage.objects.select_related(
             'language', 'post__parent'
