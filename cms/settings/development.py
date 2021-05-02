@@ -48,7 +48,7 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 GRAPHENE = {
-    "SCHEMA": "presentation.main.schema.schema"
+    "SCHEMA": "cms.presentation.main.schema.schema"
 }
 
 # Database
