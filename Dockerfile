@@ -55,10 +55,8 @@ COPY --from=builder --chown=cmsadm /home/cmsbuilder/.local $USER_HOME/.local
 
 # Make sure scripts installed by pip in .local are usable:
 ENV PATH=$USER_HOME/.local/bin:$PATH
+RUN mkdir tmp
 
 COPY --chown=cmsadm scripts/ scripts/
-# RUN chmod 755 -R scripts/
 COPY --chown=cmsadm manage.py manage.py
 COPY --chown=cmsadm cms/ cms/
-
-RUN mkdir tmp

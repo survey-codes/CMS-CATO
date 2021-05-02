@@ -55,7 +55,7 @@ services:
         "celery",
         "--app=cms",
         "--concurrency=8",
-        "--db=/home/catoadm/flowerdb",
+        "--db=/home/cmsadm/flowerdb",
         "--persistent",
         "--port=5555",
         "flower",
@@ -75,7 +75,7 @@ services:
         "celery",
         "--app=cms",
         "--loglevel=INFO",
-        "--pidfile=/home/catoadm/tmp/beat.pid",
+        "--pidfile=/home/cmsadm/tmp/beat.pid",
         "beat",
       ]
     depends_on:
