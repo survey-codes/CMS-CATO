@@ -6,7 +6,7 @@ import sys
 
 def main():
     environment = os.environ.get('ENVIRONMENT', 'development')
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'projectCato.settings.{}'.format(environment))
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cms.settings.{}'.format(environment))
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
