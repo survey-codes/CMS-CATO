@@ -1,6 +1,6 @@
 from rangefilter.filters import DateRangeFilter
 
-from presentation.main.admin.audit_admin import AuditAdmin
+from cms.presentation.main.admin.audit_admin import AuditAdmin
 
 
 class FilterDateAdmin(AuditAdmin):

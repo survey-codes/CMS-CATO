@@ -1,8 +1,8 @@
 from django.contrib import admin, messages
 from django.http import HttpResponseRedirect
 
-from presentation.constants import EMPTY_VALUE
-from presentation.main.admin.base import Base
+from cms.presentation.constants import EMPTY_VALUE
+from cms.presentation.main.admin.base import Base
 
 
 class BaseAdmin(admin.ModelAdmin, Base):

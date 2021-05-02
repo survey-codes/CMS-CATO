@@ -3,19 +3,19 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.translation import ugettext_lazy as _
 
-from domain.exceptions.empty_mail_exception import EmptyMailException
-from domain.exceptions.empty_template_exception import EmptyTemplateException
-from domain.exceptions.invalid_form_exception import InvalidFromException
-from domain.exceptions.zero_active_users_exception import ZeroActiveUsersException
-from domain.exceptions.zero_quota_exception import ZeroQuotaException
-from domain.services.mail_service import MailService
-from domain.services.quota_service import QuotaService
-from domain.services.user_pqrd_service import UserPqrdService
-from infrastructure.data_access.entities.response_user_send import ResponseUserSend
-from infrastructure.data_access.entities.tools.models import Quota
-from presentation.constants import MAIL_KEY, DEFAULT_BOOL
-from presentation.main.admin.read_only_base_admin import ReadOnlyBaseAdmin
-from presentation.tools.forms.select_mail_form import SelectMailForm
+from cms.domain.exceptions.empty_mail_exception import EmptyMailException
+from cms.domain.exceptions.empty_template_exception import EmptyTemplateException
+from cms.domain.exceptions.invalid_form_exception import InvalidFromException
+from cms.domain.exceptions.zero_active_users_exception import ZeroActiveUsersException
+from cms.domain.exceptions.zero_quota_exception import ZeroQuotaException
+from cms.domain.services.mail_service import MailService
+from cms.domain.services.quota_service import QuotaService
+from cms.domain.services.user_pqrd_service import UserPqrdService
+from cms.infrastructure.data_access.entities.response_user_send import ResponseUserSend
+from cms.infrastructure.data_access.entities.tools.models import Quota
+from cms.presentation.constants import MAIL_KEY, DEFAULT_BOOL
+from cms.presentation.main.admin.read_only_base_admin import ReadOnlyBaseAdmin
+from cms.presentation.tools.forms.select_mail_form import SelectMailForm
 
 SEND_MAIL = _("Send mail")
 MAIL_SHORT_DESCRIPTION = "Enviar correo electrónico"

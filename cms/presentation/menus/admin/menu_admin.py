@@ -1,9 +1,9 @@
 from django.contrib import admin
 
-from infrastructure.data_access.entities.menus.menu import Menu
-from presentation.constants import NAME_KEY, LANGUAGE_TAB, MENU
-from presentation.main.admin.filter_date_admin import FilterDateAdmin
-from presentation.menus.inline.menu_language_inline import MenuLanguageInline
+from cms.infrastructure.data_access.entities.menus.menu import Menu
+from cms.presentation.constants import NAME_KEY, LANGUAGE_TAB, MENU
+from cms.presentation.main.admin.filter_date_admin import FilterDateAdmin
+from cms.presentation.menus.inline.menu_language_inline import MenuLanguageInline
 
 
 @admin.register(Menu)

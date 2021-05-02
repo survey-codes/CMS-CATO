@@ -9,12 +9,12 @@ from import_export.admin import ImportExportModelAdmin
 from mptt.admin import DraggableMPTTAdmin
 from rangefilter.filter import DateRangeFilter
 
-from infrastructure.data_access.entities.contents.models import posts, sections
-from infrastructure.data_access.entities.main.image import get_image_preview
-from presentation import constants as c
-from presentation.constants import NO_PAGES, IMAGE_PREVIEW
-from presentation.contents.resources import PostLanguageResource, ImportPostResource, ExportPostResource
-from presentation.main.admin.admin import Audit2Admin
+from cms.infrastructure.data_access.entities.contents.models import posts, sections
+from cms.infrastructure.data_access.entities.main.image import get_image_preview
+from cms.presentation import constants as c
+from cms.presentation.constants import NO_PAGES, IMAGE_PREVIEW
+from cms.presentation.contents.resources import PostLanguageResource, ImportPostResource, ExportPostResource
+from cms.presentation.main.admin.admin import Audit2Admin
 
 COUNT_SECTIONS = _('Number of sections')
 COUNT_IMAGES = _('Number of images in gallery')

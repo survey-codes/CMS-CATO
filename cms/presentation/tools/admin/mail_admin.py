@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from infrastructure.data_access.entities.tools.models import Mail
-from presentation.constants import NAME_KEY, MAIL
-from presentation.main.admin.audit_admin import AuditAdmin
+from cms.infrastructure.data_access.entities.tools.models import Mail
+from cms.presentation.constants import NAME_KEY, MAIL
+from cms.presentation.main.admin.audit_admin import AuditAdmin
 
 
 @admin.register(Mail)

@@ -2,10 +2,10 @@ from django.contrib import admin
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
 
-from infrastructure.data_access.entities.tools.models import Quota
-from presentation.constants import MAIL_KEY
-from presentation.main.admin.audit_admin import AuditAdmin
-from presentation.tools.forms.quota_form import QuotaForm
+from cms.infrastructure.data_access.entities.tools.models import Quota
+from cms.presentation.constants import MAIL_KEY
+from cms.presentation.main.admin.audit_admin import AuditAdmin
+from cms.presentation.tools.forms.quota_form import QuotaForm
 
 
 @admin.register(Quota)

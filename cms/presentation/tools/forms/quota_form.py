@@ -1,7 +1,7 @@
 from django import forms
 
-from domain.exceptions.quota_exceptions import DoNotSelectTypeException
-from infrastructure.data_access.entities.tools.models import Quota
+from cms.domain.exceptions.quota_exceptions import DoNotSelectTypeException
+from cms.infrastructure.data_access.entities.tools.models import Quota
 
 
 class QuotaForm(forms.ModelForm):

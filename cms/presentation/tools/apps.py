@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class ToolsConfig(AppConfig):
-    name = 'presentation.tools'
+    name = 'cms.presentation.tools'

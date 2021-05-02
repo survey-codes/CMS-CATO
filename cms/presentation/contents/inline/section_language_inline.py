@@ -1,6 +1,6 @@
-from infrastructure.data_access.entities.contents.models.sections import SectionLanguage
-from presentation.constants import TITLE_KEY
-from presentation.main.inline.language_inline import LanguageInline
+from cms.infrastructure.data_access.entities.contents.models.sections import SectionLanguage
+from cms.presentation.constants import TITLE_KEY
+from cms.presentation.main.inline.language_inline import LanguageInline
 
 
 class SectionLanguageInline(LanguageInline):

@@ -2,11 +2,11 @@ from adminsortable.admin import NonSortableParentAdmin
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
-from domain.utilities.image import Image
-from infrastructure.data_access.entities.contents.models.extra import GeneralData
-from presentation.constants import LANGUAGE_TAB, MENU_KEY
-from presentation.contents.inline.general_data_language_inline import GeneralDataLanguageInline
-from presentation.main.admin.filter_date_admin import FilterDateAdmin
+from cms.domain.utilities.image import Image
+from cms.infrastructure.data_access.entities.contents.models.extra import GeneralData
+from cms.presentation.constants import LANGUAGE_TAB, MENU_KEY
+from cms.presentation.contents.inline.general_data_language_inline import GeneralDataLanguageInline
+from cms.presentation.main.admin.filter_date_admin import FilterDateAdmin
 
 
 @admin.register(GeneralData)

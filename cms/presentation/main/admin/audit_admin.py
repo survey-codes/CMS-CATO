@@ -1,6 +1,6 @@
-from infrastructure.data_access.entities.main.language_abstract import CREATION_DATE_KEY, UPDATE_DATE_KEY
-from presentation.constants import ACTIVE_KEY, AUDIT, CREATED_BY_KEY, UPDATED_BY_KEY
-from presentation.main.admin.base_admin import BaseAdmin
+from cms.infrastructure.data_access.entities.main.language_abstract import CREATION_DATE_KEY, UPDATE_DATE_KEY
+from cms.presentation.constants import ACTIVE_KEY, AUDIT, CREATED_BY_KEY, UPDATED_BY_KEY
+from cms.presentation.main.admin.base_admin import BaseAdmin
 
 
 class AuditAdmin(BaseAdmin):

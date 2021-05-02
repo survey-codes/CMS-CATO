@@ -1,4 +1,4 @@
-from presentation.main.inline.audit_inline import AuditInline
+from cms.presentation.main.inline.audit_inline import AuditInline
 
 
 class LanguageInline(AuditInline):

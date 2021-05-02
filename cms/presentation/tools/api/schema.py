@@ -1,6 +1,6 @@
 import graphene
 from graphene_django import DjangoObjectType
-from infrastructure.data_access.entities.tools import models
+from cms.infrastructure.data_access.entities.tools import models
 
 
 class LanguageType(DjangoObjectType):

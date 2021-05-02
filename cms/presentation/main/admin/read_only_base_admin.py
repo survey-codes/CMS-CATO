@@ -1,4 +1,4 @@
-from presentation.main.admin.audit_admin import AuditAdmin
+from cms.presentation.main.admin.audit_admin import AuditAdmin
 
 VALUE_TRUE = True
 VALUE_FALSE = False

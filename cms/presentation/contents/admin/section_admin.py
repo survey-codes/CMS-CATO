@@ -2,12 +2,12 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
-from domain.utilities.image import Image
-from infrastructure.data_access.entities.contents.models.sections import Section
-from presentation.constants import LANGUAGE_TAB, NO_PAGES, IMAGE_PREVIEW, TITLE_KEY, SLUG_KEY
-from presentation.contents.admin import PostSettingsInline
-from presentation.contents.inline.section_language_inline import SectionLanguageInline
-from presentation.main.admin.filter_date_admin import FilterDateAdmin
+from cms.domain.utilities.image import Image
+from cms.infrastructure.data_access.entities.contents.models.sections import Section
+from cms.presentation.constants import LANGUAGE_TAB, NO_PAGES, IMAGE_PREVIEW, TITLE_KEY, SLUG_KEY
+from cms.presentation.contents.admin import PostSettingsInline
+from cms.presentation.contents.inline.section_language_inline import SectionLanguageInline
+from cms.presentation.main.admin.filter_date_admin import FilterDateAdmin
 
 
 @admin.register(Section)

@@ -3,10 +3,10 @@ from django.db.models import F
 from django.utils.translation import ugettext_lazy as _
 from mptt.admin import DraggableMPTTAdmin
 
-from infrastructure.data_access.entities.menus.menu_item import MenuItem
-from presentation.constants import NAME_KEY, MENU_KEY, MENU, LANGUAGE_TAB, PARENT_KEY
-from presentation.main.admin.filter_date_admin import FilterDateAdmin
-from presentation.menus.inline.menu_item_language_inline import MenuItemLanguageInline
+from cms.infrastructure.data_access.entities.menus.menu_item import MenuItem
+from cms.presentation.constants import NAME_KEY, MENU_KEY, MENU, LANGUAGE_TAB, PARENT_KEY
+from cms.presentation.main.admin.filter_date_admin import FilterDateAdmin
+from cms.presentation.menus.inline.menu_item_language_inline import MenuItemLanguageInline
 
 
 @admin.register(MenuItem)

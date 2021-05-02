@@ -1,6 +1,6 @@
-from infrastructure.data_access.entities.menus.menu_item_language import MenuItemLanguage
-from presentation.constants import NAME_KEY
-from presentation.main.inline.language_inline import LanguageInline
+from cms.infrastructure.data_access.entities.menus.menu_item_language import MenuItemLanguage
+from cms.presentation.constants import NAME_KEY
+from cms.presentation.main.inline.language_inline import LanguageInline
 
 
 class MenuItemLanguageInline(LanguageInline):

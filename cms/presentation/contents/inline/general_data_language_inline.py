@@ -1,5 +1,5 @@
-from infrastructure.data_access.entities.contents.models.extra import GeneralDataLanguage
-from presentation.main.inline.language_inline import LanguageInline
+from cms.infrastructure.data_access.entities.contents.models.extra import GeneralDataLanguage
+from cms.presentation.main.inline.language_inline import LanguageInline
 
 
 class GeneralDataLanguageInline(LanguageInline):

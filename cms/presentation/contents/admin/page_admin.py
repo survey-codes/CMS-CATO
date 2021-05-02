@@ -5,11 +5,11 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from mptt.admin import DraggableMPTTAdmin
 
-from infrastructure.data_access.entities.contents.models import Page
-from presentation.constants import LANGUAGE_TAB, MENU_KEY, PARENT_KEY, TITLE_KEY, SLUG_KEY
-from presentation.contents.admin import SectionInline
-from presentation.contents.inline.page_language_inline import PageLanguageInline
-from presentation.main.admin.filter_date_admin import FilterDateAdmin
+from cms.infrastructure.data_access.entities.contents.models import Page
+from cms.presentation.constants import LANGUAGE_TAB, MENU_KEY, PARENT_KEY, TITLE_KEY, SLUG_KEY
+from cms.presentation.contents.admin import SectionInline
+from cms.presentation.contents.inline.page_language_inline import PageLanguageInline
+from cms.presentation.main.admin.filter_date_admin import FilterDateAdmin
 
 
 @admin.register(Page)

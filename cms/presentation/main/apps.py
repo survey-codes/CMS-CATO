@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class MainConfig(AppConfig):
-    name = 'presentation.main'
+    name = 'cms.presentation.main'
