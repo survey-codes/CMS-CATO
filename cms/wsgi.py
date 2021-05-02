@@ -1,5 +1,5 @@
 """
-WSGI config for projectCato project.
+WSGI config for cms project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

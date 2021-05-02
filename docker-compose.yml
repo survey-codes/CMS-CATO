@@ -35,7 +35,7 @@ services:
     command:
       [
         "celery",
-        "--app=projectCato",
+        "--app=cms",
         "--concurrency=8",
         "--hostname=worker1@%h",
         "--loglevel=INFO",
@@ -53,9 +53,9 @@ services:
     command:
       [
         "celery",
-        "--app=projectCato",
+        "--app=cms",
         "--concurrency=8",
-        "--db=/src/flowerdb",
+        "--db=/home/catoadm/flowerdb",
         "--persistent",
         "--port=5555",
         "flower",
@@ -73,9 +73,9 @@ services:
     command:
       [
         "celery",
-        "--app=projectCato",
+        "--app=cms",
         "--loglevel=INFO",
-        "--pidfile=/src/tmp/beat.pid",
+        "--pidfile=/home/catoadm/tmp/beat.pid",
         "beat",
       ]
     depends_on:
