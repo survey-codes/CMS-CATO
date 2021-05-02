@@ -4,17 +4,17 @@ services:
   web:
     build: .
     image: catocms:latest
-    container_name: catocms-backend
+    container_name: catocms
     environment:
       ENVIRONMENT: development
     depends_on:
       - db
       - broker
     volumes:
-      - .:/src
-      - ./scripts:/scripts
+      - ./cms:/home/cmsadm/cms
+      - ./scripts:/home/cmsadm/scripts
     # Dev user: admin pass: admin
-    command: ["/scripts/wait-for-it.sh", "db:5432", "--", "/scripts/command-dev.sh"]
+    command: ["./scripts/wait-for-it.sh", "db:5432", "--", "./scripts/command-dev.sh"]
     ports:
       - "8010:8000"
 
