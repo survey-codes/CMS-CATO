@@ -4,15 +4,20 @@ services:
   web:
     build: .
     image: catocms:latest
-    container_name: catocms-backend
+    container_name: catocms
     environment:
       ENVIRONMENT: development
     depends_on:
       - db
       - broker
     volumes:
-      - .:/src
+      - ./domain:/home/cmsadm/domain
+      - ./infrastructure:/home/cmsadm/infrastructure
+      - ./locale:/home/cmsadm/locale
+      - ./presentation:/home/cmsadm/presentation
+      - ./projectCato:/home/cmsadm/projectCato
       - ./scripts:/scripts
+      - ./templates:/home/cmsadm/templates
     # Dev user: admin pass: admin
     command: ["/scripts/wait-for-it.sh", "db:5432", "--", "/scripts/command-dev.sh"]
     ports:
@@ -55,7 +60,7 @@ services:
         "celery",
         "--app=projectCato",
         "--concurrency=8",
-        "--db=/src/flowerdb",
+        "--db=/home/cmsadm/flowerdb",
         "--persistent",
         "--port=5555",
         "flower",
@@ -75,7 +80,7 @@ services:
         "celery",
         "--app=projectCato",
         "--loglevel=INFO",
-        "--pidfile=/src/tmp/beat.pid",
+        "--pidfile=/home/cmsadm/tmp/beat.pid",
         "beat",
       ]
     depends_on:
