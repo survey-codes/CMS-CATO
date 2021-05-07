@@ -11,7 +11,6 @@ RUN apt-get update && apt-get install -y \
     gcc \
     git \
     libldap2-dev \
-    libpq-dev \
     libsasl2-dev \
     libssl-dev \
     python3-dev
@@ -38,7 +37,6 @@ FROM python:3.8-slim-buster
 # Install here only runtime required packages
 RUN apt-get update && apt-get install -y \
     gettext \
-    binutils \
     libproj-dev \
     gdal-bin \
     python3-gdal
@@ -57,6 +55,11 @@ COPY --from=builder --chown=cmsadm /home/cmsbuilder/.local $USER_HOME/.local
 ENV PATH=$USER_HOME/.local/bin:$PATH
 RUN mkdir tmp
 
-COPY --chown=cmsadm scripts/ scripts/
+COPY --chown=cmsadm domain/ domain/
+COPY --chown=cmsadm infrastructure/ infrastructure/
+COPY --chown=cmsadm locale/ locale/
+COPY --chown=cmsadm presentation/ presentation/
+COPY --chown=cmsadm projectCato/ projectCato/
+COPY --chown=cmsadm templates/ templates/
 COPY --chown=cmsadm manage.py manage.py
-COPY --chown=cmsadm cms/ cms/
+COPY --chown=cmsadm scripts/ scripts/

@@ -11,10 +11,15 @@ services:
       - db
       - broker
     volumes:
-      - ./cms:/home/cmsadm/cms
-      - ./scripts:/home/cmsadm/scripts
+      - ./domain:/home/cmsadm/domain
+      - ./infrastructure:/home/cmsadm/infrastructure
+      - ./locale:/home/cmsadm/locale
+      - ./presentation:/home/cmsadm/presentation
+      - ./projectCato:/home/cmsadm/projectCato
+      - ./scripts:/scripts
+      - ./templates:/home/cmsadm/templates
     # Dev user: admin pass: admin
-    command: ["./scripts/wait-for-it.sh", "db:5432", "--", "./scripts/command-dev.sh"]
+    command: ["/scripts/wait-for-it.sh", "db:5432", "--", "/scripts/command-dev.sh"]
     ports:
       - "8010:8000"
 
@@ -35,7 +40,7 @@ services:
     command:
       [
         "celery",
-        "--app=cms",
+        "--app=projectCato",
         "--concurrency=8",
         "--hostname=worker1@%h",
         "--loglevel=INFO",
@@ -53,7 +58,7 @@ services:
     command:
       [
         "celery",
-        "--app=cms",
+        "--app=projectCato",
         "--concurrency=8",
         "--db=/home/cmsadm/flowerdb",
         "--persistent",
@@ -73,7 +78,7 @@ services:
     command:
       [
         "celery",
-        "--app=cms",
+        "--app=projectCato",
         "--loglevel=INFO",
         "--pidfile=/home/cmsadm/tmp/beat.pid",
         "beat",

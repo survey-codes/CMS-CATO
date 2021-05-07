@@ -1,4 +1,4 @@
-# Lat update: Delete old dependencies
+# Lat update: Psycopg update
 
 # Clean, responsive, configurable theme for the Sphinx documentation system
 alabaster==0.7.12
@@ -92,7 +92,7 @@ packaging==20.0
 Pillow==6.2.1
 
 # PostgreSQL python client
-psycopg2==2.8.3
+psycopg2-binary==2.8.5
 
 PyYAML==5.3.1
 requests==2.22.0
@@ -101,4 +101,3 @@ singledispatch==3.4.0.3
 snowballstemmer==2.0.0
 
 tablib==0.14.0
-urllib3==1.25.7
