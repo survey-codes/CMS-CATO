@@ -1,28 +1,62 @@
-FROM python:3.8
+#############################################
+# BUILDER IMAGE: Only for building the code #
+#############################################
+FROM python:3.8-slim-buster AS builder
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-RUN apt-get update
+RUN apt-get update && apt-get install -y \
+    gcc \
+    git \
+    libldap2-dev \
+    libpq-dev \
+    libsasl2-dev \
+    libssl-dev \
+    python3-dev
 
-# OS dependencies
-RUN apt-get install gettext -y; apt-get --assume-yes install binutils libproj-dev gdal-bin python3-gdal
+# Create user for building and installing pip packages inside its home for security purposes
+RUN useradd --create-home cmsbuilder
+ENV BUILDER_HOME=/home/cmsbuilder
+WORKDIR $BUILDER_HOME
+USER cmsbuilder
 
-# Setup workdir
-RUN mkdir /src
-WORKDIR /src
+# Install dependencies and create layer cache of them
+COPY requirements.txt .
+RUN pip install --user -r requirements.txt
 
-# Python dependencies
-COPY requirements.txt /src/
-RUN pip install -r /src/requirements.txt
+# Install test dependencies and create layer cache of them
+COPY test-requirements.txt .
+RUN pip install --user -r test-requirements.txt
 
-# Test dependencies
-COPY test-requirements.txt /src/
-RUN pip install -r /src/test-requirements.txt
+######################################
+# RUNNER IMAGE: For running the code #
+######################################
+FROM python:3.8-slim-buster
 
-COPY . /src
+# Install here only runtime required packages
+RUN apt-get update && apt-get install -y \
+    gettext \
+    binutils \
+    libproj-dev \
+    gdal-bin \
+    python3-gdal
 
-RUN chmod 755 -R scripts/
+RUN groupadd -g 2000 cmsadm && \
+    useradd -u 2000 -g cmsadm --create-home cmsadm
 
+ENV USER_HOME=/home/cmsadm
+WORKDIR $USER_HOME
+USER cmsadm
+
+# Copy pip install results from builder image
+COPY --from=builder --chown=cmsadm /home/cmsbuilder/.local $USER_HOME/.local
+
+# Make sure scripts installed by pip in .local are usable:
+ENV PATH=$USER_HOME/.local/bin:$PATH
 RUN mkdir tmp
+
+COPY --chown=cmsadm scripts/ scripts/
+COPY --chown=cmsadm manage.py manage.py
+COPY --chown=cmsadm cms/ cms/
