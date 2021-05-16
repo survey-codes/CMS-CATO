@@ -11,7 +11,7 @@ class Image:
     def get_image_preview(obj, img, title, width=100, field_msg=PREVIEW_TEXT):
         if obj.pk:
             if img:
-                url = img.url
+                url = img
                 return mark_safe(f"""<a href="{url}" target="_blank">
                 <img src="{url}" alt="{title}" style="max-width:{width}px; height: auto;" /></a>""")
             return EMPTY_VALUE
