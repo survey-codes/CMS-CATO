@@ -52,7 +52,7 @@ django-crum==0.7.5
 django-debug-toolbar==3.2
 
 # Django application and library for importing and exporting data with included admin integration
-django-import-export==2.0.1
+django-import-export==2.4.0
 
 # Use this to insert a script tag via forms.Media containing additional attributes
 django-js-asset==1.2.2
@@ -98,5 +98,3 @@ PyYAML==5.3.1
 Rx==1.6.1
 singledispatch==3.4.0.3
 snowballstemmer==2.0.0
-
-tablib==2.0.0
