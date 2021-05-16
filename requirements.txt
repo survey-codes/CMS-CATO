@@ -1,4 +1,4 @@
-# Lat update: Psycopg update
+# Lat update: Celery email manager
 
 # Clean, responsive, configurable theme for the Sphinx documentation system
 alabaster==0.7.12
@@ -69,9 +69,6 @@ django-suit @ https://github.com/darklow/django-suit/tarball/v2
 # Extends default Django URLField to support relative URLs
 django-url-or-relative-url-field==0.1.1
 
-docutils==0.16
-et-xmlfile==1.0.1
-
 # Celery Monitoring
 flower==0.9.3
 
@@ -98,9 +95,8 @@ Pillow==6.2.1
 psycopg2-binary==2.8.5
 
 PyYAML==5.3.1
-requests==2.22.0
 Rx==1.6.1
 singledispatch==3.4.0.3
 snowballstemmer==2.0.0
 
-tablib==0.14.0
+tablib==2.0.0
