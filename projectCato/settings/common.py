@@ -15,7 +15,7 @@ from celery.schedules import crontab
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 ENVIRONMENT = os.environ.get('ENVIRONMENT', 'development')
-IS_PRODUCTION = ENVIRONMENT == "production"
+IS_PRODUCTION = ENVIRONMENT == 'production'
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Application definition
@@ -192,26 +192,15 @@ LOCALE_PATHS = (
 ##########
 # CELERY #
 ##########
-
-# Broker settings.
 CELERY_BROKER_USE_SSL = False
 CELERY_BROKER_URL = ''
 CELERY_TIMEZONE = TIME_ZONE
 
-# Task result backend
+# AMQP settings
 CELERY_RESULT_BACKEND = 'amqp'
-
-# AMQP backend settings
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_RESULT_EXPIRES = 3600
 
 # Task execution
 CELERY_TASK_IGNORE_RESULT = True
 CELERY_WORKER_DISABLE_RATE_LIMITS = True
-
-# CELERY_BEAT_SCHEDULE = {
-#     'hello_task': {
-#         'task': 'main.tasks.hello',
-#         'schedule': crontab(minute='*/1')
-#     }
-# }
