@@ -30,6 +30,9 @@ django-admin-sortable==2.1.8
 # A replacement for django-admin-sortable using an unintrusive approach.
 django-admin-sortable2==0.7.3
 
+# A Django email backend that uses a Celery queue for out-of-band sending of the messages
+django-celery-email==3.0.0
+
 # Provides a RichTextField, RichTextUploadingField, CKEditorWidget and CKEditorUploadingWidget
 django-ckeditor==5.7.1
 
