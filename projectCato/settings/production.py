@@ -8,7 +8,8 @@ SECRET_KEY = get_secret('DJANGO_SECRET_KEY')
 
 PROD_APPS = [
     'storages',
-    'graphene_django'
+    'graphene_django',
+    'djcelery_email'
 ]
 
 INSTALLED_APPS += PROD_APPS
@@ -33,6 +34,9 @@ else:
         }
     }
 
+##########
+# S3 #
+##########
 USE_S3 = (get_secret('USE_S3') == 'True')
 
 if USE_S3:
@@ -52,3 +56,21 @@ if USE_S3:
     MEDIA_LOCATION = 'media'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
     DEFAULT_FILE_STORAGE = 'projectCato.storage_backends.PublicMediaStorage'
+
+##########
+# CELERY #
+##########
+CELERY_BROKER_USE_SSL = True
+CELERY_BROKER_URL = get_secret('CLOUDAMQP_URL')
+CELERY_RESULT_BACKEND = get_secret('CLOUDAMQP_URL', 'amqp://')
+CELERY_BROKER_POOL_LIMIT = 1
+CELERY_BROKER_CONNECTION_TIMEOUT = 10
+CELERY_TASK_SERIALIZER = 'json'
+
+CELERY_SEND_TASK_ERROR_EMAILS = True
+ADMINS = (
+    ('admin', 'daniel.restrepo@unillanos.edu.co'),
+)
+
+EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
+CELERY_EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
