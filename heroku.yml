@@ -5,9 +5,24 @@ setup:
 build:
   docker:
     web: Dockerfile
+    celery: Dockerfile
+    celery-beat: Dockerfile
+    celery-flower: Dockerfile
 
 run:
   web: gunicorn --workers 2 --log-level info --timeout 300 --bind 0.0.0.0:$PORT projectCato.wsgi:application
+  celery:
+    command:
+      - celery worker -A projectCato -l INFO -c 4
+    image: celery
+  celery-beat:
+    command:
+      - celery beat -A projectCato -l INFO
+    image: celery-beat
+  celery-flower:
+    command:
+      - celery flower -A projectCato -l INFO -c 4
+    image: celery-flower
 
 release:
   image: web
