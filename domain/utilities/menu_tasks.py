@@ -17,7 +17,8 @@ def _get_menu_items(menu, language):
 
     """
 
-    from domain.entities.menus.models import MenuItemLanguage
+    from infrastucture.dataaccess.menus.models.menu_item_language import MenuItemLanguage
+
     items = []
     item_translations = MenuItemLanguage.objects.filter(menuitem__menu=menu, language=language)
     for item in item_translations:
@@ -34,7 +35,7 @@ def menu_update_jsonfield(menu_id):
     avoid stale data problems or non-existent references
     """
 
-    from domain.entities.menus.models import MenuLanguage
+    from infrastucture.dataaccess.menus.models.menu_language import MenuLanguage
     try:
         menu_translations = MenuLanguage.objects.select_related(
             'language', 'menu'
@@ -48,7 +49,7 @@ def menu_update_jsonfield(menu_id):
                 'items': _get_menu_items(translation.menu, translation.language)
             }
 
-        translation.save(update_fields=['metadata'])
+            translation.save(update_fields=['metadata'])
 
     except Exception as e:
         logger.warning(f'Error retrieving menu: \n{e}')
@@ -60,7 +61,7 @@ def menuitem_update_jsonfield(menuitem_id):
 
     """
 
-    from domain.entities.menus.models import MenuItemLanguage
+    from infrastucture.dataaccess.menus.models.menu_item_language import MenuItemLanguage
     try:
         item_translations = MenuItemLanguage.objects.select_related(
             'language', 'menuitem__parent'

@@ -1,7 +1,7 @@
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
-from presentation.constants import EMPTY_VALUE
+from infrastucture.constants import EMPTY_VALUE
 
 
 class Image:

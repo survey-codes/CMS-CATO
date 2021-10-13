@@ -1,6 +1,5 @@
 from .common import *
 
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'p)$s^_is49gaum8)yy-hlgkl8+bwc*9lxvlq5_73#9y5qqeln*'
 
@@ -49,7 +48,7 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 GRAPHENE = {
-    "SCHEMA": "presentation.main.schema.schema"
+    "SCHEMA": "infrastucture.dataaccess.main.schema.schema"
 }
 
 # Database

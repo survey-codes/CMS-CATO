@@ -1,5 +1,5 @@
-from infrastructure.data_access.entities.tools.models import Language
-from presentation.constants import DEFAULT_BOOL
+from infrastucture.constants import DEFAULT_BOOL
+from infrastucture.dataaccess.tools.models import Language
 
 
 class LanguageService:

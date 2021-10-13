@@ -10,13 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 import os
-from celery.schedules import crontab
-
+# from celery.schedules import crontab
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 ENVIRONMENT = os.environ.get('ENVIRONMENT', 'development')
 IS_PRODUCTION = ENVIRONMENT == "production"
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+CMS_DIR = os.path.join(BASE_DIR, 'projectCato')
 
 # Application definition
 INSTALLED_APPS = [
@@ -29,10 +29,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'adminsortable2',
     'adminsortable',
-    'presentation.tools.apps.ToolsConfig',
-    'presentation.contents.apps.ContentsConfig',
-    'presentation.main.apps.MainConfig',
-    'presentation.menus.apps.MenusConfig',
+    'infrastucture.dataaccess.tools.apps.ToolsConfig',
+    'infrastucture.dataaccess.contents.apps.ContentsConfig',
+    'infrastucture.dataaccess.main.apps.MainConfig',
+    'infrastucture.dataaccess.menus.apps.MenusConfig',
     'ckeditor',
     'mptt',
     'colorfield',
@@ -57,7 +57,7 @@ ROOT_URLCONF = 'projectCato.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(CMS_DIR, '../templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'debug': True,
@@ -77,7 +77,6 @@ WSGI_APPLICATION = 'projectCato.wsgi.application'
 CKEDITOR_CONFIGS = {
     'default': {
         'skin': 'moono',
-        # 'skin': 'office2013',
         'toolbar_Basic': [
             ['Source', '-', 'Bold', 'Italic']
         ],
@@ -175,10 +174,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(CMS_DIR, 'static')
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(CMS_DIR, 'media')
 
 # Translations
 LANGUAGES = (
@@ -186,7 +185,7 @@ LANGUAGES = (
     ('en', 'English'),
 )
 LOCALE_PATHS = (
-    os.path.join(BASE_DIR, 'locale'),
+    os.path.join(CMS_DIR, 'locale'),
 )
 
 ##########

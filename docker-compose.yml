@@ -12,9 +12,9 @@ services:
       - broker
     volumes:
       - ./domain:/home/cmsadm/domain
-      - ./infrastructure:/home/cmsadm/infrastructure
-      - ./locale:/home/cmsadm/locale
       - ./presentation:/home/cmsadm/presentation
+      - ./locale:/home/cmsadm/locale
+      - ./infrastucture:/home/cmsadm/infrastucture
       - ./projectCato:/home/cmsadm/projectCato
       - ./scripts:/scripts
       - ./templates:/home/cmsadm/templates

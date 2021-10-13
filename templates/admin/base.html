@@ -2,50 +2,60 @@
 {% load i18n admin_static suit_tags %}
 
 {% block extrastyle %}
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
-    <link href='{% static "suit/css/font-awesome.min.css" %}' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+<link href='{% static "suit/css/font-awesome.min.css" %}' rel='stylesheet' type='text/css'>
+<style>
+    #id_mail {
+        padding: 5px;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+</style>
 {% endblock %}
 
 {% block branding %}
-    <img src="{% static 'images/logo.png' %}" width="70" style="margin: 4% 0px; margin-left: auto; margin-right: auto; display: block">
-    <h1 id="site-name">
-        <a href="{% url 'admin:index' %}" style="">
-            {{ site_header|default:_('Django administration') }}
-            <span class="header-label">Admin</span>
-        </a>
-    </h1>
+<img src="{% static 'images/logo.png' %}" width="70"
+     style="margin: 4% 0px; margin-left: auto; margin-right: auto; display: block">
+<h1 id="site-name">
+    <a href="{% url 'admin:index' %}" style="">
+        {{ site_header|default:_('Django administration') }}
+        <span class="header-label">Admin</span>
+    </a>
+</h1>
 {% endblock %}
 
 {% block extrahead %}
-    <link rel="icon" href="{% static 'images/favicon.ico'%}" sizes="48x48" />
+<link rel="icon" href="{% static 'images/favicon.ico'%}" sizes="48x48"/>
 {% endblock %}
 
 {% block userlinks %}
-    {% if site_url %}
-        <a href="{{ site_url }}" class="icon-link view-site-link" data-title="Ver el sitio">{% trans 'View site' %}</a>
-    {% endif %}
-    {% if user.is_active and user.is_superuser %}
-        <a href="http://localhost:5555/" target="_blank" class="icon-link fa-tasks" data-title="Tareas">{% trans 'View tasks' %}</a>
-    {% endif %}
-    {% if user.has_usable_password %}
-        <a href="{% url 'admin:password_change' %}" class="icon-link change-password-link" data-title="Cambiar contraseña">{% trans 'Change password' %}</a>
-    {% endif %}
-    <a href="{% url 'admin:logout' %}" class="icon-link logout-link" data-title="Terminar sesión">{% trans 'Log out' %}</a>
+{% if site_url %}
+<a href="{{ site_url }}" class="icon-link view-site-link" data-title="Ver el sitio">{% trans 'View site' %}</a>
+{% endif %}
+{% if user.is_active and user.is_superuser %}
+<a href="http://localhost:5555/" target="_blank" class="icon-link fa-tasks" data-title="Tareas">{% trans 'View tasks'
+    %}</a>
+{% endif %}
+{% if user.has_usable_password %}
+<a href="{% url 'admin:password_change' %}" class="icon-link change-password-link" data-title="Cambiar contraseña">{%
+    trans 'Change password' %}</a>
+{% endif %}
+<a href="{% url 'admin:logout' %}" class="icon-link logout-link" data-title="Terminar sesión">{% trans 'Log out' %}</a>
 {% endblock %}
 
 {% block footer_links %}
-    Soporte: <a href="mailto:contacto@grupocato.co" target="_blank">contacto@grupocato.co</a>
+Soporte: <a href="mailto:contacto@grupocato.co" target="_blank">contacto@grupocato.co</a>
 {% endblock %}
 
 {% block welcome-msg %}
-    <span class="welcome">
+<span class="welcome">
         {% trans 'Welcome,' %}
         <strong>{% firstof user.get_short_name user.get_username %}</strong>.
     </span>
 {% endblock %}
 
 {% block copyright %}
-    <span class="hidden-md-down"></span>
-    Desarrollado por Grupo Cato
-    <br>Colombia todos los derechos reservados
+<span class="hidden-md-down"></span>
+Desarrollado por Grupo Cato
+<br>Colombia todos los derechos reservados
 {% endblock %}

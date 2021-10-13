@@ -2,6 +2,7 @@
 from celery.task import task
 from celery.utils.log import get_logger
 
+
 logger = get_logger(__name__)
 
 
@@ -25,7 +26,7 @@ def _get_galleries(post_id):
 
     galleries = list()
     types = ('non_gallery', 'gallery')
-    from domain.entities.contents.models.posts import PostGallery
+    from infrastucture.dataaccess.contents.models import PostGallery
     post_galleries = PostGallery.objects.filter(post_id=post_id, active=True).order_by('order')
     post_type = types[post_galleries.count() > 1]
     for gallery in post_galleries:
@@ -47,8 +48,8 @@ def _get_menu(menu, language):
     """
 
     """
+    from infrastucture.dataaccess.menus.models.menu_language import MenuLanguage
 
-    from domain.entities.menus.models import MenuLanguage
     queryset = MenuLanguage.objects.filter(menu=menu, language=language)
     return queryset.first().metadata if queryset.exists() else None
 
@@ -60,8 +61,7 @@ def page_update_jsonfield(page_id):
     This task is triggered 10 seconds after saving a page in order to
     avoid stale data problems or non-existent references
     """
-
-    from infrastructure.data_access.entities.contents.models.pages import PageLanguage
+    from infrastucture.dataaccess.contents.models import PageLanguage
     try:
         page_translations = PageLanguage.objects.select_related(
             'language', 'page__menu'
@@ -91,8 +91,7 @@ def info_update_jsonfield(info_id):
     This task is triggered 10 seconds after saving a page in order to
     avoid stale data problems or non-existent references
     """
-
-    from domain.entities.contents.models import GeneralDataLanguage
+    from infrastucture.dataaccess.contents.models import GeneralDataLanguage
     try:
         info_translations = GeneralDataLanguage.objects.select_related(
             'language', 'info__menu'
@@ -121,9 +120,8 @@ def section_update_jsonfield(section_id):
     This task is triggered 10 seconds after saving a page in order to
     avoid stale data problems or non-existent references
     """
-
-    from domain.entities.contents.models.sections import SectionLanguage
-    from domain.entities.contents.models.posts import PostSettings
+    from infrastucture.dataaccess.contents.models import SectionLanguage
+    from infrastucture.dataaccess.contents.models import PostSettings
     try:
         section_translations = SectionLanguage.objects.select_related(
             'language', 'section__template'
@@ -159,7 +157,7 @@ def post_update_jsonfield(post_id):
     avoid stale data problems or non-existent references
     """
 
-    from domain.entities.contents.models.posts import PostLanguage
+    from infrastucture.dataaccess.contents.models import PostLanguage
     try:
         post_translations = PostLanguage.objects.select_related(
             'language', 'post__parent'
