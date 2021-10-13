@@ -7,7 +7,7 @@ build:
     web: Dockerfile
 
 run:
-  web: gunicorn --workers 2 --log-level info --timeout 300 --bind 0.0.0.0:$PORT cms.wsgi:application
+  web: gunicorn --workers 2 --log-level info --timeout 300 --bind 0.0.0.0:$PORT projectCato.wsgi:application
 
 release:
   image: web

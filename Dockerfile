@@ -25,7 +25,7 @@ USER cmsbuilder
 COPY requirements.txt .
 RUN pip install --user -r requirements.txt
 
-# Install test dependencies and create layer cache of them
+# Install tests dependencies and create layer cache of them
 COPY test-requirements.txt .
 RUN pip install --user -r test-requirements.txt
 
@@ -56,9 +56,9 @@ ENV PATH=$USER_HOME/.local/bin:$PATH
 RUN mkdir tmp
 
 COPY --chown=cmsadm domain/ domain/
-COPY --chown=cmsadm infrastructure/ infrastructure/
-COPY --chown=cmsadm locale/ locale/
 COPY --chown=cmsadm presentation/ presentation/
+COPY --chown=cmsadm locale/ locale/
+COPY --chown=cmsadm infrastucture/ infrastucture/
 COPY --chown=cmsadm projectCato/ projectCato/
 COPY --chown=cmsadm templates/ templates/
 COPY --chown=cmsadm manage.py manage.py
