@@ -7,7 +7,11 @@ from infrastucture.dataaccess.contents.repository.page_language_repository_impl 
 
 
 class PageQuery(ObjectType):
-    pages = List(PageLanguage, lang=String(description='Filtrar búsqueda por idioma'))
+    pages = List(
+        PageLanguage,
+        lang=String(description='Filtrar búsqueda por idioma'),
+        slug=String(description='Buscar una página por su SLUG', required=True)
+    )
 
     def resolve_pages(self, info, **kwargs):
         lang = kwargs.get('lang', 'ES')
