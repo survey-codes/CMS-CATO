@@ -1,5 +1,6 @@
 import graphene
 from graphene_django import DjangoObjectType
+
 from infrastucture.dataaccess.tools import models
 
 

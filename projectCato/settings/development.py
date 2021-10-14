@@ -48,7 +48,8 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 GRAPHENE = {
-    "SCHEMA": "infrastucture.dataaccess.main.schema.schema"
+    # "SCHEMA": "infrastucture.dataaccess.main.schema.schema"
+    "SCHEMA": "presentation.views.schema.schema"
 }
 
 # Database

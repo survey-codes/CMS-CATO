@@ -1,13 +1,16 @@
+from graphene import ObjectType, String
+
 from domain.exceptions.language.empty_abbreviation_exception import EmptyAbbreviationException
 from domain.exceptions.language.empty_name_exception import EmptyNameException
 from domain.exceptions.language.it_is_not_capitalized_exception import ItIsNotCapitalizedException
 
 
-class Language:
+class Language(ObjectType):
+    name = String()
+    abbreviation = String()
 
-    def __init__(self, name: str, abbreviation: str):
-        self.name = name
-        self.abbreviation = abbreviation
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.__validate_fields()
 
     def __validate_fields(self):

@@ -48,7 +48,6 @@ def menu_update_jsonfield(menu_id):
                 'name': translation.name,
                 'items': _get_menu_items(translation.menu, translation.language)
             }
-
             translation.save(update_fields=['metadata'])
 
     except Exception as e:
