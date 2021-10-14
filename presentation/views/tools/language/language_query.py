@@ -1,12 +1,15 @@
 from graphene import ObjectType, List, String
 
 from domain.entity.language import Language
+from domain.repository.language_repository import LanguageRepository
 from domain.services.language_service import LanguageService
+from infrastucture.dataaccess.tools.repository.language_repository_impl import LanguageRepositoryImpl
 
 
 class LanguageQuery(ObjectType):
     languages = List(Language, abbreviation=String())
 
     def resolve_languages(self, info, abbreviation=None, **kwargs):
-        language_service = LanguageService()
+        language_repository: LanguageRepository = LanguageRepositoryImpl()
+        language_service = LanguageService(language_repository)
         return language_service.select(abbreviation=abbreviation)

@@ -1,10 +1,13 @@
-from graphene import ObjectType, String
+from graphene import ObjectType, String, List
 
-from infrastucture.dataaccess.contents.api.scalars import JSONCustom
+from domain.entity.general_language import GeneralLanguage
+from domain.services.general_service import GeneralService
 
 
 class GeneralQuery(ObjectType):
-    general = JSONCustom(lang=String(description='Filtrar búsqueda por idioma'))
+    generals = List(GeneralLanguage, lang=String(description='Filtrar búsqueda por idioma'))
 
-    def resolve_general(self, info, **kwargs):
+    def resolve_generals(self, info, **kwargs):
         lang = kwargs.get('lang', 'ES')
+        general_service = GeneralService()
+        return general_service.select(lang)

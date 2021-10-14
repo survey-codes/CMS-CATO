@@ -1,10 +1,11 @@
 from domain.entity.language import Language
 from domain.repository.language_repository import LanguageRepository
-from infrastucture.dataaccess.tools.repository.language_repository_impl import LanguageRepositoryImpl
 
 
 class LanguageService:
-    __language_repository: LanguageRepository = LanguageRepositoryImpl()
+
+    def __init__(self, language_repository: LanguageRepository):
+        self.__language_repository = language_repository
 
     def select(self, abbreviation=None) -> [Language]:
         if abbreviation:
