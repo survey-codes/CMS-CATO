@@ -15,6 +15,7 @@ class PageQuery(ObjectType):
 
     def resolve_pages(self, info, **kwargs):
         lang = kwargs.get('lang', 'ES')
+        slug = kwargs.get('slug')
         page_language_repository: PageLanguageRepository = PageLanguageRepositoryImpl()
         page_language_service = PageLanguageService(page_language_repository)
-        return page_language_service.select(lang)
+        return page_language_service.select(lang, slug)

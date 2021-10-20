@@ -6,7 +6,7 @@ from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
-from domain.utilities.content_tasks import section_update_jsonfield
+from infrastucture.dataaccess.utilities.content_tasks import section_update_jsonfield
 from infrastucture.dataaccess.contents.constants import APP_LABEL, DEFAULT_VALUE, MAX_LENGTH_20, \
     MAX_LENGTH_50, MAX_LENGTH_SHORT_TITLE, PATH_APP
 from infrastucture.dataaccess.contents.models import Page

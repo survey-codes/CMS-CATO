@@ -5,7 +5,7 @@ from celery import Celery
 
 # set the default Django settings module for the 'celery' program.
 environment = os.environ.get('ENVIRONMENT', 'development')
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'projectCato.settings.{}'.format(environment))
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', f'projectCato.settings.{environment}')
 
 app = Celery('projectCato')
 
@@ -21,4 +21,4 @@ app.autodiscover_tasks()
 
 @app.task(bind=True)
 def debug_task(self):
-    print('Request: {0!r}'.format(self.request))
+    print(f'Request: {self.request}')

@@ -4,11 +4,11 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from domain.utilities.content_tasks import info_update_jsonfield
 from infrastucture.dataaccess.contents.constants import PATH_APP, APP_LABEL
 from infrastucture.dataaccess.main.models.audit import Audit
 from infrastucture.dataaccess.main.models.language_abstract import LanguageAbstract
 from infrastucture.dataaccess.menus.models.menu import Menu
+from infrastucture.dataaccess.utilities.content_tasks import info_update_jsonfield
 
 PATH_SITE = 'site/'
 PATH_SITE_LOGO = f'{PATH_APP}{PATH_SITE}logo'

@@ -1,9 +1,10 @@
-from graphene import ObjectType, String, JSONString
+from graphene import ObjectType, String, JSONString, Int
 
 from domain.exceptions.page.empty_title_exception import EmptyTitleException
 
 
 class PageLanguage(ObjectType):
+    pk = Int()
     title = String()
     description = String()
     metadata = JSONString()

@@ -198,7 +198,7 @@ CELERY_BROKER_URL = ''
 CELERY_TIMEZONE = TIME_ZONE
 
 # Task result backend
-CELERY_RESULT_BACKEND = 'amqp'
+CELERY_RESULT_BACKEND = 'rpc'
 
 # AMQP backend settings
 CELERY_RESULT_SERIALIZER = 'json'

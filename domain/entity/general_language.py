@@ -1,9 +1,10 @@
-from graphene import ObjectType, String, JSONString
+from graphene import ObjectType, String, JSONString, Int
 
 from domain.exceptions.general.empty_metadata_exception import EmptyMetadataException
 
 
-class GeneralLanguage(ObjectType):
+class GeneralDataLanguage(ObjectType):
+    pk = Int()
     footer = String()
     metadata = JSONString()
 
