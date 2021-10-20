@@ -1,6 +1,6 @@
-from domain.entity.general_language import GeneralLanguage
+from domain.entity.general_language import GeneralDataLanguage
 
 
-class GeneralLanguageRepository:
-    def select(self, lang: str) -> [GeneralLanguage]:
+class GeneralDataLanguageRepository:
+    def select(self, lang: str) -> [GeneralDataLanguage]:
         pass

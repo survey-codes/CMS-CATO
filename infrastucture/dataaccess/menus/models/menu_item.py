@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 
-from domain.utilities.menu_tasks import menuitem_update_jsonfield
+from infrastucture.dataaccess.utilities.menu_tasks import menuitem_update_jsonfield
 from infrastucture.dataaccess.constants import MENU_ITEM_NAME, MAX_LENGTH_NAME, MENU, MENUS_APP_LABEL
 from infrastucture.dataaccess.main.models.audit import Audit
 from infrastucture.dataaccess.menus.models.menu import Menu

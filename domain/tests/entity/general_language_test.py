@@ -1,6 +1,6 @@
 from django.test import SimpleTestCase
 
-from domain.entity.general_language import GeneralLanguage
+from domain.entity.general_language import GeneralDataLanguage
 from domain.exceptions.general.empty_metadata_exception import EmptyMetadataException
 
 
@@ -10,7 +10,7 @@ class GeneralLanguageTestCase(SimpleTestCase):
         metadata = ""
         menssage = "Debes ingresar metadata correctamente, por favor llena todos los campos!"
         try:
-            GeneralLanguage(footer, metadata)
+            GeneralDataLanguage(footer, metadata)
             self.fail("Se espera que metadata sea vacio")
         except EmptyMetadataException as error:
             self.assertEqual(menssage, str(error))

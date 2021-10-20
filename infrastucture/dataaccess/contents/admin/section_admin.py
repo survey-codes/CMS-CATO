@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
-from domain.utilities.image import Image
+from infrastucture.dataaccess.utilities.image import Image
 from infrastucture.dataaccess.contents.admin import PostSettingsInline
 from infrastucture.dataaccess.main.admin.filter_date_admin import FilterDateAdmin
 from infrastucture.dataaccess.contents.models import Section

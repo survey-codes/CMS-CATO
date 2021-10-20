@@ -2,7 +2,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from domain.utilities.menu_tasks import menu_update_jsonfield
+from infrastucture.dataaccess.utilities.menu_tasks import menu_update_jsonfield
 from infrastucture.dataaccess.constants import MENU, MENUS_APP_LABEL, MENU_NAME, MAX_LENGTH_NAME
 from infrastucture.dataaccess.main.models.audit import Audit
 

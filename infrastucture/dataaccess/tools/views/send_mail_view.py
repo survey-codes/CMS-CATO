@@ -6,7 +6,7 @@ from django.urls import reverse
 from domain.exceptions.empty_template_exception import EmptyTemplateException
 from domain.exceptions.invalid_form_exception import InvalidFromException
 from domain.services.user_pqrd_service import UserPqrdService
-from domain.utilities.tasks.send_task import SendTask
+from infrastucture.dataaccess.utilities.tasks.send_task import SendTask
 from infrastucture.dataaccess.tools.models import UserPqrd
 from infrastucture.constants import IDS, MAIL_KEY
 from infrastucture.dataaccess.tools.forms.select_mail_form import SelectMailForm

@@ -76,7 +76,7 @@ def page_update_jsonfield(page_id):
                 'sections': list()
             }
             if translation.page.menu:
-                translation.metadata['menu'] = _get_menu(translation.page.menu, translation.language)
+                translation.metadata['menu'] = _get_menu(translation.page.menu, translation.languages)
 
             translation.save(update_fields=['metadata'])
 
@@ -105,7 +105,7 @@ def info_update_jsonfield(info_id):
                 'footer': translation.footer
             }
             if translation.info.menu:
-                translation.metadata['menu'] = _get_menu(translation.info.menu, translation.language)
+                translation.metadata['menu'] = _get_menu(translation.info.menu, translation.languages)
 
             translation.save(update_fields=['metadata'])
 
@@ -141,7 +141,7 @@ def section_update_jsonfield(section_id):
 
             components = PostSettings.objects.select_related('post').filter(section=translation.section)
             for component in components:
-                translation.metadata['posts'].append(_get_component_translation(component.post, translation.language))
+                translation.metadata['posts'].append(_get_component_translation(component.post, translation.languages))
 
             translation.save(update_fields=['metadata'])
 

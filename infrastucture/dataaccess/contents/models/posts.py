@@ -8,7 +8,7 @@ from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 from mptt.models import MPTTModel, TreeForeignKey
 
-from domain.utilities.content_tasks import post_update_jsonfield
+from infrastucture.dataaccess.utilities.content_tasks import post_update_jsonfield
 from infrastucture.dataaccess.contents.constants import PATH_APP, MAX_LENGTH_50, MAX_LENGTH_URL, \
     DEFAULT_VALUE, APP_LABEL, MAX_LENGTH_SHORT_TITLE
 from infrastucture.dataaccess.contents.models.sections import Section

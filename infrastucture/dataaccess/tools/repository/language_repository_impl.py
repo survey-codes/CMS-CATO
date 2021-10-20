@@ -12,5 +12,6 @@ class LanguageRepositoryImpl(LanguageRepository):
         return self.__language_acl.from_list_model_to_list_domain(languages)
 
     def select_by_abbreviation(self, abbreviation: str) -> [Language]:
-        language = LanguageModel.objects.filter(abbreviation=abbreviation)
-        return self.__language_acl.from_list_model_to_list_domain(language)
+        languages_model = LanguageModel.objects.filter(abbreviation=abbreviation)
+        assert languages_model, "Lo sentimos :( no encontramos un idiomas"
+        return self.__language_acl.from_list_model_to_list_domain(languages_model)

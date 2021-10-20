@@ -6,7 +6,7 @@ from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 from mptt.models import MPTTModel, TreeForeignKey
 
-from domain.utilities.content_tasks import page_update_jsonfield
+from infrastucture.dataaccess.utilities.content_tasks import page_update_jsonfield
 from infrastucture.dataaccess.contents.constants import MAX_LENGTH_20, DEFAULT_VALUE, APP_LABEL
 from infrastucture.dataaccess.main.models.audit import Audit
 from infrastucture.dataaccess.main.models.language_abstract import LanguageAbstract
