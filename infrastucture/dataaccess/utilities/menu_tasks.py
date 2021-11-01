@@ -46,7 +46,7 @@ def menu_update_jsonfield(menu_id):
         for translation in menu_translations:
             translation.metadata = {
                 'name': translation.name,
-                'items': _get_menu_items(translation.menu, translation.languages)
+                'items': _get_menu_items(translation.menu, translation.language)
             }
             translation.save(update_fields=['metadata'])
 

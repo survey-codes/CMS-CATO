@@ -8,6 +8,6 @@ class MenuAcl:
     @staticmethod
     def from_model_to_domain(model: MenuModel) -> Optional[MenuDomain]:
         if model:
-            return MenuDomain(model.pk, model.name, model.is_general)
+            return MenuDomain(model.pk, model.is_general)
         else:
             return None
