@@ -1,14 +1,14 @@
-from domain.entity.page import Page
-from domain.repository.menu_language_repository import MenuLanguageRepository
-from domain.repository.menu_repository import MenuRepository
-from domain.repository.page_language_repository import PageLanguageRepository
-from domain.repository.page_repository import PageRepository
-from domain.services.menu_service import MenuService
-from domain.services.page_service import PageService
-from infrastucture.dataaccess.contents.repository.page_language_repository_impl import PageLanguageRepositoryImpl
-from infrastucture.dataaccess.contents.repository.page_repository_impl import PageRepositoryImpl
-from infrastucture.dataaccess.menus.repository.menu_language_repository_impl import MenuLanguageRepositoryImpl
-from infrastucture.dataaccess.menus.repository.menu_repository_impl import MenuRepositoryImpl
+from domain.main.contents.entity.page import Page
+from domain.main.contents.repository.page_language_repository import PageLanguageRepository
+from domain.main.contents.repository.page_repository import PageRepository
+from domain.main.contents.services.page_service import PageService
+from domain.main.menus.repository.menu_language_repository import MenuLanguageRepository
+from domain.main.menus.repository.menu_repository import MenuRepository
+from domain.main.menus.services.menu_service import MenuService
+from infrastucture.contents.repository.page_language_repository_impl import PageLanguageRepositoryImpl
+from infrastucture.contents.repository.page_repository_impl import PageRepositoryImpl
+from infrastucture.menus.repository.menu_language_repository_impl import MenuLanguageRepositoryImpl
+from infrastucture.menus.repository.menu_repository_impl import MenuRepositoryImpl
 
 
 class PagePresenter:

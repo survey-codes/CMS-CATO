@@ -1,6 +1,6 @@
 from graphene import ObjectType, List, String
 
-from domain.entity.page import Page
+from domain.main.contents.entity.page import Page
 from presentation.presenter.contents.page.page_presenter import PagePresenter
 
 

@@ -1,1 +1,1 @@
-from domain.tests.entity.language_test import *
+from domain.tests.tools.entity.language_test import *
