@@ -214,3 +214,9 @@ CELERY_WORKER_DISABLE_RATE_LIMITS = True
 #         'schedule': crontab(minute='*/1')
 #     }
 # }
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
+EMAIL_HOST_PASSWORD = os.getenv('SG.0cC-jGnBT6G1VhhovyQjEQ.T6tUjfMS52gnkzGp0HQ0-r2BTBCGErZ5zQU02yTVkhk')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

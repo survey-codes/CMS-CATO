@@ -1,16 +1,13 @@
-from domain.main.constants import DEFAULT_BOOL
-from infrastucture.tools.models import UserPqrd
+from domain.main.common.aggregate.response import Response
+from domain.main.exceptions.empty_mail_exception import EmptyMailException
+from domain.main.tools.repository.user_pqrd_repository import UserPqrdRepository
 
 
 class UserPqrdService:
-    __user_pqrd = UserPqrd.objects
+    def __init__(self, user_pqrd_repository: UserPqrdRepository):
+        self.__user_pqrd_repository = user_pqrd_repository
 
-    def select(self) -> 'Queryset[UserPqrd]':
-        return self.__user_pqrd.filter(active=DEFAULT_BOOL)
-
-    def select_by_list(self, ids: str) -> 'Queryset[UserPqrd]':
-        ids_list = ids.split(",")
-        return self.select().filter(pk__in=ids_list)
-
-    def select_by_ids(self, ids: list) -> 'Queryset[UserPqrd]':
-        return self.select().filter(pk__in=ids)
+    def create(self, email: str) -> Response:
+        if not email:
+            raise EmptyMailException()
+        # return self.__user_pqrd_repository.create(email)
