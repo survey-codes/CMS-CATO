@@ -101,3 +101,6 @@ singledispatch==3.4.0.3
 snowballstemmer==2.0.0
 
 tablib==0.14.0
+
+# SendGrid for mailing
+sendgrid

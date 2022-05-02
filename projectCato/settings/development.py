@@ -48,7 +48,8 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 GRAPHENE = {
-    "SCHEMA": "infrastucture.dataaccess.main.schema.schema"
+    # "SCHEMA": "infrastucture.dataaccess.main.schema.schema"
+    "SCHEMA": "presentation.views.schema.schema"
 }
 
 # Database
@@ -68,15 +69,27 @@ if os.environ.get('GITHUB_WORKFLOW'):
 
 # Database for development purposes (See docker-compose file)
 else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.contrib.gis.db.backends.postgis',
-            'NAME': 'postgres',
-            'USER': 'postgres',
-            'PASSWORD': 'postgres',
-            'HOST': 'db',
-            'PORT': 5432,
+    if os.environ.get('IS_CONTAINER'):
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.contrib.gis.db.backends.postgis',
+                'NAME': 'postgres',
+                'USER': 'postgres',
+                'PASSWORD': 'postgres',
+                'HOST': 'db',
+                'PORT': 5432,
+            }
         }
-    }
+    else:
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.contrib.gis.db.backends.postgis',
+                'NAME': 'postgres',
+                'USER': 'postgres',
+                'PASSWORD': 'postgres',
+                'HOST': '192.168.1.105',
+                'PORT': 50000,
+            }
+        }
 
 CELERY_BROKER_URL = 'amqp://catocms:catocms@broker:5672/'

@@ -1,0 +1,56 @@
+# Python WEB framework
+Django==2.2.3
+
+# Asynchronous Task Queue
+celery==4.3.0
+
+# Django admin custom template
+django-suit @ https://github.com/darklow/django-suit/tarball/v2
+
+# Add drag-and-drop ordering to any model in Django admin
+django-admin-sortable==2.1.8
+
+# A replacement for django-admin-sortable using an unintrusive approach.
+django-admin-sortable2==0.7.3
+
+# Provides a RichTextField, RichTextUploadingField, CKEditorWidget and CKEditorUploadingWidget
+django-ckeditor==5.7.1
+
+# Utilities for implementing Modified Preorder Tree Traversal with your Django Models
+django-mptt==0.10.0
+
+# Simple color field for your models with a nice color-picker in the admin-interface
+django-colorfield==0.4.1
+
+# Add the filter by a custom date/datetime range on the admin UI
+django-admin-rangefilter==0.8.1
+
+# Django application and library for importing and exporting data with included admin integration
+django-import-export==2.0.1
+
+# Automatically deletes files for FileField, ImageField and subclasses
+django-cleanup==4.0.0
+
+# A configurable set of panels that display various debug information about the current request/response
+django-debug-toolbar==3.2
+
+# Cross-Origin Resource Sharing (CORS) headers to responses
+django-cors-headers==3.7.0
+
+# Provides tools to implement a GraphQL API in Python using a code-first approach
+graphene-django==2.15.0
+
+# PostgreSQL python client
+psycopg2-binary==2.8.5
+
+# Captures the current request and user in thread local storage
+django-crum==0.7.5
+
+# SendGrid for mailing
+sendgrid
+
+# Python Imaging Library
+Pillow==6.2.1
+
+# Extends default Django URLField to support relative URLs
+django-url-or-relative-url-field==0.1.1

@@ -29,10 +29,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'adminsortable2',
     'adminsortable',
-    'infrastucture.dataaccess.tools.apps.ToolsConfig',
-    'infrastucture.dataaccess.contents.apps.ContentsConfig',
-    'infrastucture.dataaccess.main.apps.MainConfig',
-    'infrastucture.dataaccess.menus.apps.MenusConfig',
+    'infrastucture.tools.apps.ToolsConfig',
+    'infrastucture.contents.apps.ContentsConfig',
+    'infrastucture.main.apps.MainConfig',
+    'infrastucture.menus.apps.MenusConfig',
     'ckeditor',
     'mptt',
     'colorfield',
@@ -198,7 +198,7 @@ CELERY_BROKER_URL = ''
 CELERY_TIMEZONE = TIME_ZONE
 
 # Task result backend
-CELERY_RESULT_BACKEND = 'amqp'
+CELERY_RESULT_BACKEND = 'rpc'
 
 # AMQP backend settings
 CELERY_RESULT_SERIALIZER = 'json'
@@ -214,3 +214,9 @@ CELERY_WORKER_DISABLE_RATE_LIMITS = True
 #         'schedule': crontab(minute='*/1')
 #     }
 # }
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
+EMAIL_HOST_PASSWORD = os.getenv('SG.0cC-jGnBT6G1VhhovyQjEQ.T6tUjfMS52gnkzGp0HQ0-r2BTBCGErZ5zQU02yTVkhk')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
