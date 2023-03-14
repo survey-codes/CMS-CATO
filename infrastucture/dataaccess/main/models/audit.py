@@ -35,7 +35,8 @@ class Audit(models.Model):
 
     update_date = models.DateTimeField(
         verbose_name=__UPDATED_DATE,
-        auto_now=True
+        auto_now=True,
+        null=True
     )
 
     updated_by = models.ForeignKey(
