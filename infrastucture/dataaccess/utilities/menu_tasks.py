@@ -17,7 +17,7 @@ def _get_menu_items(menu, language):
 
     """
 
-    from infrastucture.dataaccess.menus.models.menu_item_language import MenuItemLanguage
+    from infrastucture.menus.models import MenuItemLanguage
 
     items = []
     item_translations = MenuItemLanguage.objects.filter(menuitem__menu=menu, language=language)
@@ -35,7 +35,7 @@ def menu_update_jsonfield(menu_id):
     avoid stale data problems or non-existent references
     """
 
-    from infrastucture.dataaccess.menus.models.menu_language import MenuLanguage
+    from infrastucture.menus.models.menu_language import MenuLanguage
     try:
         menu_translations = MenuLanguage.objects.select_related(
             'language', 'menu'
@@ -60,7 +60,7 @@ def menuitem_update_jsonfield(menuitem_id):
 
     """
 
-    from infrastucture.dataaccess.menus.models.menu_item_language import MenuItemLanguage
+    from infrastucture.menus.models import MenuItemLanguage
     try:
         item_translations = MenuItemLanguage.objects.select_related(
             'language', 'menuitem__parent'
