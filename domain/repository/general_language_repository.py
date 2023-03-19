@@ -1,4 +1,4 @@
-from domain.entity.general_language import GeneralDataLanguage
+from domain.main.contents.entity.general_language import GeneralDataLanguage
 
 
 class GeneralDataLanguageRepository:

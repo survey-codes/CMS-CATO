@@ -1,4 +1,4 @@
-from domain.entity.language import Language as LanguageDomain
+from domain.main.tools.entity.language import Language as LanguageDomain
 from infrastucture.dataaccess.tools.models import Language as LanguageModel
 
 
