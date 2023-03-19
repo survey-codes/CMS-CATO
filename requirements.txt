@@ -103,4 +103,6 @@ snowballstemmer==2.0.0
 tablib==0.14.0
 
 # SendGrid for mailing
-sendgrid
+sendgrid~=6.9.7
+
+graphene~=2.1.9

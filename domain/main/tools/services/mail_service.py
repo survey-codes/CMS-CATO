@@ -1,5 +1,5 @@
 from domain.main.constants import DEFAULT_BOOL
-from infrastucture.tools.models import Mail
+from infrastucture.dataaccess.tools.models import Mail
 
 
 class MailService:

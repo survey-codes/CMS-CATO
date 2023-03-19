@@ -87,7 +87,7 @@ else:
                 'NAME': 'postgres',
                 'USER': 'postgres',
                 'PASSWORD': 'postgres',
-                'HOST': '192.168.1.105',
+                'HOST': '192.168.1.180',
                 'PORT': 50000,
             }
         }
