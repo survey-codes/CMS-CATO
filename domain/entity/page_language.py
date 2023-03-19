@@ -1,6 +1,6 @@
 from graphene import ObjectType, String, JSONString, Int
 
-from domain.main.exceptions.page.empty_title_exception import EmptyTitleException
+from domain.main.exceptions.empty_value_exception import EmptyValueException
 
 
 class PageLanguage(ObjectType):
@@ -18,4 +18,4 @@ class PageLanguage(ObjectType):
 
     def __is_empty_title(self):
         if not self.title:
-            raise EmptyTitleException()
+            raise EmptyValueException()

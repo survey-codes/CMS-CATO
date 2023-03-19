@@ -1,6 +1,6 @@
 from typing import Optional
 
-from domain.main.contents.entity.page_language import PageLanguage as PageLanguageDomain
+from domain.main.contents.model.page_language import PageLanguage as PageLanguageDomain
 from infrastucture.dataaccess.contents.acl.base_acl import BaseAcl
 from infrastucture.dataaccess.contents.models import PageLanguage as PageLanguageModel
 

@@ -1,6 +1,6 @@
 from typing import Optional
 
-from domain.main.exceptions.empty_pk_exception import EmptyPkException
+from domain.main.exceptions.empty_pk_exception import BadPkException
 from domain.main.menus.entity.menu import Menu
 from domain.main.menus.repository.menu_language_repository import MenuLanguageRepository
 from domain.main.menus.repository.menu_repository import MenuRepository
@@ -15,7 +15,7 @@ class MenuService:
 
     def select_by_page_pk(self, page_pk: int, lang: str) -> Optional[Menu]:
         if not page_pk:
-            raise EmptyPkException()
+            raise BadPkException()
         menu = self.__menu_repository.select_by_page_pk(page_pk)
         if menu:
             return self.__add_language(menu, lang)

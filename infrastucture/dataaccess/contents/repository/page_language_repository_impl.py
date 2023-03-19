@@ -1,4 +1,4 @@
-from domain.main.contents.entity.page_language import PageLanguage
+from domain.main.contents.model.page_language import PageLanguage
 from domain.main.contents.repository.page_language_repository import PageLanguageRepository
 from infrastucture.dataaccess.contents.acl.page_language_acl import PageLanguageAcl
 from infrastucture.dataaccess.contents.models import PageLanguage as PageLanguageModel

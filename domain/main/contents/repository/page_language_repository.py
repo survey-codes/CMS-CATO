@@ -1,4 +1,4 @@
-from domain.main.contents.entity.page_language import PageLanguage
+from domain.main.contents.model.page_language import PageLanguage
 
 
 class PageLanguageRepository:
