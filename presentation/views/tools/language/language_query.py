@@ -3,7 +3,7 @@ from graphene import ObjectType, List, String
 from domain.main.tools.entity.language import Language
 from domain.main.tools.repository.language_repository import LanguageRepository
 from domain.main.tools.services.language_service import LanguageService
-from infrastucture.tools.repository.language_repository_impl import LanguageRepositoryImpl
+from infrastucture.dataaccess.tools import LanguageRepositoryImpl
 
 
 class LanguageQuery(ObjectType):

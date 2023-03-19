@@ -5,10 +5,10 @@ from domain.main.contents.services.page_service import PageService
 from domain.main.menus.repository.menu_language_repository import MenuLanguageRepository
 from domain.main.menus.repository.menu_repository import MenuRepository
 from domain.main.menus.services.menu_service import MenuService
-from infrastucture.contents.repository.page_language_repository_impl import PageLanguageRepositoryImpl
-from infrastucture.contents.repository.page_repository_impl import PageRepositoryImpl
-from infrastucture.menus.repository.menu_language_repository_impl import MenuLanguageRepositoryImpl
-from infrastucture.menus.repository.menu_repository_impl import MenuRepositoryImpl
+from infrastucture.dataaccess.contents.repository.page_language_repository_impl import PageLanguageRepositoryImpl
+from infrastucture.dataaccess.contents.repository import PageRepositoryImpl
+from infrastucture.dataaccess.menus.repository.menu_language_repository_impl import MenuLanguageRepositoryImpl
+from infrastucture.dataaccess.menus.repository.menu_repository_impl import MenuRepositoryImpl
 
 
 class PagePresenter:

@@ -1,6 +1,6 @@
 from graphene import ObjectType, String, JSONString, Int
 
-from domain.exceptions.page.empty_title_exception import EmptyTitleException
+from domain.main.exceptions.page.empty_title_exception import EmptyTitleException
 
 
 class PageLanguage(ObjectType):

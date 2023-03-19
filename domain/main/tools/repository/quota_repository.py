@@ -1,4 +1,4 @@
-from infrastucture.tools.models.quota_type import QuotaType
+from infrastucture.dataaccess.tools.models import QuotaType
 
 
 class QuotaRepository:

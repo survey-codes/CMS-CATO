@@ -1,7 +1,7 @@
 from django.test import SimpleTestCase
 
 from domain.entity.general_language import GeneralDataLanguage
-from domain.exceptions.general.empty_metadata_exception import EmptyMetadataException
+from domain.main.exceptions.general.empty_metadata_exception import EmptyMetadataException
 
 
 class GeneralLanguageTestCase(SimpleTestCase):

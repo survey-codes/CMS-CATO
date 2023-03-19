@@ -1,7 +1,7 @@
 from domain.main.common.aggregate.response import Response
 from domain.main.tools.repository.user_pqrd_repository import UserPqrdRepository
 from domain.main.tools.services.user_pqrd_service import UserPqrdService
-from infrastucture.tools.repository.user_pqrd_repository_impl import UserPqrdRepositoryImpl
+from infrastucture.dataaccess.tools.repository.user_pqrd_repository_impl import UserPqrdRepositoryImpl
 
 
 class UserPqrdPresenter:

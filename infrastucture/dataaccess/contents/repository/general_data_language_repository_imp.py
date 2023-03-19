@@ -1,5 +1,5 @@
-from domain.entity.general_language import GeneralDataLanguage as GeneralDataLanguageDomain
-from domain.repository.general_language_repository import GeneralDataLanguageRepository
+from domain.main.contents.entity.general_language import GeneralDataLanguage as GeneralDataLanguageDomain
+from domain.main.contents.repository.general_language_repository import GeneralDataLanguageRepository
 from infrastucture.dataaccess.contents.acl.general_data_language_acl import GeneralDataLanguageAcl
 from infrastucture.dataaccess.contents.models import GeneralDataLanguage
 

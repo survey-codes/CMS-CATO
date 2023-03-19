@@ -1,5 +1,5 @@
 from domain.main.constants import DEFAULT_BOOL
-from infrastucture.tools.models import Quota
+from infrastucture.dataaccess.tools.models import Quota
 
 
 class QuotaService:

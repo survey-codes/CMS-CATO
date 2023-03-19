@@ -1,11 +1,15 @@
-from domain.entity.page_language import PageLanguage as PageLanguageDomain
+from typing import Optional
+
+from domain.main.contents.entity.page_language import PageLanguage as PageLanguageDomain
+from infrastucture.dataaccess.contents.acl.base_acl import BaseAcl
 from infrastucture.dataaccess.contents.models import PageLanguage as PageLanguageModel
 
 
-class PageLanguageAcl:
-    @staticmethod
-    def from_model_to_domain(model: PageLanguageModel) -> PageLanguageDomain:
-        return PageLanguageDomain(model.pk, model.title, model.description, model.metadata)
+class PageLanguageAcl(BaseAcl):
+    def from_model_to_domain(self, model: PageLanguageModel) -> Optional[PageLanguageDomain]:
+        if not model:
+            return None
+        return PageLanguageDomain(model.language.abbreviation, model.title, model.description, model.metadata)
 
     def from_models_to_domains(self, models: [PageLanguageModel]) -> [PageLanguageDomain]:
         return map(lambda model: self.from_model_to_domain(model), models)
