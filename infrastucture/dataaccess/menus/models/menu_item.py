@@ -3,8 +3,8 @@ from django.utils.translation import ugettext_lazy as _
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 
-from infrastucture.dataaccess.utilities.menu_tasks import menuitem_update_jsonfield
-from infrastucture.dataaccess.constants import MENU_ITEM_NAME, MAX_LENGTH_NAME, MENU, MENUS_APP_LABEL
+# from infrastucture.dataaccess.utilities.menu_tasks import menuitem_update_jsonfield
+from infrastucture.constants import MENU_ITEM_NAME, MAX_LENGTH_NAME, MENU, MENUS_APP_LABEL
 from infrastucture.dataaccess.main.models.audit import Audit
 from infrastucture.dataaccess.menus.models.menu import Menu
 
@@ -62,4 +62,5 @@ class MenuItem(MPTTModel, Audit):
     def save(self, *args, **kwargs):
         super(MenuItem, self).save(*args, **kwargs)
         # Run background tasks on translations
-        menuitem_update_jsonfield.apply_async(kwargs={'menuitem_id': self.pk}, countdown=10)
+        # TODO: Revisar esto
+        # menuitem_update_jsonfield.apply_async(kwargs={'menuitem_id': self.pk}, countdown=10)

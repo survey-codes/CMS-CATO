@@ -6,6 +6,8 @@ from django.urls import reverse
 from domain.main.exceptions.empty_template_exception import EmptyTemplateException
 from domain.main.exceptions.invalid_form_exception import InvalidFromException
 from domain.main.tools.services.user_pqrd_service import UserPqrdService
+from infrastucture.dataaccess.messengerservice import MessengerServiceInterface
+from infrastucture.dataaccess.tools.repository.user_pqrd_repository_impl import UserPqrdRepositoryImpl
 from infrastucture.dataaccess.utilities.tasks.send_task import SendTask
 from infrastucture.dataaccess.tools.models import UserPqrd
 from infrastucture.constants import IDS, MAIL_KEY
@@ -15,13 +17,17 @@ from infrastucture.dataaccess.tools.views.base_view import BaseView
 
 class SendMailView(BaseView):
     __USERS_KEY = "users"
-    __user_pqrd_service = UserPqrdService()
-    __send_task = SendTask()
     __request = None
 
     form_class = SelectMailForm
     initial = {'key': 'value'}
     template_name = "forms/select_mail.html"
+
+    def __init__(self, user_pqrd_repository_impl: UserPqrdRepositoryImpl,
+                 messenger_service_interface: MessengerServiceInterface, **kwargs):
+        super().__init__(**kwargs)
+        self.__user_pqrd_service = user_pqrd_repository_impl
+        self.__send_task = SendTask(messenger_service_interface)
 
     def __get_ids(self):
         return self.__request.GET.get(IDS)

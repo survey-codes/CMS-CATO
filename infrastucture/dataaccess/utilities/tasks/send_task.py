@@ -9,8 +9,8 @@ from domain.main.tools.valueobject.response_user_send import ResponseUserSend
 from infrastucture.dataaccess.messengerservice.MessengerServiceInterface import MessengerServiceInterface
 from infrastucture.dataaccess.messengerservice.model.MailDto import MailDto
 from infrastucture.dataaccess.tools.models import QuotaType
-from infrastucture.dataaccess.tools import MailRepositoryImpl
-from infrastucture.dataaccess.tools import QuotaRepositoryImpl
+from infrastucture.dataaccess.tools.repository.mail_repository_impl import MailRepositoryImpl
+from infrastucture.dataaccess.tools.repository.quota_repository_impl import QuotaRepositoryImpl
 from infrastucture.dataaccess.tools.repository.user_pqrd_repository_impl import UserPqrdRepositoryImpl
 
 logger = get_logger(__name__)

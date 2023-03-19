@@ -5,8 +5,8 @@ class TypeResponse(Enum):
     SUCCESS = (200, "Success")
     FAIL = (2, "We have problems saving the information")
 
-    def __new__(cls, code: int, message: str):
-        type_response = object.__new__(cls)
+    # def __new__(cls, code: int, message: str):
+    #     type_response = object.__new__(cls)
         # TODO: Se debe revisar esto
         # type_response._value_ = code
         # type_response.message = message

@@ -1,5 +1,5 @@
 from infrastucture.constants import NAME_KEY
-from infrastucture.dataaccess.main.inline import LanguageInline
+from infrastucture.dataaccess.main.inline.language_inline import LanguageInline
 from infrastucture.dataaccess.menus.models.menu_item_language import MenuItemLanguage
 
 

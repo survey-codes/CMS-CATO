@@ -4,7 +4,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from infrastucture.constants import MENU_NAME, MAX_LENGTH_NAME, MENUS_APP_LABEL
-from infrastucture.dataaccess.main.models import LanguageAbstract
+from infrastucture.dataaccess.main.models.language_abstract import LanguageAbstract
 from infrastucture.dataaccess.menus.models.menu import Menu
 
 

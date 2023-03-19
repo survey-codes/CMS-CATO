@@ -2,7 +2,7 @@ from adminsortable.admin import NonSortableParentAdmin
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
-from infrastucture.dataaccess.utilities.image import Image
+# from infrastucture.dataaccess.utilities.image import Image
 from infrastucture.dataaccess.contents.inline.general_data_language_inline import GeneralDataLanguageInline
 from infrastucture.dataaccess.main.admin.filter_date_admin import FilterDateAdmin
 from infrastucture.dataaccess.contents.models import GeneralData
@@ -33,7 +33,7 @@ class GeneralDataAdmin(NonSortableParentAdmin, FilterDateAdmin):
 
     def _get_logo(self, obj):
         image = obj.logo
-        return Image.get_image_preview(obj, img=image, title=self.__LOGO_PREVIEW)
+        # return Image.get_image_preview(obj, img=image, title=self.__LOGO_PREVIEW)
 
     _get_logo.allow_tags = True
     _get_logo.short_description = __IMAGE_PREVIEW

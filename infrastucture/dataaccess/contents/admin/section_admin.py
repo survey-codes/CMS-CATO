@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
-from infrastucture.dataaccess.utilities.image import Image
+# from infrastucture.dataaccess.utilities.image import Image
 from infrastucture.dataaccess.contents.admin import PostSettingsInline
 from infrastucture.dataaccess.main.admin.filter_date_admin import FilterDateAdmin
 from infrastucture.dataaccess.contents.models import Section
@@ -65,7 +65,8 @@ class SectionAdmin(FilterDateAdmin):
     def _background_preview(self, obj):
         image = obj.background
         if image:
-            return Image.get_image_preview(obj, img=image.url, title=IMAGE_PREVIEW, )
+            # return Image.get_image_preview(obj, img=image.url, title=IMAGE_PREVIEW, )
+            pass
 
     _background_preview.allow_tags = True
     _background_preview.short_description = IMAGE_PREVIEW
