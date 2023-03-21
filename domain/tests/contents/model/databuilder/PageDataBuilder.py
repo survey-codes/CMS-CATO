@@ -12,7 +12,7 @@ class PageDataBuilder(ObjectType):
     __order = 1
     __slug = "example"
 
-    def with_pk(self, pk: int) -> 'PageDataBuilder':
+    def with_pk(self, pk: property) -> 'PageDataBuilder':
         self.__pk = pk
         return self
 

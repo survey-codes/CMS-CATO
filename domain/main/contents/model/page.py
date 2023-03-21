@@ -1,27 +1,32 @@
+from typing import Optional
+
 from graphene import Int
 
 from domain.main.exceptions.empty_pk_exception import BadPkException
 from domain.main.exceptions.empty_value_exception import EmptyValueException
+from domain.main.menus.entity.menu import Menu
 
 
 class Page:
-    pk = int
+    pk = property
     title = str
     description = str
     metadata = str
     children = [int]
     order = int
     slug = str
+    menu = Optional[Menu]
 
     def __init__(
         self,
-        pk: int,
+        pk: property,
         title: str,
         description: str,
         metadata: str,
         children: [int],
         order: int,
         slug: str,
+        menu: Optional[Menu],
         *args,
         **kwargs
     ):
@@ -33,6 +38,7 @@ class Page:
         self.children = children
         self.order = order
         self.slug = slug
+        self.menu = menu
         self.__validation()
 
     def __validation(self):

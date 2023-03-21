@@ -16,7 +16,7 @@ class MenuService:
     def select_by_page_pk(self, page_pk: int, lang: str) -> Optional[Menu]:
         if not page_pk:
             raise BadPkException()
-        menu = self.__menu_repository.select_by_page_pk(page_pk)
+        menu = self.__menu_repository.select_by_page_pk(page_pk, lang)
         if menu:
             return self.__add_language(menu, lang)
         return None

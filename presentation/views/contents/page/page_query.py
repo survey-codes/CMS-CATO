@@ -1,17 +1,14 @@
 from graphene import ObjectType, List, String
 
-from domain.entity.page_language import PageLanguage
-from domain.repository.page_language_repository import PageLanguageRepository
-from domain.services.page_languege_service import PageLanguageService
-from infrastucture.dataaccess.contents.repository.page_language_repository_impl import PageLanguageRepositoryImpl
+from presentation.dto.page_dto import PageDto
 from presentation.presenter.contents.page.page_presenter import PagePresenter
 
 
 class PageQuery(ObjectType):
     pages = List(
-        PageLanguage,
+        PageDto,
         lang=String(description='Filtrar búsqueda por idioma'),
-        slug=String(description='Buscar una página por su SLUG', required=True)
+        slug=String(description='Buscar una página por su SLUG')
     )
 
     def resolve_pages(self, info, **kwargs):
