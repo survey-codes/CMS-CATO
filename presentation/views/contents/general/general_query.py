@@ -1,6 +1,6 @@
 from graphene import ObjectType, String, List
 
-from domain.main.contents.entity.general_language import GeneralDataLanguage
+from domain.main.contents.model.general_language import GeneralDataLanguage
 from domain.repository.general_language_repository import GeneralDataLanguageRepository
 from domain.services.general_service import GeneralService
 from infrastucture.dataaccess.contents.repository.general_data_language_repository_imp import \

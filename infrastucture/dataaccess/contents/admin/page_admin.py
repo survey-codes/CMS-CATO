@@ -1,4 +1,3 @@
-from adminsortable.admin import NonSortableParentAdmin
 from django.contrib import admin
 from django.db.models import Count
 from django.utils.safestring import mark_safe
@@ -13,13 +12,14 @@ from infrastucture.dataaccess.main.admin.filter_date_admin import FilterDateAdmi
 
 
 @admin.register(Page)
-class PageAdmin(FilterDateAdmin, DraggableMPTTAdmin, NonSortableParentAdmin):
+class PageAdmin(FilterDateAdmin, DraggableMPTTAdmin):
     __PAGE = _('Page')
     __SECTION_PLURAL = _('Sections')
     __NO_SECTIONS = _("It does not contain sections")
     __TITLE = _("Title")
 
     DraggableMPTTAdmin.indented_title.short_description = __TITLE
+    expand_tree_by_default = True
     list_display = ('tree_actions', 'indented_title', SLUG_KEY, '_show_sections')
     inlines = [SectionInline, PageLanguageInline]
     fieldsets = (

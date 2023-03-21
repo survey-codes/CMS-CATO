@@ -1,6 +1,6 @@
 from django.test import SimpleTestCase
 
-from domain.entity.general_language import GeneralDataLanguage
+from domain.main.contents.model.general_language import GeneralDataLanguage
 from domain.main.exceptions.general.empty_metadata_exception import EmptyMetadataException
 
 

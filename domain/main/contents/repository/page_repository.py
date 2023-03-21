@@ -1,4 +1,4 @@
-from domain.main.contents.entity.page import Page
+from domain.main.contents.model.page import Page
 
 
 class PageRepository:
