@@ -1,0 +1,108 @@
+# Lat update: Psycopg update
+
+# Clean, responsive, configurable theme for the Sphinx documentation system
+alabaster==0.7.12
+
+# AWS Software Development Kit for python
+boto3==1.17.39
+
+# Asynchronous Task Queue
+celery==4.3.0
+
+certifi==2019.11.28
+chardet==3.0.4
+colorama==0.4.3
+defusedxml==0.6.0
+diff-match-patch==20181111
+
+# For autoconfig database using DATABASE_URL env variable
+dj-database-url
+
+# Python WEB framework
+Django==2.2.3
+
+# Add the filter by a custom date/datetime range on the admin UI
+django-admin-rangefilter==0.8.1
+
+# Add drag-and-drop ordering to any model in Django admin
+django-admin-sortable==2.1.8
+
+# A replacement for django-admin-sortable using an unintrusive approach.
+django-admin-sortable2==0.7.3
+
+# Provides a RichTextField, RichTextUploadingField, CKEditorWidget and CKEditorUploadingWidget
+django-ckeditor==5.7.1
+
+# Automatically deletes files for FileField, ImageField and subclasses
+django-cleanup==4.0.0
+
+# Simple color field for your models with a nice color-picker in the admin-interface
+django-colorfield==0.4.1
+
+# Cross-Origin Resource Sharing (CORS) headers to responses
+django-cors-headers==3.7.0
+
+# Captures the current request and user in thread local storage
+django-crum==0.7.5
+
+# A configurable set of panels that display various debug information about the current request/response
+django-debug-toolbar==3.2
+
+# Django application and library for importing and exporting data with included admin integration
+django-import-export==2.0.1
+
+# Use this to insert a script tag via forms.Media containing additional attributes
+django-js-asset==1.2.2
+
+# Utilities for implementing Modified Preorder Tree Traversal with your Django Models
+django-mptt==0.10.0
+
+# Collection of custom storage backends for Django
+django-storages==1.11.1
+
+# Django admin custom template
+django-suit @ https://github.com/darklow/django-suit/tarball/v2
+
+# Extends default Django URLField to support relative URLs
+django-url-or-relative-url-field==0.1.1
+
+docutils==0.16
+et-xmlfile==1.0.1
+
+# Celery Monitoring
+flower==0.9.3
+
+# Provides tools to implement a GraphQL API in Python using a code-first approach
+graphene-django==2.15.0
+
+# Python WSGI HTTP Server
+gunicorn==20.0.4
+
+imagesize==1.2.0
+jdcal==1.4.1
+Jinja2==2.10.3
+MarkupPy==1.14
+MarkupSafe==1.1.1
+mccabe==0.6.1
+odfpy==1.4.1
+openpyxl==3.0.4
+packaging==20.0
+
+# Python Imaging Library
+Pillow==6.2.1
+
+# PostgreSQL python client
+psycopg2-binary==2.8.5
+
+PyYAML==5.3.1
+requests==2.22.0
+Rx==1.6.1
+singledispatch==3.4.0.3
+snowballstemmer==2.0.0
+
+tablib==0.14.0
+
+# SendGrid for mailing
+sendgrid~=6.9.7
+
+graphene~=2.1.9
