@@ -89,5 +89,9 @@ services:
       - web
 
   db:
-    build: .
+    image: postgis/postgis:12-3.0
     container_name: catocms-postgis
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "50000:5432"
