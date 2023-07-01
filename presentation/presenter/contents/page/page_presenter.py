@@ -2,7 +2,6 @@ from domain.main.contents.model.page import Page
 from domain.main.contents.repository.page_language_repository import PageLanguageRepository
 from domain.main.contents.repository.page_repository import PageRepository
 from domain.main.contents.services.page_service import PageService
-from domain.main.menus.entity.menu import Menu
 from infrastucture.dataaccess.contents.repository.page_language_repository_impl import PageLanguageRepositoryImpl
 from infrastucture.dataaccess.contents.repository.page_repository_impl import PageRepositoryImpl
 

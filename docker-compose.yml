@@ -22,7 +22,7 @@ services:
 #    command: ["sh", "/scripts/wait-for-it.sh", "db:5432", "--", "/scripts/command-dev.sh"]
     command: ["sh", "/scripts/command-dev.sh"]
     ports:
-      - "8010:8000"
+      - "80:8000"
 
   broker:
     image: rabbitmq:latest
@@ -89,5 +89,9 @@ services:
       - web
 
   db:
-    build: .
+    image: postgis/postgis:12-3.0
     container_name: catocms-postgis
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "50000:5432"

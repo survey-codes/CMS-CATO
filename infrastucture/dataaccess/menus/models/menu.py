@@ -23,17 +23,16 @@ class Menu(Audit):
         verbose_name_plural = __MENU_PLURAL
         app_label = MENUS_APP_LABEL
 
-    def clean(self):
-        queryset = Menu.objects.filter(is_general=True)
+    def __validate_general_option(self):
+        queryset = Menu.objects.filter(is_general=True).exclude(pk=self.pk)
         if queryset.exists():
-            raise ValidationError({
-                "general": self.__MENU_GENERAL_ERROR
-            })
+            raise ValidationError({"general": self.__MENU_GENERAL_ERROR})
 
     def __str__(self):
         return self.name
 
     def save(self, *args, **kwargs):
+        self.__validate_general_option()
         super(Menu, self).save(*args, **kwargs)
         # Run background tasks on translations
         # menu_update_jsonfield.apply_async(kwargs={'menu_id': self.pk}, countdown=10)

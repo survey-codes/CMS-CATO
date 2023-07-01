@@ -12,7 +12,7 @@ class MenuItemLanguage(LanguageAbstract):
     """
 
     """
-    __MENU_ITEM_TRANSLATIONS = _('translations')
+    __MENU_ITEM_TRANSLATIONS = 'translations'
 
     name = models.CharField(verbose_name=MENU_ITEM_NAME, max_length=MAX_LENGTH_NAME)
     metadata = JSONField(default=dict, encoder=DjangoJSONEncoder, editable=False)
