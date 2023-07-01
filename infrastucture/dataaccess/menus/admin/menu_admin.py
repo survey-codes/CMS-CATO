@@ -1,4 +1,5 @@
-from django.contrib import admin
+from django.contrib import admin, messages
+from django.core.exceptions import ValidationError
 
 from infrastucture.constants import NAME_KEY, LANGUAGE_TAB, MENU
 from infrastucture.dataaccess.main.admin.filter_date_admin import FilterDateAdmin
@@ -25,3 +26,9 @@ class MenuAdmin(FilterDateAdmin):
         ('menu', MENU),
         ('language', LANGUAGE_TAB)
     )
+
+    def save_model(self, request, obj, form, change):
+        try:
+            obj.full_clean()
+        except ValidationError as e:
+            messages.error(request, e)

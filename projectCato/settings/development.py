@@ -83,13 +83,15 @@ else:
     else:
         DATABASES = {
             'default': {
-                'ENGINE': 'django.contrib.gis.db.backends.postgis',
+                'ENGINE': 'django.db.backends.postgresql',
                 'NAME': 'postgres',
                 'USER': 'postgres',
                 'PASSWORD': 'postgres',
-                'HOST': '192.168.1.180',
+                'HOST': '192.168.1.26',
                 'PORT': 50000,
             }
         }
 
 CELERY_BROKER_URL = 'amqp://catocms:catocms@broker:5672/'
+
+GDAL_LIBRARY_PATH = "C:\OSGeo4W\\bin\gdal307.dll"

@@ -15,3 +15,6 @@ class General:
         self.image = image
         self.footer = footer
         self.menu = menu
+
+    def __str__(self):
+        return f"{{pk: {self.pk}, image: {self.image}, footer: {self.footer}, menu: {self.menu}}}"
