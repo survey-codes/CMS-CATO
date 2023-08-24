@@ -2,6 +2,7 @@ from typing import Optional
 
 from graphene import Int
 
+from domain.main.contents.model.section import Section
 from domain.main.exceptions.empty_pk_exception import BadPkException
 from domain.main.exceptions.empty_value_exception import EmptyValueException
 from domain.main.menus.entity.menu import Menu
@@ -16,6 +17,7 @@ class Page:
     order = int
     slug = str
     menu = Optional[Menu]
+    sections = [Section]
 
     def __init__(
         self,
@@ -27,6 +29,7 @@ class Page:
         order: int,
         slug: str,
         menu: Optional[Menu],
+        sections: [Section],
         *args,
         **kwargs
     ):
@@ -39,6 +42,7 @@ class Page:
         self.order = order
         self.slug = slug
         self.menu = menu
+        self.sections = sections
         self.__validation()
 
     def __validation(self):

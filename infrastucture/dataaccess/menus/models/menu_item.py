@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
@@ -60,6 +61,7 @@ class MenuItem(MPTTModel, Audit):
         return self.name
 
     def save(self, *args, **kwargs):
+        self.link = f"/{slugify(self.name)}"
         super(MenuItem, self).save(*args, **kwargs)
         # Run background tasks on translations
         # TODO: Revisar esto

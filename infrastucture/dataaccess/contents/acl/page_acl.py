@@ -1,12 +1,14 @@
 from typing import Optional
 
 from domain.main.contents.model.page import Page as PageDomain
+from infrastucture.dataaccess.contents.acl.section_acl import SectionAcl
 from infrastucture.dataaccess.contents.models import Page as PageModel, PageLanguage
 from infrastucture.dataaccess.menus.acl.menu_acl import MenuAcl
 
 
 class PageAcl:
     __menu_acl = MenuAcl()
+    __section_acl = SectionAcl()
 
     def from_model_to_domain(self, model: PageModel, lang: str) -> Optional[PageDomain]:
         language: PageLanguage = model.translations.filter(language__abbreviation=lang).first()
@@ -18,6 +20,7 @@ class PageAcl:
         metadata = language.metadata
         children = []
         menu = self.__menu_acl.from_model_to_domain(menu, lang)
+        sections = self.__section_acl.from_model_list_to_domain_list(model.sections.all(), lang)
         return PageDomain(
             pk=model.pk,
             title=title,
@@ -26,7 +29,8 @@ class PageAcl:
             children=children,
             order=model.order,
             slug=model.slug,
-            menu=menu
+            menu=menu,
+            sections=sections
         )
 
     def from_models_to_domains(self, models: [PageModel], lang: str) -> [PageDomain]:
