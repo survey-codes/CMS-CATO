@@ -12,6 +12,6 @@ class PagePresenter:
         page_language_repository: PageLanguageRepository = PageLanguageRepositoryImpl()
         self.__page_service = PageService(page_repository, page_language_repository)
 
-    def select(self, lang: str, slug: str) -> [Page]:
+    def select(self, lang: str, slug: str = "") -> [Page]:
         pages = self.__page_service.select(lang, slug)
         return pages
