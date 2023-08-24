@@ -16,6 +16,7 @@ class MenuItemAdmin(FilterDateAdmin, DraggableMPTTAdmin):
     __PARENT = _("Parent")
 
     list_display = ('tree_actions', 'indented_title', "_get_parent_name", MENU_KEY)
+    readonly_fields = ('link',)
     expand_tree_by_default = True
     inlines = [MenuItemLanguageInline]
     fieldsets = (

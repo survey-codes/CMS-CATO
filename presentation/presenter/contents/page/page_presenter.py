@@ -14,8 +14,4 @@ class PagePresenter:
 
     def select(self, lang: str, slug: str) -> [Page]:
         pages = self.__page_service.select(lang, slug)
-        return map(lambda page: self.__add_additional_fields(page, lang), pages)
-
-    def __add_additional_fields(self, page: Page, lang: str):
-        page.children = self.__page_service.select_children_by_pk(page.pk)
-        return page
+        return pages
